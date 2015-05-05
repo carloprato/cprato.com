@@ -1,0 +1,7 @@
+RewriteEngine On
+ 
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+ 
+RewriteRule ^.*$ /index.php
+Redirect 301 /portfolio http://www.cprato.com/en/home
