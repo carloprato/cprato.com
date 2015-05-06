@@ -5,7 +5,6 @@ define( 'WP_USE_THEMES', false); require( './blog/wp-blog-header.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, user-scalable=no" name="viewport">
@@ -15,7 +14,6 @@ define( 'WP_USE_THEMES', false); require( './blog/wp-blog-header.php');
     <title>Carlo Prato</title>
     <link rel="icon" href="/res/images/favicon.ico" type="image/x-icon" />
     <link href="<?php echo SITE_ROOT; ?>/res/css/stylesheet.css" rel="stylesheet">
-
     <style type='text/css'>
         /* Column margins */
         

@@ -7,6 +7,7 @@ define("SITE_ROOT", "");
 // 1 Testing, warnings
 // 2 Extended errors
 ////
+
 define("DEBUG", "2");
 error_reporting(E_ALL);
 

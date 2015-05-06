@@ -1,6 +1,5 @@
 <div class='evidence_container'>
     <div class="row evidence">
-
         <div class='col_6 evidence_paragraph' style='padding-left:10px; text-align: left;text-align:justify;'>
             <h2><?php echo $l['About_me']; ?></h2>
             <span itemscope itemtype="http://schema.org/Person">
@@ -8,21 +7,12 @@
 			<?php echo $l['About_body']; ?>
 			</p>
 			</span>
-
-        </div>
-        
-
+        </div>   
         <div class='col_6 evidence_paragraph'>
-            <img itemprop="image" src="/res/images/carloprato.png" alt="Carlo Prato" style="vertical-align:top;width:250px;padding:0px;margin:0px;" />
+            <img itemprop="image" src="<?php echo SITE_ROOT; ?>/res/images/carloprato.png" alt="Carlo Prato" style="vertical-align:top;width:250px;padding:0px;margin:0px;" />
         </div>
-
         <div class='fill'></div>
-
-
-
     </div>
-</div>
-
 </div>
 <?php /* <div class='content_container'>
 <div class="row content">
@@ -37,8 +27,6 @@
     <div class='col_4 evidence_paragraph' style='padding-left:10px; text-align: left;'>
         <h2>Contact</h2>If you want to contact me feel free to send an e-mail to carloprato24@gmail.com. I’m currently looking for a part-time job as webdesigner or programmer.
     </div>
-
-
 
 </div>
 

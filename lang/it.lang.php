@@ -14,5 +14,7 @@
 	$l['Blog'] = 'Blog';
 	$l['Menu'] = 'Men&ugrave;';
 	$l['Contact'] = 'Contattami';
+	
+	return $l;
 ?>
 	
