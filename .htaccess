@@ -1,8 +1,10 @@
+Options +FollowSymLinks
 RewriteEngine On
 RewriteBase /
 
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
- 
-RewriteRule ^.*$ /index.php
+
+RewriteRule ^([a-zA-Z0-9]+)/([a-zA-Z0-9]+)$ /index.php?lang=$1&p=$2 [L]
+
 Redirect 301 /portfolio http://www.cprato.com/en/home

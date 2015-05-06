@@ -2,14 +2,15 @@
     <div class="row evidence">
 
         <div class='col_6 evidence_paragraph' style='padding-left:10px; text-align: left;text-align:justify;'>
-            <h2><?php echo $l[About_me]; ?></h2>
+            <h2><?php echo $l['About_me']; ?></h2>
             <span itemscope itemtype="http://schema.org/Person">
 			<p style='line-height:2'>			
-			<?php echo $l[About_body]; ?>
+			<?php echo $l['About_body']; ?>
 			</p>
 			</span>
 
         </div>
+        
 
         <div class='col_6 evidence_paragraph'>
             <img itemprop="image" src="/res/images/carloprato.png" alt="Carlo Prato" style="vertical-align:top;width:250px;padding:0px;margin:0px;" />

@@ -1,15 +1,9 @@
 <?php
 
-  	$params     	= split("/", $_SERVER['REQUEST_URI']);
-	include("inc/config.php");		
-	if ($params['1'] == SITE_ROOT)
-		unset($params['1']);
-
-/*	$_GET['lang'] 		= $params['1'];
-	$_GET['p'] 		= $params['2'];
  	if ($_GET['lang'] == NULL) $_GET['lang'] = 'en';
 	if ($_GET['p'] == NULL) $_GET['p'] = 'home';
-*/
+ 
+	include("inc/config.php");		
 	include("lang/en.lang.php");	
 	include("lang/" . $_GET['lang'] .".lang.php");
 	include("inc/header.inc.php");
