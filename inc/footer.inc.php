@@ -5,25 +5,36 @@
 
             <h2 class='Home' style='border-bottom:1px solid #c1c1c1;'>Recent Posts</h2>
             <ul>
-                <?php $args=a rray( 'post_status'=> 'publish', 'numberposts' => '3'); $recent_posts = wp_get_recent_posts($args); foreach( $recent_posts as $recent ){ echo '
-                <li><a style="color:#8cf" class="Home" href="' . get_permalink($recent[" ID "]) . '">' . $recent["post_title"].'</a> </li> '; } ?>
+                <?php /* Replacing Wordpress dynamic request to static HTML  
+						$args=array( 'post_status'=> 'publish', 'numberposts' => '3'); 
+						$recent_posts = wp_get_recent_posts($args);
+						foreach( $recent_posts as $recent ){ 
+						echo '
+                <li><a style="color:#8cf" class="Home" href="' . get_permalink($recent[" ID "]) . '">' . $recent["post_title"].'</a> </li> '; } 
+                */
+                
+                ?>
+                
+                				<ul>
+				<li><a style="color:#8cf" class="Home" href="http://www.cprato.com/blog/?p=86">Carlo Prato - A Little Thought</a> </li> <li><a style="color:#8cf" class="Home" href="http://www.cprato.com/blog/?p=78">Lily - Prerelease</a> </li> <li><a style="color:#8cf" class="Home" href="http://www.cprato.com/blog/?p=70">My i3 Budget Build</a> </li> 				</ul>
+
             </ul>
         </div>
 
 
         <div class='col_3 footer_paragraph' style='padding:0px 5px; text-align: justify;'>
 
-            <h2 class='Home' style='border-bottom:1px solid #c1c1c1;'><?=$l[Menu];?></h2>
-            <a href='/<?=$_GET[lang];?>/home' class='Home' style='color:#8cf'>
-                <?=$l[Home];?>
+            <h2 class='Home' style='border-bottom:1px solid #c1c1c1;'><?=$l["Menu"];?></h2>
+            <a href='/<?=$_GET["lang"];?>/home' class='Home' style='color:#8cf'>
+                <?=$l["Home"];?>
             </a>
             <br/>
             <a href='/blog' class='Home' style='color:#8cf'>
-                <?=$l[Blog];?>
+                <?=$l["Blog"];?>
             </a>
             <br/>
-            <a href='/<?=$_GET[lang];?>/about' class='Home' style='color:#8cf'>
-                <?=$l[About];?>
+            <a href='/<?=$_GET["lang"];?>/about' class='Home' style='color:#8cf'>
+                <?=$l["About"];?>
             </a>
             <br/>
 
@@ -31,7 +42,7 @@
 
         <div class='col_3 footer_paragraph' style='padding:0px 5px; text-align: justify;'>
 
-            <h2 class='Home' style='border-bottom:1px solid #c1c1c1;'><?=$l[Contact];?></h2>
+            <h2 class='Home' style='border-bottom:1px solid #c1c1c1;'><?=$l["Contact"];?></h2>
             <span class='Home'>Carlo Prato</span>
             <br/>
             <a class='Home' style='color:#8cf; ' href='mailto:carlo@cprato.com'>carlo@cprato.com</a>
