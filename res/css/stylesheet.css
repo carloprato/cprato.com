@@ -268,12 +268,19 @@ body {
     z-index: 11;
     padding-top: 83px
 }
+
+.evidence_paragraph {
+        float: left;
+        padding-left:10px; 
+        text-align:justify;
+    }
 .menu_item {
     font-size: 24px;
     font-family: "Noto Serif";
     color: #dfdfdf;
     text-shadow: 0 4.33px 5px #000;
-    z-index: 12
+    z-index: 12;
+    text-align:center;
 }
 .evidence {
     margin: 0 auto;
@@ -286,7 +293,20 @@ body {
     color: #000;
     text-align: left;
     padding-top: 20px;
-    z-index: 21
+    z-index: 21;
+    
+}
+
+.footer_paragraph {
+
+    color:#c1c1c1;
+    padding:0px 5px; 
+    text-align: left;
+}
+
+.footer_link {
+       text-shadow: 0 1px 2px #c8c8c8;
+       color:#8cf; 
 }
 .iphone {
     background-image: url(../images/iphone.png);
@@ -508,9 +528,7 @@ img {
         font-size: 16px;
         float: none
     }
-    .evidence_paragraph {
-        float: left
-    }
+
     .padding_fix {
         padding-left: 0
     }
@@ -524,7 +542,9 @@ img {
         min-width: 320px
     }
     .evidence_paragraph {
-        float: left
+        float: left;
+        padding-left:10px; 
+        text-align:justify;
     }
     .row {
         width: 320px
@@ -553,7 +573,8 @@ img {
         padding-left: 0
     }
     .Home {
-        line-height: 30px
+        line-height: 30px;
+    
     }
     .last {
         margin-left: 0;

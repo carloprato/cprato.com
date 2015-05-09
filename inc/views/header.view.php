@@ -4,7 +4,7 @@ define( 'WP_USE_THEMES', false); require( './blog/wp-blog-header.php');
 */
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo $language->current_language(); ?>">
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, user-scalable=no" name="viewport">
@@ -14,34 +14,20 @@ define( 'WP_USE_THEMES', false); require( './blog/wp-blog-header.php');
     <title>Carlo Prato</title>
     <link rel="icon" href="/res/images/favicon.ico" type="image/x-icon" />
     <link href="<?php echo SITE_ROOT; ?>/res/css/stylesheet.css" rel="stylesheet">
-    <style type='text/css'>
-        /* Column margins */
-        
+    <style type='text/css'>    
         .col_12,
-        /* full width */
-        
         .col_9,
-        /* 3/4 width */
-        
         .col_8,
-        /* 2/3 width */
-        
         .col_6,
-        /* half width */
-        
         .col_4,
-        /* 1/3 width */
-        
         .col_3,
-        /* 1/4 width */
-        
         .col_2,
         .col_1 {
             margin-top: 10px;
             margin-bottom: 10px;
             margin-left: 0;
             margin-right: 0;
-            text-align: center;
+            text-align: left;
             display: table-cell;
             vertical-align: central;
         }

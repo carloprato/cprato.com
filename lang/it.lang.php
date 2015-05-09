@@ -1,9 +1,9 @@
 <?php 
-	$l = array();
-	$l['Home'] = 'Home';
-	$l['About'] = 'Chi sono';
-	$l['About_me'] = 'Chi sono';		
-	$l['About_body'] = 'Ciao! <br/>
+	$lang = array();
+	$lang['Home'] = 'Home';
+	$lang['About'] = 'Chi sono';
+	$lang['About_me'] = 'Chi sono';		
+	$lang['About_body'] = 'Ciao! <br/>
 				Sono <span itemprop="name">Carlo Prato</span>, uno <span itemprop="jobTitle">studente</span> <span itemprop="nationality">italiano</span> a Malta. Al momento sto seguendo un corso serale per la Laurea in Risorse Umane all\'Universit&agrave; di Malta.<br/>
 				<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">Vivo a <span itemprop="addressLocality">Mosta</span>, <span itemprop="addressCountry">Malta</span> con la mia fidanzata Brenda.<br/></div>
 				<br/>
@@ -11,10 +11,10 @@
 				<a href="http://www.cprato.com/res/files/CV/CV.zip">Qualifiche (10MB, ZIP)</a><br/>
 				Puoi contattarmi scrivendo una e-mail a <a href="mailto:carlo@cprato.com" itemprop="email">carlo@cprato.com</a>.				
 				<br/><br/>';
-	$l['Blog'] = 'Blog';
-	$l['Menu'] = 'Men&ugrave;';
-	$l['Contact'] = 'Contattami';
+	$lang['Blog'] = 'Blog';
+	$lang['Menu'] = 'Men&ugrave;';
+	$lang['Contact'] = 'Contattami';
 	
-	return $l;
+	return $lang;
 ?>
 	

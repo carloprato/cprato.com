@@ -1,5 +1,5 @@
 <?php
-	
-	return $l;
+	$lang = array();
+	return $lang;
 
 ?>
