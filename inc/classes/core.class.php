@@ -16,7 +16,7 @@
 				define("DEBUG", "2");
 				error_reporting(E_ALL);
 				
-				define("VERSION", "0.0.1");
+				define("VERSION", "0.0.1a");
 			}
 
 		function absolute_url($url) {
