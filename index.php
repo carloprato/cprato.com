@@ -14,6 +14,4 @@
 	$html .= 	$display->view('body');
 	$html .=	$display->view($_GET['p']);
 	$html .=	$display->view('footer');
-	
-	print_r($lang);
 	?>
