@@ -1,11 +1,11 @@
+
 <div class='content_container'>
     <div class="row content">
         <div class='col_8 content_paragraph' style='text-align:justify;padding-left:10px;float:left;'>
 
- 				<h2>Settings</h2>
-                    <?php		                       			
-                        echo Settings::test();
-                        ?>
+ 				<h2>404 - Page Not Found</h2>
+				    The page you were looking for does not exist anymore.<br />
+              
         </div>
     </div>
     <div class='fill'>

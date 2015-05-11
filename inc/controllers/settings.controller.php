@@ -2,7 +2,7 @@
 	
 	class Settings {
 				
-		function test() {
+		public static function test() {
 									
 			return "This works!";
 			

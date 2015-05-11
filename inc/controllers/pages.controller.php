@@ -21,7 +21,12 @@
 		 	global $lang;
 			global $language;
 			
-			return include(SITE_ROOT . "inc/views/" . $page . ".view.php");		
+			if (file_exists(SITE_ROOT . "inc/views/" . $page . ".view.php")) {
+				return include(SITE_ROOT . "inc/views/" . $page . ".view.php");	
+			} else {
+				header("HTTP/1.0 404 Not Found");
+				return include(SITE_ROOT . "inc/views/404.view.php");
+			}
 		}
 		
 		function view() {
