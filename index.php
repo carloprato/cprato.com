@@ -13,8 +13,8 @@
 	$language = new Language;
 	$lang     = $language->load($_GET['lang']);
 		
-	$routes = new Routes;
+	$routes	  = new Routes;
 	$routes->call();
 
-	$pages = new Pages;
+	$pages	  = new Pages;
 	$pages->view();
