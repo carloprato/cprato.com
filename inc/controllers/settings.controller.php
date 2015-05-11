@@ -3,8 +3,11 @@
 	class Settings {
 				
 		public static function test() {
-									
-			return "This works!";
+			
+			global $language;
+			global $lang;
+						
+			return $language->string("About");
 			
 		}
 	}

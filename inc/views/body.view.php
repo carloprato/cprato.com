@@ -19,7 +19,7 @@
             </div>
             <div class='nav'>
                 <div class='col_4' style='margin-left:20px;'>
-                    <a class='menu_item' href='<?php echo SITE_ROOT; ?>/<?php echo $_GET['lang']; ?>/home'>
+                    <a class='menu_item' href='<?php echo SITE_ROOT . "/" . $_GET['lang']; ?>/home'>
                         Home
                     </a>
                 </div>
@@ -29,7 +29,7 @@
                     </a>
                 </div>
                 <div class='col_4' style='padding-left:10px;'>
-                    <a class='menu_item' href='<?php echo SITE_ROOT; ?>/<?php echo $_GET['lang']; ?>/about'>
+                    <a class='menu_item' href='<?php echo SITE_ROOT . "/" . $_GET['lang']; ?>/about'>
                         <?php echo $language->string('About'); ?>
                     </a>
                 </div>

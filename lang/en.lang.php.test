@@ -1,7 +1,7 @@
 <?php
 $lang = array();
 $lang["Home"] = "Home";
-$lang["About"] = "About";
+$lang["About"] = "About test";
 $lang["About_me"] = "About Me";
 $lang["About_body"] = "Hello! <br/>
 				I am <span itemprop='name'>Carlo Prato</span>, an <span itemprop='nationality'>Italian</span> <span itemprop='jobTitle'>student</span> currently following the Bachelor in Human Resources and Work at the University of Malta.<br/>
@@ -15,4 +15,5 @@ $lang["Blog"] = "Blog";
 $lang["Menu"] = "Menu";
 $lang["Contact"] = "Contact";
 $lang["Recent_posts"] = "Recent Posts";
+$lang["saveButton"] = "Save";
 return $lang;

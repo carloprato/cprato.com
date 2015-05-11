@@ -1,6 +1,7 @@
 <?php
 
 	require_once("inc/classes/core.class.php");
+	require_once("inc/classes/db.class.php");
 	
 	$core = new Core;
 	$core->startup();

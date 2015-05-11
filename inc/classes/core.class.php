@@ -28,7 +28,7 @@
 			
 			if (!isset($_GET['p']) || !isset($_GET['lang'])) {
 				
-				header("Location: " . SITE_ROOT . "/en/home");
+				header("Location: " . SITE_ROOT . "en/home");
 				}
 			}
 			

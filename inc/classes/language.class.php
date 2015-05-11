@@ -46,25 +46,5 @@
 			return $lang;			
 		}
 		
-		function saveToFile() {
-			$lang = array();
-			$lang = $this->addString();
-			$filename = $_SERVER['DOCUMENT_ROOT'] . "/lang/" . $this->current_language() . ".lang.php";
-			$text = "<?php" . "\r\n";
-			$text .= '$lang = array();' . "\r\n";
-			foreach($lang as $key => $value)
-			{
-			    $text .= '$lang["' . $key.'"] = "'. $value . '";' . "\r\n";
-			}
-			$fh = fopen($filename, "w") or die("Could not open log file.");
-			/* $data = filemtime($_SERVER['DOCUMENT_ROOT'] . "/lang/" . $this->current_language() . ".lang.php.bk");
-			$time_modified = time() - $data;
-			echo $time_modified;
-			if ($time_modified > 600) {
-				copy($_SERVER['DOCUMENT_ROOT'] . "/lang/" . $this->current_language() . ".lang.php", $_SERVER['DOCUMENT_ROOT'] . "/lang/" . $this->current_language() . ".lang.php.bk");
-			}
-			*/
-			fwrite($fh, $text) or die("Could not write file!");
-			fclose($fh);
-		}
+
 	}

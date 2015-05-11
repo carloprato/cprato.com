@@ -1,7 +1,7 @@
 <div class='footer_container'>
     <div class="row footer">
         <div class='col_6 footer_paragraph' >
-            <h2 class='Home' style='border-bottom:1px solid #c1c1c1;'>Recent Posts</h2>
+            <h2 class='Home' style='border-bottom:1px solid #c1c1c1;'><?php echo $language->string("Recent_posts"); ?></h2>
                <ul>                
                 <?php /* Replacing Wordpress dynamic request to static HTML  
 						$args=array( 'post_status'=> 'publish', 'numberposts' => '3'); 

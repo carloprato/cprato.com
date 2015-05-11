@@ -1,7 +1,7 @@
 <div class='evidence_container'>
     <div class="row evidence">
         <div class='col_4 evidence_paragraph'>
-            <h2>About Me</h2>My name is Carlo, I’m a 20 year old from Italy. I love webdesign, music, retrogaming and reading! If you want to know more about me feel free to read <a href="/<?=$_GET[lang]; ?>/about">here</a> or in <a href="/blog">my blog</a>.
+            <h2>About Me</h2>My name is Carlo, I’m a 20 year old from Italy. I love webdesign, music, retrogaming and reading! If you want to know more about me feel free to read <a href="/<?=$_GET['lang']; ?>/about">here</a> or in <a href="/blog">my blog</a>.
         </div>
         <div class='col_4 evidence_paragraph'>
             <h2>Skills</h2>I’m proficient in PHP/MySQL programming, and website design using Adobe Photoshop for the creation of the mock-up that I convert into real websites later on. I know my way around Java and Python too.
