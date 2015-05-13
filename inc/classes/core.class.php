@@ -22,7 +22,8 @@
 
 		function absolute_url($url) {
 						
-		}				
+		}		
+				
 		function checkURI() { 
 			// Check if language and page to display are set, otherwise redirects to the homepage
 			

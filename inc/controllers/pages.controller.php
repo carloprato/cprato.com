@@ -16,17 +16,22 @@
 			}
 		}	
 				
-		function load($page, $data = NULL) {
+		function load($page, $type = 'view') {
 			
 		 	global $lang;
 			global $language;
-			
-			if (file_exists(SITE_ROOT . "inc/views/" . $page . ".view.php")) {
-				return include(SITE_ROOT . "inc/views/" . $page . ".view.php");	
-			} else {
-				header("HTTP/1.0 404 Not Found");
-				return include(SITE_ROOT . "inc/views/404.view.php");
-			}
+
+			if (isset($_GET['p']) && isset($_GET['lang'])) {
+
+				if (file_exists(SITE_ROOT . "inc/views/" . $page . ".view.php")) {
+
+					return include(SITE_ROOT . "inc/views/" . $page . ".view.php");	
+				} else {
+					
+					header("HTTP/1.0 404 Not Found");
+					return include(SITE_ROOT . "inc/views/404.view.php");					
+				}
+			}	
 		}
 		
 		function view() {

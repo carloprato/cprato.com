@@ -12,10 +12,11 @@
 		        $list[] = new Posts($post['id'], $post['user'], $post['password']);
 		      }
 		
+		
 		      return $list;
 		    }
-	
-		}
+			
+		
 		
 		function logout() {
 			
