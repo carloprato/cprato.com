@@ -10,8 +10,8 @@
 			return $array;
 		}
 		public static function update() {
-			
-			if (isset($_POST['saveButton'])) {
+						
+			if (isset($_POST['saveButton']) && 1 == 0) { // Disabling the save feature until issue #3 is fixed.
 				
 				unset($_POST['saveButton']);
 				$lang = $_POST;
@@ -38,6 +38,8 @@
 		}
 		
 		function saveToFile() {
+			
+
 			$lang = array();
 			$lang = $this->addString();
 			$filename = $_SERVER['DOCUMENT_ROOT'] . "/lang/" . $this->current_language() . ".lang.php";

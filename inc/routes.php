@@ -2,8 +2,7 @@
 	
 	class Routes {
 				
-		function call() {
-			
+		function call() {			
 						
 			if (isset($_GET['action'])) {
 				
