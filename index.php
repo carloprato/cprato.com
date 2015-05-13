@@ -19,5 +19,3 @@
 
 	$pages	  = new Pages;
 	$pages->view();
-	
-
