@@ -2,11 +2,13 @@
 
 	require_once("inc/classes/core.class.php");
 	require_once("inc/classes/db.class.php");
+	session_start();
 	
 	$core = new Core;
 	$core->startup();
 	$core->checkURI();
 	
+	require_once(SITE_ROOT . "inc/classes/auth.class.php");		
 	require_once(SITE_ROOT . "inc/classes/language.class.php");	
 	require_once(SITE_ROOT . "inc/routes.php");
 	require_once(SITE_ROOT . "inc/controllers/pages.controller.php");							
@@ -17,5 +19,6 @@
 	$routes	  = new Routes;
 	$routes->call();
 
-	$pages	  = new Pages;
+	$pages	  = new PagesController;
 	$pages->view();
+	

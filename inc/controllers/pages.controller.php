@@ -1,6 +1,6 @@
 <?php
 	
-	class Pages {
+	class PagesController {
 		
 		protected $action;
 		protected $controller;

@@ -10,7 +10,7 @@
 					$action = $_GET['action'];
 					if (file_exists(SITE_ROOT . "inc/controllers/" . $controller . ".controller.php")) {
 						require_once(SITE_ROOT . "inc/controllers/" . $controller . ".controller.php");
-						$class = ucwords($controller);				
+						$class = ucwords($controller)."Controller";				
 						${$controller} = new $class;
 						${$controller}->{$action}();
 					}

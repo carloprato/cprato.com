@@ -1,6 +1,6 @@
 <?php
 	
-	class Settings {
+	class SettingsController {
 				
 		public static function test() {
 			

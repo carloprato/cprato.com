@@ -4,7 +4,7 @@
 
  				<h2>Settings</h2>
                     <?php		                       			
-                        echo Settings::test();
+                        echo SettingsController::test();
                         ?>
         </div>
     </div>

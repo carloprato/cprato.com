@@ -2,24 +2,42 @@
 	
 	class Auth {
 		
-		function login() {
+		public static function login() {
 								
-		      $list = [];
-		      $db = Db::getInstance();
-		      $req = $db->query('SELECT * FROM users');
-		
-		      foreach($req->fetchAll() as $post) {
-		        $list[] = new Posts($post['id'], $post['user'], $post['password']);
-		      }
-		
-		
-		      return $list;
-		    }
+			// Checks if the user exists and if the password is correct, if yes authorizes them.
+			//
+			//
+			//
 			
-		
-		
+		    $db = Db::getInstance();
+			
+			if (isset($_POST['user']) && isset($_POST['password'])) {
+				$sql = 'SELECT * FROM users WHERE user = ? AND password = ? LIMIT 1';
+				$q = $db->prepare($sql);
+				$req = $q->execute(array( $_POST['user'], $_POST['password']));	
+				
+
+				foreach($q->fetchAll(PDO::FETCH_ASSOC) as $user) {
+
+					$_SESSION['privileges'] = $user['privileges'];
+					$_SESSION['user'] = $_POST['user'];
+					$_SESSION['password'] = md5($_POST['password']);
+
+
+					return "Login Successful.";		
+		      	}
+
+
+		    	return "Error.";
+				}
+
+				header("Location: /en/auth/auth");
+		 	}
+					
 		function logout() {
 			
+			session_destroy();
+			header('Location: /en/home');
 			
 		}
 		
@@ -28,9 +46,18 @@
 			
 		}
 		
-		function protect() {
+		public static function protect($privileges) {
 			
-			
+			if (isset($_SESSION['privileges']) && $_SESSION['privileges'] >= $privileges) {
+				
+				return true;
+			} else if (isset($_SESSION['privileges']) && $_SESSION['privileges'] < $privileges) {
+				
+				header("Location: /en/home");
+			} else {
+				
+				header("Location: /en/home");
+			}
 		}
 		
 	}
