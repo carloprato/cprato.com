@@ -14,7 +14,6 @@
 			Auth::protect(100);						
 			if (isset($_POST['saveButton'])) {
 
-
 				$strings = [];
 		      	$db = Db::getInstance();
 				  $post = array();

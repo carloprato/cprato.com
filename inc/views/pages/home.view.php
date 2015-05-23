@@ -17,19 +17,26 @@
         <div class='col_8 content_paragraph' style='text-align:justify;padding-left:10px;float:left;'>
 <?php /* Replacing Wordpress dynamic request to static HTML
             <h2>Latest Blog Posts</h2>
-            <?php $posts=get_posts( 'posts_per_page=3&order=DESC&orderby=post_date'); foreach ($posts as $post) : setup_postdata( $post ); ?>
-            <?php the_date(); echo "<br />"; ?>
-            <h3><?php the_title(); ?></h3>
-            <?php the_excerpt(); ?>
-            <?php endforeach; ?>
+                <?php 
+						$args=array( 'post_status'=> 'publish', 'numberposts' => '3'); 
+						$recent_posts = wp_get_recent_posts($args);
+						foreach( $recent_posts as $recent ){ 
+						if (strlen($recent["post_content"]) > 300)	
+							$recent["post_content"] = substr($recent["post_content"], 0, 300) . '...<a href="/blog/?p='. $recent["ID"] . '"> Continue Reading</a>';
+				echo '
+                <h3>
+					<a href="/blog/?p='. $recent["ID"] . '">
+						'. $recent["post_title"].'
+					</a>
+				</h3>
+				
+				'. $recent["post_content"] . '
+				<br/>'; } 
+           
+                ?> 
         */
-        ?>
- 				<h2>Latest Blog Posts</h2>
-				    4th May 2015<br />
-                    <h3>Carlo Prato &#8211; A Little Thought</h3>
-                                                       
-                    20th March 2015<br />
-                    <h3>My i3 Budget Build</h3>
+        ?> Blog posts here
+ 				
                   
         </div>
     </div>

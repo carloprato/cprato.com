@@ -1,7 +1,11 @@
 <?php
 	
-	class SettingsController {
+	class AdminController {
 				
+		public static function all() {
+			
+			return "test";
+		}
 		public static function test() {
 			
 			global $language;
