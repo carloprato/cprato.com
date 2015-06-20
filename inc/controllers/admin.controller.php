@@ -3,7 +3,7 @@
 	class AdminController {
 				
 		public static function all() {
-			
+			Auth::protect(100);
 			return "test";
 		}
 		public static function test() {

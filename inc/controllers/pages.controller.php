@@ -6,11 +6,22 @@
 		protected $controller;
 
 		function __construct() {
-						
+				
 			if (isset($_GET['action'])) {
-				$this->action   = $_GET['action'];
+				
+				$action = $_GET['action'];
+			}	else $action = NULL;	
+			 
+			if (isset($_GET['action']))  {
+				$this->action   = $action;
 				$this->controller = $_GET['p'];	
-			} else {
+			} else if (!isset($_GET['action']) && !file_exists("inc/views/pages/" . $_GET['p'] . ".view.php")) {
+				
+				$this->action = 'index';
+				$this->controller = $_GET['p'];
+				
+			} else if (file_exists("inc/views/pages/" . $_GET['p'] . ".view.php")) {
+				
 				$this->controller = 'pages';	
 				$this->action   = $_GET['p'];
 			}

@@ -48,6 +48,7 @@
 		
 		public static function protect($privileges) {
 			
+			
 			if (isset($_SESSION['privileges']) && $_SESSION['privileges'] >= $privileges) {
 				
 				return true;

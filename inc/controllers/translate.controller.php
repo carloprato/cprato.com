@@ -2,13 +2,14 @@
 	
 	class TranslateController {
 
-		public static function all() {
+		public static function index() {
  			
 			Auth::protect(100);
 			$strings = Language::load($_GET['lang']);
 			
 			return $strings;
 		}
+		
 		public static function update() {
 
 			Auth::protect(100);						
