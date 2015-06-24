@@ -88,10 +88,13 @@
 					$template = str_replace("{{translate:" . $string . "}}", $language->string($string), $template);
 								}
 			}
-
+			
+			
+			
 			$this->set("p", $_GET['p']);
 			$this->set("lang", $_GET['lang']);
 			$this->set("SITE_ROOT", SITE_ROOT);
+			$this->set("recent_posts", BlogController::recent_posts(3));
 			$this->replace();
 			return $template;
 			

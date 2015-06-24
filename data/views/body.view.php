@@ -20,7 +20,7 @@
             <div class='nav'>
                 <div class='col_4'>
                     <a class='menu_item' href='{{SITE_ROOT}}/{{lang}}/home'>
-                        Home
+                        {{translate:Home}}
                     </a>
                 </div>
                 <div class='col_4' style='padding-left:5px;' >

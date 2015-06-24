@@ -2,28 +2,18 @@
     <div class="row footer">
         <div class='col_6 footer_paragraph' >
             <h2 class='Home' style='border-bottom:1px solid #c1c1c1;'>{{translate:Recent_posts}}</h2>
-               <ul>                
-                <?php /* Replacing Wordpress dynamic request to static HTML  
-						$args=array( 'post_status'=> 'publish', 'numberposts' => '3'); 
-						$recent_posts = wp_get_recent_posts($args);
-						foreach( $recent_posts as $recent ){ 
-						echo '
-                <li><a style="color:#8cf" class="Home" href="' . get_permalink($recent[" ID "]) . '">' . $recent["post_title"].'</a> </li> '; } 
-                */            
-                ?>             
-
-				<li><a style="color:#8cf" class="Home" href="http://www.cprato.com/blog/?p=86">Carlo Prato - A Little Thought</a> </li> <li><a style="color:#8cf" class="Home" href="http://www.cprato.com/blog/?p=78">Lily - Prerelease</a> </li> <li><a style="color:#8cf" class="Home" href="http://www.cprato.com/blog/?p=70">My i3 Budget Build</a> </li> 				</ul>
-            </ul>
+                {{recent_posts}}
+                
         </div>
         <div class='col_3 footer_paragraph'>
             <h2 class='Home' style='border-bottom:1px solid #c1c1c1;'>{{translate:Menu}}</h2>
-            <a href='/<?=$_GET["lang"];?>/home' class='footer_link'>
+            <a href='/{{lang}}/home' class='footer_link'>
                 {{translate:Home}}</a>
             <br/>
-            <a href='/blog' class='footer_link'>
+            <a href='/{{lang}}/blog' class='footer_link'>
                 {{translate:Blog}}</a>
             <br/>
-            <a href='/<?=$_GET["lang"];?>/about' class='footer_link'>
+            <a href='/{{lang}}/about' class='footer_link'>
                 {{translate:About}}</a>
             <br/>
         </div>

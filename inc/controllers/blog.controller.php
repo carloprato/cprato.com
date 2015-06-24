@@ -60,4 +60,25 @@
 		 
 		   
 		}
+		
+		static function recent_posts($num) {
+			
+			global $tpl;
+
+			$args=array( 'post_status'=> 'publish', 'numberposts' => $num); 
+			$recent_posts = wp_get_recent_posts($args);
+			$post_list = NULL;
+
+			foreach( $recent_posts as $recent ){
+
+					$post_list .= '<a href="' . SITE_ROOT . '/' . $_GET['lang'] . '/blog/view_post/'. $recent["ID"] . '" class="footer_link">' . $recent["post_title"] .'
+					</a><br/>';
+				 } 	
+			$tpl = new TemplateController;
+
+	 		$tpl->set("list_posts", $post_list); 
+			return $post_list;
+
+
+		}
 	}

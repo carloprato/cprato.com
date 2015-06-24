@@ -19,8 +19,7 @@
             <h2>Latest Blog Posts</h2>
 
 
- 				
-                  
+ 			          
         </div>
     </div>
     <div class='fill'>
