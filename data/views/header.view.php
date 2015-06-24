@@ -60,6 +60,6 @@
         ga('create', 'UA-60272920-1', 'auto');
         ga('send', 'pageview');
     </script>
-    <script type="text/javascript" src="/res/js/tinyeditor.js"></script>
+    <script type="text/javascript" src="/data/res/js/tinyeditor.js"></script>
 
 </head>

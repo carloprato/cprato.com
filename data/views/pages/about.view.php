@@ -11,7 +11,7 @@
 			</span>
         </div>   
         <div class='col_6 evidence_paragraph'>
-            <img itemprop="image" src="{{SITE_ROOT}}/res/images/carloprato.png" alt="Carlo Prato" style="vertical-align:top;width:250px;padding:0px;margin:0px;" />
+            <img itemprop="image" src="/data/res/images/carloprato.png" alt="Carlo Prato" style="vertical-align:top;width:250px;padding:0px;margin:0px;" />
         </div>
     </div>
     <div class='fill'></div>

@@ -5,8 +5,28 @@
 		public static function index() {
  			
 			Auth::protect(100);
-			$strings = Language::load($_GET['lang']);
-			
+			$strings1 = Language::load($_GET['lang']);
+		
+			 foreach ($strings1 as $key=>$value) {
+
+                            if ($key == 'english') { continue; }
+                            $strings .= "
+							
+								<tr>
+	                                <td style='width:200px;'>
+	                                    " . $key . "
+	                                </td>
+	                                <td>
+	                                    " . htmlspecialchars($posts['english'][$key]) . "
+	                                </td>
+	                                <td>
+	                                    <textarea name='". $key . "' style='width:400px;height:100%;'>" . htmlspecialchars($value) . "</textarea>
+									</td>
+								</tr>";
+                                                                      
+			 }	
+			 $tpl = new TemplateController;
+			 $tpl->set("translation_table", $strings, $tpl);
 			return $strings;
 		}
 		
@@ -29,12 +49,12 @@
 				  //print_r($_POST);
 				$lang = $_GET['lang'];
 				foreach ($post as $key=>$value) {
-					
+
 					$sql = 'SELECT count(*) FROM translations WHERE keyword = ? AND lang = ?';
 					$q = $db->prepare($sql);
 					$req = $q->execute(array( $key, $lang ));					
 
-			   		if ( $q->fetchColumn() == 1 ) {
+			   		if ( $q->fetchColumn() > 0 ) {
 						   
 							$sql = 'UPDATE translations SET string = ? WHERE lang = ? AND keyword = ?';
 							$q = $db->prepare($sql);						
@@ -45,9 +65,9 @@
 					
 
 				}
-				
+		
 					if (isset($_POST['new_key']) && $_POST['new_key'] != NULL) {
-							
+	
 							$key = $_POST['new_key'];
 							$value = $_POST['new_value'];
 							$lang = 'en';

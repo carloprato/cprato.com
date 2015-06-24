@@ -26,12 +26,20 @@
 		
 		function edit($id) {
 			// Edits a created static page
-			global $template;
+			global $language;
+			$page = file_get_contents("data/views/pages/" . $id . ".view.php");
 			$tpl = new TemplateController;
+			
+			if(preg_match_all('/{{translate:+(.*?)}}/', $page, $matches)) {
+				foreach ($matches[1] as $string) {
+					print_r($matches);
+					$page = str_replace("{{translate:" . $string . "}}", "<span style='display:none;'>" . $string . "</span>" . $language->string($string) . "&zwnj;", $page);
+								}
+			}
+
 			$tpl->set("page_content", $page);
 			global $text;
 			$text = "1";
-
 							
 		}
 	}

@@ -19,7 +19,4 @@
 			return Auth::logout();			
 			
 		}
-		
-		
-		
 	}

@@ -5,7 +5,8 @@
 			
 			
 			<textarea id="input">
-				
+				    <link href="/data/res/css/stylesheet.css" rel="stylesheet">
+
 					{{page_content}}
 			</textarea>
 			<script type="text/javascript">
