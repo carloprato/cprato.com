@@ -1,13 +1,13 @@
 <div class='evidence_container'>
     <div class="row evidence">
         <div class='col_4 evidence_paragraph'>
-            <?php echo $language->string("about_me_home"); ?>
+            {{translate:about_me_home}}
         </div>
         <div class='col_4 evidence_paragraph'>
-            <?php echo $language->string("skills_home"); ?>
+            {{translate:skills_home}}
         </div>
         <div class='col_4 evidence_paragraph'>
-            <?php echo $language->string("contact_me_home"); ?>
+            {{translate:contact_me_home}}
         </div>
     </div>
     <div class='fill'></div>
@@ -15,7 +15,7 @@
 <div class='content_container'>
     <div class="row content">
         <div class='col_8 content_paragraph' style='text-align:justify;padding-left:10px;float:left;'>
-<?php /* Replacing Wordpress dynamic request to static HTML
+
             <h2>Latest Blog Posts</h2>
                 <?php 
 						$args=array( 'post_status'=> 'publish', 'numberposts' => '3'); 
@@ -34,8 +34,7 @@
 				<br/>'; } 
            
                 ?> 
-        */
-        ?> Blog posts here
+
  				
                   
         </div>

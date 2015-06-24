@@ -1,8 +1,3 @@
-<?php
-/* Disabling Wordpress
-define( 'WP_USE_THEMES', false); require( './blog/wp-blog-header.php'); 
-*/
-?>
 <!DOCTYPE html>
 <html lang="<?php echo $language->current_language(); ?>">
 <head>
@@ -12,8 +7,9 @@ define( 'WP_USE_THEMES', false); require( './blog/wp-blog-header.php');
     <meta name="author" content="Carlo Prato">
     <meta name="keywords" content="Carlo Prato, Carlo Prato Malta, Carlo Prato Mosta, Webdesign Malta">
     <title>Carlo Prato</title>
-    <link rel="icon" href="/res/images/favicon.ico" type="image/x-icon" />
-    <link href="<?php echo SITE_ROOT; ?>/res/css/stylesheet.css" rel="stylesheet">
+    <link rel="icon" href="/data/res/images/favicon.ico" type="image/x-icon" />
+    <link href="/data/res/css/stylesheet.css" rel="stylesheet">
+
     <style type='text/css'>    
         .col_12,
         .col_9,
@@ -64,4 +60,6 @@ define( 'WP_USE_THEMES', false); require( './blog/wp-blog-header.php');
         ga('create', 'UA-60272920-1', 'auto');
         ga('send', 'pageview');
     </script>
+    <script type="text/javascript" src="/res/js/tinyeditor.js"></script>
+
 </head>

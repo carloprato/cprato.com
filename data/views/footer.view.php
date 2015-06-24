@@ -1,7 +1,7 @@
 <div class='footer_container'>
     <div class="row footer">
         <div class='col_6 footer_paragraph' >
-            <h2 class='Home' style='border-bottom:1px solid #c1c1c1;'><?php echo $language->string("Recent_posts"); ?></h2>
+            <h2 class='Home' style='border-bottom:1px solid #c1c1c1;'>{{translate:Recent_posts}}</h2>
                <ul>                
                 <?php /* Replacing Wordpress dynamic request to static HTML  
 						$args=array( 'post_status'=> 'publish', 'numberposts' => '3'); 
@@ -16,19 +16,19 @@
             </ul>
         </div>
         <div class='col_3 footer_paragraph'>
-            <h2 class='Home' style='border-bottom:1px solid #c1c1c1;'><?php echo $language->string("Menu");?></h2>
+            <h2 class='Home' style='border-bottom:1px solid #c1c1c1;'>{{translate:Menu}}</h2>
             <a href='/<?=$_GET["lang"];?>/home' class='footer_link'>
-                <?php echo $language->string("Home");?></a>
+                {{translate:Home}}</a>
             <br/>
             <a href='/blog' class='footer_link'>
-                <?php echo $language->string("Blog");?></a>
+                {{translate:Blog}}</a>
             <br/>
             <a href='/<?=$_GET["lang"];?>/about' class='footer_link'>
-                <?php echo $language->string("About");?></a>
+                {{translate:About}}</a>
             <br/>
         </div>
         <div class='col_3 footer_paragraph'>
-            <h2 class='Home' style='border-bottom:1px solid #c1c1c1;'><?php echo $language->string("Contact");?></h2>
+            <h2 class='Home' style='border-bottom:1px solid #c1c1c1;'>{{translate:Contact}}</h2>
             <span class='Home'>Carlo Prato</span>
             <br/>
             <a class='footer_link' href='mailto:carlo@cprato.com'>carlo@cprato.com</a>

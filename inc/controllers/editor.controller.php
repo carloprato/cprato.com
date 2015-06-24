@@ -26,6 +26,12 @@
 		
 		function edit($id) {
 			// Edits a created static page
-			return "sexy";				
+			global $template;
+			$tpl = new TemplateController;
+			$tpl->set("page_content", $page);
+			global $text;
+			$text = "1";
+
+							
 		}
 	}
