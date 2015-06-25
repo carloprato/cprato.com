@@ -11,6 +11,18 @@
 			
 
 		}
+
+		static public function version() {
+			
+			return "0.0.1";
+		}
+		
+		static public function views_list() {
+			
+			return array('index', 'list_posts', 'view_post');
+		}
+		
+		
 		function index() {
 			// List all possible actions related to this module
 
@@ -76,7 +88,7 @@
 				 } 	
 			$tpl = new TemplateController;
 
-	 		$tpl->set("list_posts", $post_list); 
+	 		$tpl->set("recent_posts", $post_list); 
 			return $post_list;
 
 

@@ -5,8 +5,18 @@
 		protected $action;
 		protected $controller;
 
+		static public function version() {
+			
+			return "0.0.1";
+		}
+		
+		static public function views_list() {
+			
+			return array();
+		}
+		
 		function __construct() {
-				
+			
 			if (isset($_GET['action'])) {
 				// Defines action not to incur in the undefined variable later on
 				
@@ -47,10 +57,13 @@
 
 					return $template .= file_get_contents(SITE_ROOT . "data/views/" . $page . ".view.php");
 					
+				} else if (file_exists(SITE_ROOT . "inc/views/" . $page . ".view.php")) {
+
+					return $template .= file_get_contents(SITE_ROOT . "inc/views/" . $page . ".view.php");
+										
 				} else {
-					
 					header("HTTP/1.0 404 Not Found");
-					return include(SITE_ROOT . "data/views/404.view.php");					
+					return include(SITE_ROOT . "inc/views/404.view.php");					
 				}
 			}	
 		}

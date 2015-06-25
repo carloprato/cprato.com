@@ -6,7 +6,17 @@
 		//
 		//
 		//
+	
+		static public function version() {
+			
+			return "0.0.1";
+		}
 		
+		static public function views_list() {
+			
+			return array('index', 'add', 'edit');
+		}
+				
 		function __construct() {
 			
 

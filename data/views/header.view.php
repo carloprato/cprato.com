@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<?php echo $language->current_language(); ?>">
+<html lang="{{lang}}">
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, user-scalable=no" name="viewport">
@@ -55,11 +55,10 @@
             a.async = 1;
             a.src = g;
             m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.cprato.com/res/js/analytics.js', 'ga');
+        })(window, document, 'script', '//data/res/js/analytics.js', 'ga');
 
         ga('create', 'UA-60272920-1', 'auto');
         ga('send', 'pageview');
     </script>
     <script type="text/javascript" src="/data/res/js/tinyeditor.js"></script>
-
 </head>

@@ -7,6 +7,7 @@
 				// Defines startup variables
 				
 				define("SITE_ROOT", "");
+				define("WP_PATH", "/wp");
 				
 				//// DEBUG
 				// 0 Production, no warnings, just fatal errors

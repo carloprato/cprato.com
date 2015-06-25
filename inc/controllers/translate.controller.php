@@ -2,6 +2,16 @@
 	
 	class TranslateController {
 
+		static public function version() {
+			
+			return "0.0.1";
+		}
+		
+		static public function views_list() {
+			
+			return array('index', 'update');
+		}
+		
 		public static function index() {
  			
 			Auth::protect(100);

@@ -1,7 +1,9 @@
 <?php
 
 	require_once("inc/classes/core.class.php");
-	require_once("data/classes/db.class.php");
+
+	require_once("data/db.config.php");	
+	require_once("inc/classes/db.class.php");
 	session_start();
 	
 	$core = new Core;
