@@ -53,11 +53,11 @@
 				
 				return true;
 			} else if (isset($_SESSION['privileges']) && $_SESSION['privileges'] < $privileges) {
-				
-				header("Location: /en/home");
+
+		 		header("Location: /en/auth");
 			} else {
-				
-				header("Location: /en/home");
+
+				header("Location: /en/auth");
 			}
 		}
 		

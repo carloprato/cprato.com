@@ -163,7 +163,7 @@ svg {
     overflow: hidden
 }
 body {
-    font: 13px/1.5 "Helvetica Neue", Arial, "Liberation Sans", FreeSans, sans-serif
+
 }
 code,
 pre {
@@ -175,8 +175,12 @@ hr {
     clear: both;
     height: 0
 }
+h1, h2, h3 {
+    
+    color: #22620e;
+}
 h1 {
-    font-size: 25px
+    font-size: 25px;
 }
 h2 {
     font-size: 23px
@@ -215,10 +219,10 @@ p,
 pre,
 table,
 ul {
-    margin-bottom: 20px;
+    margin-bottom: 20px
 }
 @font-face {
-    font-family: 'Noto Serif'
+    font-family: 'Noto Serif';
 }
 * {
     font-family: 'Noto Serif';
@@ -231,13 +235,13 @@ a {
     color: #2A5DB0
 }
 a:hover {
-    text-decoration: underline
+    text-decoration: underline;
 }
 .logo {
     background-image: url(../images/logo.png);
     background-repeat: no-repeat;
     background-position: 50% 50%;
-    background-size: 50%;
+    background-size: 100%;
     transition: background-image 1s ease;
     margin: 0 auto;
     height: 120px;
@@ -252,16 +256,14 @@ body {
 .logo a:hover {
     text-decoration: none
 }
-.logo:hover {
-    background-image: url(../images/logo_glow.png)
-}
+
 .header {
     background: url(../images/header_bg.png) center #323232;
     z-index: 2
 }
 .title {
     font-size: 24px;
-    font-family: "Noto Serif";
+
     color: #dfdfdf;
     text-align: center;
     text-shadow: 0 4.33px 5px #000;
@@ -273,14 +275,12 @@ body {
         float: left;
         padding-left:10px; 
         text-align:justify;
-
     }
-    
 .menu_item {
     font-size: 24px;
-    font-family: "Noto Serif";
-    color: #dfdfdf;
-    text-shadow: 0 4.33px 5px #000;
+    font-family: 'Noto Serif';
+    color: #000;
+    text-shadow: 0 4.33px 5px #fff;
     z-index: 12;
     text-align:center;
 }
@@ -299,24 +299,19 @@ body {
     
 }
 
-.content_paragraph,
-.content_container {
-    min-height:300px;
-}
-p {
-    margin-bottom:20px;
-}
 .footer_paragraph {
 
-    color:#c1c1c1;
+    color:#000;
     padding:0px 5px; 
     text-align: left;
 }
 
-
+.footer_paragraph ul li {
+    list-style: none;
+}
 .footer_link {
        text-shadow: 0 1px 2px #c8c8c8;
-       color:#8cf; 
+       color:#2A5DB0; 
 }
 .iphone {
     background-image: url(../images/iphone.png);
@@ -338,7 +333,7 @@ p {
 }
 .footer .Home,
 .footer .evidence_paragraph {
-    color: #efefef;
+    color: #22620e;
     text-shadow: 0 1px 2px #c8c8c8
 }
 .page_title {
@@ -347,7 +342,7 @@ p {
 }
 .menu_item:hover {
     text-shadow: 0 1.33px 5px #dfdfdf;
-    background: rgba(30, 30, 30, .6);
+    background: rgba(150, 150, 150 .6);
     border-radius: 8px 8px 0 0;
     box-shadow: inset 0 0 5px 0 #000
 }
@@ -456,7 +451,7 @@ body {
     width: 460px
 }
 .col_4 {
-    width: 290px
+    width: 300px
 }
 .col_3 {
     width: 220px
@@ -590,21 +585,3 @@ img {
         margin-left: 0;
         margin-right: 10px
     }
-}
-
-#input {border:none; margin:0; padding:0; font:14px 'Courier New',Verdana; border:0}
-.te {border:1px solid #bbb; padding:0 1px 1px; font:12px Verdana,Arial; margin:25px}
-.te iframe {border:none}
-.teheader {border-bottom:1px solid #bbb; background:url(/data/res/images/header-bg.gif) repeat; padding-top:1px}
-.teheader select {float:left; margin-top:5px}
-.tefont {margin-left:12px}
-.tesize {margin:0 3px}
-.testyle {margin-right:12px}
-.tedivider {display: inline-block; width:1px; height:30px; background:#ccc}
-.tecontrol {display: inline-block; width:34px; height:30px; cursor:pointer; background-image:url(/data/res/images/icons.png)}
-.tecontrol:hover {background-color:#fff; background-position:30px 0}
-.tefooter {height:32px; border-top:1px solid #bbb; background:#f5f5f5}
-.toggle {float:left; background:url(/data/res/images/icons.png) -34px 2px no-repeat; padding:9px 13px 0 31px; height:23px; border-right:1px solid #ccc; cursor:pointer; color:#666}
-.toggle:hover {background-color:#fff}
-.resize {float:right; height:32px; width:32px; background:url(/data/res/images/resize.gif) 15px 15px no-repeat; cursor:s-resize}
-#editor {cursor:text; margin:10px}

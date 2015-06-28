@@ -1,7 +1,6 @@
 <?php
 	
 	class Core {
-
 	
 		function startup() {
 				// Defines startup variables
@@ -41,5 +40,5 @@
 				return $message;
 				}
 			}
-
+			
 		}

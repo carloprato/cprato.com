@@ -42,7 +42,7 @@
 			
 			if(preg_match_all('/{{translate:+(.*?)}}/', $page, $matches)) {
 				foreach ($matches[1] as $string) {
-					print_r($matches);
+
 					$page = str_replace("{{translate:" . $string . "}}", "<span style='display:none;'>" . $string . "</span>" . $language->string($string) . "&zwnj;", $page);
 								}
 			}

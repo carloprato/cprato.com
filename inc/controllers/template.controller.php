@@ -63,7 +63,7 @@
 										
 				} else {
 					header("HTTP/1.0 404 Not Found");
-					return include(SITE_ROOT . "inc/views/404.view.php");					
+					return $template .= file_get_contents(SITE_ROOT . "inc/views/errors/404.view.php");					
 				}
 			}	
 		}
@@ -99,15 +99,15 @@
 				foreach ($matches[1] as $string) {
 
 					$template = str_replace("{{translate:" . $string . "}}", $language->string($string), $template);
-								}
-			}
-			
-			
+					}
+			}			
 			
 			$this->set("p", $_GET['p']);
 			$this->set("lang", $_GET['lang']);
 			$this->set("SITE_ROOT", SITE_ROOT);
 			$this->set("recent_posts", BlogController::recent_posts(3));
+
+			$this->set("list_posts", BlogController::list_posts(3));
 			$this->replace();
 			return $template;
 			

@@ -5,6 +5,10 @@ RewriteBase /
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
 
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} (.+)/$
+RewriteRule ^ %1 [L,R=301]
+
 RewriteRule ^([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)$ /index.php?lang=$1&p=$2 [L]
 RewriteRule ^([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)$ /index.php?lang=$1&p=$2&action=$3 [L]
 RewriteRule ^([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)$ /index.php?lang=$1&p=$2&action=$3&arg=$4 [L]

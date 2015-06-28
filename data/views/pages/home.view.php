@@ -18,8 +18,7 @@
 
             <h2>Latest Blog Posts</h2>
 
-
- 			          
+            {{list_posts}}        
         </div>
     </div>
     <div class='fill'>

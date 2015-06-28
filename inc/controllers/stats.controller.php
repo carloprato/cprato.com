@@ -2,30 +2,47 @@
 	
 	class StatsController {
 		
-
-		function list_controllers() {
+		static public function version() {
 			
-		$dir    = '.';
-		$files1 = scandir($dir);
-
-		$i = 0;
-    	while (isset($files1[$i])) {
-
-			$files1[$i] = str_replace(".controller.php", "", $files1[$i]);
-
-			$i++;
+			return "0.0.1";
 		}
+		
+		static public function views_list() {
+			
+			return array('index', 'list_posts', 'view_post');
+		}
+			
+		function list_controllers() {
+				
+		Auth::protect(100);
+		$dir    = './inc/controllers';
+		$files1 = scandir($dir);
 		unset($files1[0]);
 		unset($files1[1]);
+		
+		$i = 2;
+    	while (isset($files1[$i])) {
+		
+
+
+			$controller = str_replace(".controller.php", "", $files1[$i]);			
+			$controller = ucwords($controller) . "Controller";
+		if (!class_exists($controller))	
+			include("./inc/controllers/" . $files1[$i]);
+
+			$files1[name][$i] = $files1[$i];			
+			$files1[version][$i] = $controller::version();
+
+			unset($files1[$i]);
+			$i++;
+		}
+		
+		$tpl = new TemplateController;
+		$tpl->set("controllers_list", "<pre>" . print_r($files1, true) . "</pre>");
 		return($files1);
 		
 	}
 	
+
 	}
 	
-	$test = new StatsController;
-	$array = $test->list_controllers();
-	foreach ($array as $element) {
-		$element = ucwords($element);
-		echo $element . "<br/>";	
-	}
