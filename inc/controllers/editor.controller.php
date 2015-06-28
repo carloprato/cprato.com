@@ -16,11 +16,17 @@
 			
 			return array('index', 'add', 'edit');
 		}
-				
+
+		static public function description() {
+			
+			return "Module to add and edit pages to the website.";
+		}
+											
 		function __construct() {
 			
 
 		}
+		
 		function index() {
 			// List all possible actions related to this module
 						

@@ -14,7 +14,12 @@
 			
 			return array();
 		}
-		
+
+		static public function description() {
+			
+			return "Essential module to set up and display the template.";
+		}
+									
 		function __construct() {
 			
 			if (isset($_GET['action'])) {

@@ -11,7 +11,12 @@
 			
 			return array('index', 'list_posts', 'view_post');
 		}
-						
+
+		static public function description() {
+			
+			return "Module to control admin rights and permissions.";
+		}
+								
 		public static function all() {
 			Auth::protect(100);
 			return "test";

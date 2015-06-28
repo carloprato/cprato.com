@@ -11,7 +11,13 @@
 			
 			return array('index', 'update');
 		}
-		
+
+		static public function description() {
+			
+			return "Essential module to display and modify strings for translation.";
+		}
+							
+									
 		public static function index() {
  			
 			Auth::protect(100);

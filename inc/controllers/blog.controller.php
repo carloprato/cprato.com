@@ -22,7 +22,11 @@
 			return array('index', 'list_posts', 'view_post');
 		}
 		
-		
+		static public function description() {
+			
+			return "Module to display blog posts and comments.";
+		}
+									
 		function index() {
 			// List all possible actions related to this module
 
