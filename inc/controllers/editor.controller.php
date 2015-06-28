@@ -33,7 +33,17 @@
 		}
 		function add() {
 			// Adds a new static page
-							
+			if (isset($_POST['page_name'])) {
+				// Removing backslash before writing the content to file
+				$_POST['page_content'] = str_replace("\\", "", $_POST['page_content']);
+				// Removing the stylesheet, temporary fix
+				$_POST['page_content'] = str_replace('<link href="/data/res/css/stylesheet.css" rel="stylesheet">', "", $_POST['page_content']);
+				$tpl = new TemplateController;
+				$tpl->set("POST", print_r($_POST, true));		
+				$file = fopen("data/views/pages/" . $_POST['page_name'] . ".view.php", "w");
+				fwrite($file, $_POST['page_content']);
+				header("Location: /en/" . $_POST['page_name']);
+			}
 		}
 		
 		function remove() {

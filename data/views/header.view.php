@@ -8,7 +8,7 @@
     <meta name="keywords" content="Carlo Prato, Carlo Prato Malta, Carlo Prato Mosta, Webdesign Malta">
     <title>Carlo Prato</title>
     <link rel="icon" href="/data/res/images/favicon.ico" type="image/x-icon" />
-    <link href="/data/res/css/stylesheet.css" rel="stylesheet">
+    <link href="{{SITE_ROOT}}/data/res/css/stylesheet.css" rel="stylesheet">
 
     <style type='text/css'>    
         .col_12,
