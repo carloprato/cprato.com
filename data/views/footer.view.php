@@ -16,6 +16,9 @@
             <a href='/{{lang}}/about' class='footer_link'>
                 {{translate:About}}</a>
             <br/>
+            <a href='/{{lang}}/auth' class='footer_link'>
+                {{translate:Login}}</a>
+            <br/>
         </div>
         <div class='col_3 footer_paragraph'>
             <h2 class='Home' style='border-bottom:1px solid #c1c1c1;'>{{translate:Contact}}</h2>

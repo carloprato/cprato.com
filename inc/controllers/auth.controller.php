@@ -20,12 +20,53 @@
 				
 		public static function auth() {
 			
+		}
+		
+		public static function register() {
+							
+			if (isset($_POST['submitButton'])) {	
+				if (strlen($_POST['user']) <= 3) {
+					
+					$error = "Username too short.";
+				} else if ($_POST['password'] != $_POST['confirm_password']) {
+					
+					$error = "Passwords do not match.";
+				}	else if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+					
+					$error = "E-Mail not valid.";
+				} else if (!isset($_POST['name'])) {
+					
+					$error = "Please insert your name and surname.";
+				} else if ($_POST['invitation_code'] != 'INVcarlo123') {
+					
+					$error = "The invitation code is not valid.";
+				} else {
+												
+							$db = Db::getInstance();
+							$sql = 'INSERT INTO `users`(`id`, `user`, `password`, `name`, `email`, `verified`, `privileges`) VALUES (?, ?, ?, ?, ?, ?, ?)';
+							$q = $db->prepare($sql);						
+							$req = $q->execute(array(NULL, $_POST['user'], Auth::encryptPassword($_POST['password']), $_POST['name'], $_POST['email'], md5($_POST['email']), 0));
+							$success = "Successfully registered";
+				}
+			
+			}
+		
+			if ($error) {
+				$tpl = new TemplateController;
+				$tpl->set("error", $error);	
+				return $error;
+			} else {				
+				$tpl = new TemplateController;
+				$tpl->set("success", $success);	
+				return $success;
+			}
 
 		}
 
 		public static function index() {
 			
-
+			$tpl = new TemplateController;
+			$tpl->set("user_details", print_r($_SESSION, true));
 		}
 				
 		public static function login() {

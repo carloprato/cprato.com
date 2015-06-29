@@ -29,9 +29,13 @@
 		
 		function index() {
 			// List all possible actions related to this module
-						
+			Auth::protect(100);						
 		}
+		
 		function add() {
+			
+			Auth::protect(100);
+			
 			// Adds a new static page
 			if (isset($_POST['page_name'])) {
 				// Removing backslash before writing the content to file
@@ -60,7 +64,7 @@
 				foreach ($matches[1] as $string) {
 
 					$page = str_replace("{{translate:" . $string . "}}", "<span style='display:none;'>" . $string . "</span>" . $language->string($string) . "&zwnj;", $page);
-								}
+				}
 			}
 
 			$tpl->set("page_content", $page);

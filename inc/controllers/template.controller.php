@@ -35,12 +35,17 @@
 				$this->controller = $_GET['p'];	
 				
 				
-			} else if (!isset($_GET['action']) && !file_exists("data/views/pages/" . $_GET['p'] . ".view.php")) {
+			} else if (!isset($_GET['action']) && isset($_GET['p']) && !file_exists("data/views/pages/" . $_GET['p'] . ".view.php")) {
 				// If there is not action and the view file with the same name 
 				// does not exist the index() method will be called
 				
 				$this->action = 'index';
 				$this->controller = $_GET['p'];
+				
+			} else if (!isset($_GET['action']) && !isset($_GET['p']) && !file_exists("data/views/pages/" . $_GET['p'] . ".view.php")) {
+
+				$this->action = 'index';
+				$this->controller = 'pages';				
 				
 			} else if (file_exists("data/views/pages/" . $_GET['p'] . ".view.php")) {
 				// If the view file exists the default controller pages will be called

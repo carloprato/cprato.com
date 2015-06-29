@@ -60,10 +60,7 @@
 		$tpl = new TemplateController;
  		$tpl->set("list_posts", $post_list);  
 
-
 		   return $post_list;
-
-
 
 	}
 	
