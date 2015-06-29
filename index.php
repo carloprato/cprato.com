@@ -27,5 +27,3 @@
 
 	$tpl = new TemplateController;
 	echo $tpl->view();
-	
-	print_r($_SESSION);

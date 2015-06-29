@@ -38,31 +38,30 @@
 		function list_posts($num = 5) {
 			
 				global $tpl;
-
+				global $recent_posts;
 						$args=array( 'post_status'=> 'publish', 'numberposts' => $num); 
 						$recent_posts = wp_get_recent_posts($args);
-						$post_list = NULL;
-						foreach( $recent_posts as $recent ){
+						/*
+						$recent_posts = array(
+							array("post_title" => "Wow great!",
+								  "post_content" => "bla bla bla bla",
+								  "ID" => 1),
+							array("post_title" => "Wow dfsg!",
+								  "post_content" => "bla sdfgss bla bla",
+								  "ID" => 2),
+								  
+							array("post_title" => "Wosdfgw great!",
+								  "post_content" => "bla bla sfgsfs bla",
+								  "ID" => 3),
+								  								  	
+						);
+						*/
 
-						if (strlen($recent["post_content"]) > 300)	
-							$recent["post_content"] = substr($recent["post_content"], 0, 300) . '...<a href="/' . $_GET[lang] .'/blog/view_post/'. $recent["ID"] . '"> Continue Reading</a>';
-				$post_list .= '
-                <h3>
-					<a href="'. SITE_ROOT . '/' . $_GET[lang] . '/blog/view_post/'. $recent["ID"] . '">
-						'. $recent["post_title"].'
-					</a>
-				</h3>
-				
-				<p>'. $recent["post_content"] . '
-				</p>
-				<br/>'; }           
-	
-		$tpl = new TemplateController;
- 		$tpl->set("list_posts", $post_list);  
+						foreach ($recent_posts as $key => $value) {
 
-		   return $post_list;
-
-	}
+							$recent_posts[$key]['post_content_short'] = substr($recent_posts[$key]['post_content'], 0, 200) . "...";
+						}
+					}
 	
 		function view_post($id) {
 			
@@ -88,13 +87,6 @@
 			$args=array( 'post_status'=> 'publish', 'numberposts' => $num); 
 			$recent_posts = wp_get_recent_posts($args);
 			$post_list = NULL;
-
-			foreach( $recent_posts as $recent ){
-
-					$post_list .= '<a href="' . SITE_ROOT . '/' . $_GET['lang'] . '/blog/view_post/'. $recent["ID"] . '" class="footer_link">' . $recent["post_title"] .'
-					</a><br/>';
-				 } 	
-			
 
 			$tpl = new TemplateController;
 

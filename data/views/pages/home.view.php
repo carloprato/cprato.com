@@ -18,7 +18,17 @@
 
             <h2>Latest Blog Posts</h2>
 
-            {{list_posts}}        
+            {foreach:recent_posts}        
+                <h3>
+					<a href="{{SITE_ROOT}}/{{lang}}/blog/view_post/{{loop_element:ID}}">
+						{{loop_element:post_title}}
+					</a>
+				</h3>
+				
+				<p>{{loop_element:post_content_short}}
+				</p>
+				<br/>
+             {endforeach}     
         </div>
     </div>
     <div class='fill'>

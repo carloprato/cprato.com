@@ -88,12 +88,13 @@
 		
 		function replace() {
 			
-				global $values;
-				global $template;
-				foreach ($values as $key=>$value) {
+			global $values;
+			global $template;
+			foreach ($values as $key=>$value) {
 					
 				$template = str_replace("{{" . $key . "}}", $value, $template);
-				}
+			}
+			$this->replace_foreach();
 		}
 		
 		function view() {
@@ -123,4 +124,24 @@
 			
 		}
 		
+		function replace_foreach() {
+			
+			global $template;
+
+			if( preg_match('~\{foreach:(.*?)\}(.*?)\{endforeach\}~s', $template, $matches) ) {
+			// If the {foreach} element is found, the variable $matches will be created.
+			// Retrieving the array created in the controller and displayed in the template.
+			
+				global ${$matches[1]};			
+				$foreach_array = ${$matches[1]};				
+				foreach ($foreach_array as $single_array) {
+					$foreach_content = $matches[2];					
+					foreach ($single_array as $key => $value) {								
+						$foreach_content = str_replace("{{loop_element:" . $key . "}}", $value, $foreach_content);					
+					}						
+					$foreach_complete .= $foreach_content;
+					}
+				$template = preg_replace('~\{foreach:(.*)\}(.*)\{endforeach\}~s', $foreach_complete, $template);
+			}
+		}
 	}
