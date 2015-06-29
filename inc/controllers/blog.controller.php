@@ -37,47 +37,37 @@
 
 		function list_posts($num = 5) {
 			
-				global $tpl;
-				global $recent_posts;
-						$args=array( 'post_status'=> 'publish', 'numberposts' => $num); 
-						$recent_posts = wp_get_recent_posts($args);
-						/*
-						$recent_posts = array(
-							array("post_title" => "Wow great!",
-								  "post_content" => "bla bla bla bla",
-								  "ID" => 1),
-							array("post_title" => "Wow dfsg!",
-								  "post_content" => "bla sdfgss bla bla",
-								  "ID" => 2),
-								  
-							array("post_title" => "Wosdfgw great!",
-								  "post_content" => "bla bla sfgsfs bla",
-								  "ID" => 3),
-								  								  	
-						);
-						*/
+			global $recent_posts;
+						
+			$db = Db::getInstance();
+			$sql = 'SELECT * FROM posts WHERE status = 1 ORDER BY date_created DESC LIMIT 3';
+				$q = $db->prepare($sql);
+				$req = $q->execute();	
+			$recent_posts = array();	
+				foreach($q->fetchAll(PDO::FETCH_ASSOC) as $post) {
+					$recent_posts[] = $post;
+		      	}
 
-						foreach ($recent_posts as $key => $value) {
-
-							$recent_posts[$key]['post_content_short'] = substr($recent_posts[$key]['post_content'], 0, 200) . "...";
-						}
+					
+				 return $recent_posts;
 					}
 	
 		function view_post($id) {
-			
-			$post = get_post($id);
-			
-		 $tpl = new TemplateController;
+		
+			$db = Db::getInstance();
+			$sql = 'SELECT * FROM posts WHERE id = ?';
+				$q = $db->prepare($sql);
+				$req = $q->execute(array($_GET['arg']));	
+				
+				foreach($q->fetchAll(PDO::FETCH_OBJ) as $post) {
+				 $tpl = new TemplateController;
+		 		 $tpl->set("post_title", $post->title);
+		 		 $tpl->set("post_date", date("H:m, d-m-Y", strtotime($post->date_created)));
+		 		 $tpl->set("post_id", $id);
+				 $tpl->set("post_content", $post->content);
+			 	 $tpl->set("comments", $comments); 		
 
-		echo $comments;
- 		 $tpl->set("post_title", $post->post_title);
- 		 $tpl->set("post_date", date("H:m, d-m-Y", strtotime($post->post_date)));
- 		 $tpl->set("post_id", $id);
-		 $comments = BlogController::view_comments($id);
-		 $tpl->set("post_content", $post->post_content);
-	 	 $tpl->set("comments", $comments); 		
-
-		   
+		      	}		   
 		}
 		
 		static function recent_posts($num) {
@@ -93,13 +83,10 @@
 	 		$tpl->set("recent_posts", $post_list); 
 
 			return $post_list;
-
-
 		}
 		
 		static function view_comments($id) {
-			
-			
+					
 			$comments = get_comments('post_id=' . $id);
 			$comment_content = array();
 			
@@ -115,15 +102,30 @@
 			}
 			return $comment_list;
 		}
-		
-		function login() {
-			
-			$args = array("echo" => FALSE,
-						  "redirect" => "/en/blog/login/success");
-			$login_form = wp_login_form($args);
-			 $tpl = new TemplateController;
-			 $tpl->set("login_form", $login_form);
 
-	
-	}
-}
+		function add() {
+			
+			if (isset($_POST['submit_button'])) {	
+												
+							$db = Db::getInstance();
+							$sql = 'INSERT INTO `posts`(`id`, `author`, `content`, `short_content`, `title`, `short_title`, `date_created`, `date_modified`, `status`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+							$q = $db->prepare($sql);						
+							$req = $q->execute(array(
+									NULL, 
+									Auth::getUserID(), 
+									$_POST['post_content'], 
+									substr($_POST['post_content'], 0, 200),
+									$_POST['post_title'], 
+									str_replace(" ", "-", $_POST['post_title']),
+									date("Y-m-d H:i:s"), 
+									date("Y-m-d H:i:s"), 
+									1
+									));
+									
+							$success = "Successfully registered";
+				}
+			
+			}
+		
+		
+		}

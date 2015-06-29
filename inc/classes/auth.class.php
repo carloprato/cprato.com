@@ -71,6 +71,21 @@
 			return $roles;
 		}
 		
+		public static function getUserID() {
+		    $db = Db::getInstance();			
+			$sql = 'SELECT * FROM users WHERE user = ? LIMIT 1';
+				$q = $db->prepare($sql);
+				$req = $q->execute(array($_SESSION['user']));	
+				
+				foreach($q->fetchAll(PDO::FETCH_OBJ) as $user) {
+						
+							return $user->id;
+						}
+						return "Error!";
+		      	}				
+			
+		
+		
 		public static function encryptPassword($password) {
 			
 			$salt = strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.');

@@ -20,12 +20,12 @@
 
             {foreach:recent_posts}        
                 <h3>
-					<a href="{{SITE_ROOT}}/{{lang}}/blog/view_post/{{loop_element:ID}}">
-						{{loop_element:post_title}}
+					<a href="{{SITE_ROOT}}/{{lang}}/blog/view_post/{{loop_element:id}}">
+						{{loop_element:title}}
 					</a>
 				</h3>
 				
-				<p>{{loop_element:post_content_short}}
+				<p>{{loop_element:short_content}}
 				</p>
 				<br/>
              {endforeach}     

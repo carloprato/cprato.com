@@ -117,7 +117,6 @@
 			$this->set("lang", $_GET['lang']);
 			$this->set("SITE_ROOT", SITE_ROOT);
 			$this->set("recent_posts", BlogController::recent_posts(3));
-
 			$this->set("list_posts", BlogController::list_posts(3));
 			$this->replace();
 			return $template;
@@ -132,7 +131,8 @@
 			// If the {foreach} element is found, the variable $matches will be created.
 			// Retrieving the array created in the controller and displayed in the template.
 			
-				global ${$matches[1]};			
+				global ${$matches[1]};		
+				${$matches[1]} ;
 				$foreach_array = ${$matches[1]};				
 				foreach ($foreach_array as $single_array) {
 					$foreach_content = $matches[2];					

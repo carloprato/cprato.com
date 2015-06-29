@@ -60,5 +60,21 @@
         ga('create', 'UA-60272920-1', 'auto');
         ga('send', 'pageview');
     </script>
-    <script type="text/javascript" src="/data/res/js/tinyeditor.js"></script>
+    <script type="text/javascript" src="/data/res/js/tinymce/tinymce.min.js" ></script >  
+<script type="text/javascript">
+tinyMCE.init({
+        theme : "modern",
+        mode : "textareas",
+        toolbar: "insertfile undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+        menubar : false,
+      setup : function(ed)
+      {
+        ed.on('init', function() 
+        {
+            this.execCommand("fontName", false, "Noto Serif");
+            this.execCommand("fontSize", false, "20px");
+        });
+  }  
+});
+</script>
 </head>
