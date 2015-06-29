@@ -268,7 +268,13 @@ body {
     z-index: 11;
     padding-top: 83px
 }
-
+.big_text {
+    width:100%;
+    border:1px solid #2A5DB0;
+    background-color: #cef;
+    padding:15px;
+    border-radius:8px;
+}
 .evidence_paragraph {
         float: left;
         padding-left:10px; 
@@ -304,7 +310,7 @@ body {
     min-height:300px;
 }
 p {
-    margin-bottom:20px;
+
 }
 .footer_paragraph {
 
@@ -590,6 +596,22 @@ img {
         margin-left: 0;
         margin-right: 10px
     }
+}
+
+::-webkit-input-placeholder {
+   color: #555555;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #555555;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #555555;
+}
+
+:-ms-input-placeholder {  
+   color: #555555;
 }
 
 #input {border:none; margin:0; padding:0; font:14px 'Courier New',Verdana; border:0}

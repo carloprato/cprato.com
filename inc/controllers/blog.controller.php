@@ -55,13 +55,14 @@
 		function view_post($id) {
 		
 			$db = Db::getInstance();
-			$sql = 'SELECT * FROM posts WHERE id = ?';
+			$sql = 'SELECT * FROM posts WHERE short_title = ?';
 				$q = $db->prepare($sql);
 				$req = $q->execute(array($_GET['arg']));	
 				
 				foreach($q->fetchAll(PDO::FETCH_OBJ) as $post) {
 				 $tpl = new TemplateController;
 		 		 $tpl->set("post_title", $post->title);
+		 		 $tpl->set("short_title", $post->short_title);
 		 		 $tpl->set("post_date", date("H:m, d-m-Y", strtotime($post->date_created)));
 		 		 $tpl->set("post_id", $id);
 				 $tpl->set("post_content", $post->content);
@@ -116,7 +117,7 @@
 									$_POST['post_content'], 
 									substr($_POST['post_content'], 0, 200),
 									$_POST['post_title'], 
-									str_replace(" ", "-", $_POST['post_title']),
+									BlogController::shorten($_POST['post_title']),
 									date("Y-m-d H:i:s"), 
 									date("Y-m-d H:i:s"), 
 									1
@@ -125,7 +126,31 @@
 							$success = "Successfully registered";
 				}
 			
-			}
-		
+			}			
+			
+			static public function shorten($text)
+			{ 
+			  // replace non letter or digits by -
+			  $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
+			
+			  // trim
+			  $text = trim($text, '-');
+			
+			  // transliterate
+			  $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+			
+			  // lowercase
+			  $text = strtolower($text);
+			
+			  // remove unwanted characters
+			  $text = preg_replace('~[^-\w]+~', '', $text);
+			
+			  if (empty($text))
+			  {
+			    return 'n-a';
+			  }
+			
+			  return $text;
+			}		
 		
 		}

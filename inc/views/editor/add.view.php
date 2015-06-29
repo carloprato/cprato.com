@@ -4,9 +4,7 @@
 			<h2>Create New Page</h2>
 			<form method='post' action='{{SITE_ROOT}}/{{lang}}/editor/add'>
 			<input type='text' name='page_name'/>
-				<textarea id="input" name='page_content'>
-	    			<link href="/data/res/css/stylesheet.css" rel="stylesheet">
-
+				<textarea class="rich_editor" name='page_content'>
 						<div class='evidence_container'>
 						    <div class="row evidence">
 						        <div class='col_4 evidence_paragraph'>

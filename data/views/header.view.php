@@ -64,7 +64,8 @@
 <script type="text/javascript">
 tinyMCE.init({
         theme : "modern",
-        mode : "textareas",
+        mode : "specific_textareas",
+        editor_selector : "rich_editor",
         toolbar: "insertfile undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
         menubar : false,
       setup : function(ed)
