@@ -1,6 +1,6 @@
 <?php
 	
-	class TemplateController {
+	class TemplateModel {
 
 		protected $action;
 		protected $controller;
@@ -89,11 +89,9 @@
 			
 			global $values;
 			global $template;
-
 			foreach ($values as $key=>$value) {
-				if (is_string($values[$key])) { // Excluding arrays which will be converted as foreach loops
-					$template = str_replace("{{" . $key . "}}", $value, $template);
-				}
+					
+				$template = str_replace("{{" . $key . "}}", $value, $template);
 			}
 			$this->replace_foreach();
 		}
@@ -117,7 +115,7 @@
 			$this->set("p", $_GET['p']);
 			$this->set("lang", $_GET['lang']);
 			$this->set("SITE_ROOT", SITE_ROOT);
-			//$this->set("recent_posts", BlogController::list_posts(3));
+			$this->set("recent_posts", BlogController::recent_posts(3));
 			$this->set("list_posts", BlogController::list_posts(3));
 			$this->replace();
 			return $template;
@@ -131,12 +129,10 @@
 			if( preg_match('~\{foreach:(.*?)\}(.*?)\{endforeach\}~s', $template, $matches) ) {
 			// If the {foreach} element is found, the variable $matches will be created.
 			// Retrieving the array created in the controller and displayed in the template.
-
-				global ${$matches[1]};
-
-				$foreach_array = ${$matches[1]};
-				$foreach_complete = NULL;			
-
+			
+				global ${$matches[1]};		
+				${$matches[1]} ;
+				$foreach_array = ${$matches[1]};				
 				foreach ($foreach_array as $single_array) {
 					$foreach_content = $matches[2];					
 					foreach ($single_array as $key => $value) {								

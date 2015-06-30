@@ -6,17 +6,12 @@
 						
 			if (isset($_GET['p'])) {
 				$controller = $_GET['p'];
-			} else {
-				$controller = 'pages';
-			}
+			} else $controller = 'pages';
 			
 			if (isset($_GET['action'])) {
 				$action = $_GET['action'];
-			} else {
-				
-				$action = 'index';
-			}
-								
+			} else $action = 'index';
+											
 			if (isset($_GET['arg'])) {
 				$arg = $_GET['arg'];
 			} else $arg = NULL;

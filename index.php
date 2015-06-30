@@ -9,9 +9,6 @@
 	$core = new Core;
 	$core->startup();
 	$core->checkURI();
-
-	define( 'WP_USE_THEMES', false); 
-	require('./wp/wp-blog-header.php'); 
 		
 	require_once(SITE_ROOT . "inc/classes/auth.class.php");		
 	require_once(SITE_ROOT . "inc/classes/language.class.php");	

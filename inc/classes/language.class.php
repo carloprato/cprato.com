@@ -25,26 +25,29 @@
 		}
 		
 		function addString() {
-
-		      $strings = [];
-		      $db = Db::getInstance();
-		      $req = $db->query('SELECT * FROM translations WHERE lang = \'' . $lang . '\'');
 			
-		      foreach($req->fetchAll(PDO::FETCH_ASSOC) as $string) {
-
-				$strings[$string['keyword']] = $string['string'];
-
-		      }
-
-		      $req = $db->query('SELECT * FROM translations WHERE lang = \'en\'');
+	        $db = Db::getInstance();
 			
-		      foreach($req->fetchAll(PDO::FETCH_ASSOC) as $string) {
+			$strings = [];
+			$sql = 'SELECT * FROM translations WHERE lang = ?';
+			$q = $db->prepare($sql);
+		    $req = $q->execute(array($_GET['lang']));
 
-				$strings['english'][$string['keyword']] = $string['string'];
+		    foreach($q->fetchAll(PDO::FETCH_OBJ) as $string) {
 
-		      }		
+				$strings[$string->keyword] = $string->string;
+			}
+
+			$sql = "SELECT * FROM translations WHERE lang = en";
+			$q = $db->prepare($sql);
+		    $req = $q->execute();
+
+		    foreach($q->fetchAll(PDO::FETCH_OBJ) as $string) {
+
+				$strings['english'][$string->keyword] = $string->string;
+		    }		
 		}
-		
+
 		public static function load($lang) {
 			
 			// Queries the database for language strings and stores them in an array.
@@ -52,26 +55,20 @@
 			// the string is not available in the currently selected language.
 			//
 			
-		      $strings = [];
-		      $db = Db::getInstance();
-		      $req = $db->query('SELECT * FROM translations WHERE lang = \'' . $lang . '\'');
+		    $strings = array();
+		    $db = Db::getInstance();
+		    $req = $db->query('SELECT * FROM translations WHERE lang = \'' . $lang . '\'');
 			
-		      foreach($req->fetchAll(PDO::FETCH_ASSOC) as $string) {
-
-				$strings[$string['keyword']] = $string['string'];
-
-		      }
-			  // You can ignore this if the language is already English.
-			  
-		      $req = $db->query('SELECT * FROM translations WHERE lang = \'en\'');
-			
-		      foreach($req->fetchAll(PDO::FETCH_ASSOC) as $string) {
-
-				$strings['english'][$string['keyword']] = $string['string'];
-
-		      }
-
-
-		      return $strings;
+			foreach($req->fetchAll(PDO::FETCH_OBJ) as $string) {
+				$strings[$string->keyword] = $string->string;
 		    }
+
+			if ($_GET['lang'] != 'en') {		  
+			  	$req = $db->query('SELECT * FROM translations WHERE lang = "en"');				
+				foreach($req->fetchAll(PDO::FETCH_ASSOC) as $string) {
+						$strings['english'][$string->keyword] = $string->string;	
+		    	}
+			}
+	    return $strings;
+	    }
 	}

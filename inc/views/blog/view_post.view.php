@@ -7,7 +7,9 @@
             
             <p style='margin-top:20px'>
                 <h3>Comments</h3>
-                {{comments}}
+                {foreach:comments}
+                    {{loop_element:content}}
+                {endforeach}
             </p>
         </div>
     </div>

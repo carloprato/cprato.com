@@ -72,30 +72,20 @@
 
 			   		if ( $q->fetchColumn() > 0 ) {
 						   
-							$sql = 'UPDATE translations SET string = ? WHERE lang = ? AND keyword = ?';
-							$q = $db->prepare($sql);						
-							$req = $q->execute(array( $value, $lang, $key));
-							
-
-					   } 
-					
-
+						$sql = 'UPDATE translations SET string = ? WHERE lang = ? AND keyword = ?';
+						$q = $db->prepare($sql);						
+						$req = $q->execute(array( $value, $lang, $key));
+					} 
 				}
-		
 					if (isset($_POST['new_key']) && $_POST['new_key'] != NULL) {
 	
-							$key = $_POST['new_key'];
-							$value = $_POST['new_value'];
-							$lang = 'en';
-							$sql = 'INSERT INTO `translations`(`id`, `keyword`, `string`, `lang`) VALUES (?, ?, ?, ?)';
-							$q = $db->prepare($sql);						
-							$req = $q->execute(array(NULL, $key, $value, $lang));
-
+						$key = $_POST['new_key'];
+						$value = $_POST['new_value'];
+						$lang = 'en';
+						$sql = 'INSERT INTO `translations`(`id`, `keyword`, `string`, `lang`) VALUES (?, ?, ?, ?)';
+						$q = $db->prepare($sql);						
+						$req = $q->execute(array(NULL, $key, $value, $lang));
 					}
-
 				}		
-			}
-					
-	}
-
-	
+			}					
+		}
