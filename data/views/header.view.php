@@ -68,14 +68,9 @@ tinyMCE.init({
         editor_selector : "rich_editor",
         toolbar: "insertfile undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
         menubar : false,
-      setup : function(ed)
-      {
-        ed.on('init', function() 
-        {
-            this.execCommand("fontName", false, "Noto Serif");
-            this.execCommand("fontSize", false, "20px");
-        });
-  }  
+        force_br_newlines : false,
+        force_p_newlines : false,
+        forced_root_block : ''
 });
 </script>
 </head>

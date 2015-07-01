@@ -41,16 +41,16 @@
 				$this->action = 'index';
 				$this->controller = $_GET['p'];
 				
-			} else if (!isset($_GET['action']) && !isset($_GET['p']) && !file_exists("data/views/pages/" . $_GET['p'] . ".view.php")) {
+			} else if (!isset($_GET['action']) && !isset($_GET['p']) && !file_exists("data/views/pages/" . PAGE . ".view.php")) {
 
 				$this->action = 'index';
 				$this->controller = 'pages';				
 				
-			} else if (file_exists("data/views/pages/" . $_GET['p'] . ".view.php")) {
+			} else if (file_exists("data/views/pages/" . PAGE . ".view.php")) {
 				// If the view file exists the default controller pages will be called
 				
 				$this->controller = 'pages';	
-				$this->action   = $_GET['p'];
+				$this->action   = PAGE;
 			}
 		}	
 		
@@ -107,15 +107,15 @@
 			$html    .=	$this->load($this->controller . "/" . $this->action);
 			$html    .=	$this->load('footer');
 			
-			if(preg_match_all('/{{translate:+(.*?)}}/', $template, $matches)) {
+			if (preg_match_all('/{{translate:+(.*?)}}/', $template, $matches)) {
 				foreach ($matches[1] as $string) {
 
 					$template = str_replace("{{translate:" . $string . "}}", $language->string($string), $template);
 				}
 			}			
 			
-			$this->set("p", $_GET['p']);
-			$this->set("lang", $_GET['lang']);
+			$this->set("p", PAGE);
+			$this->set("lang", LANG);
 			$this->set("SITE_ROOT", SITE_ROOT);
 			//$this->set("recent_posts", BlogController::list_posts(3));
 			$this->set("list_posts", BlogController::list_posts(3));

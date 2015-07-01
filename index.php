@@ -1,7 +1,6 @@
 <?php
 
 	require_once("inc/classes/core.class.php");
-
 	require_once("data/db.config.php");	
 	require_once("inc/classes/db.class.php");
 	session_start();
@@ -17,7 +16,7 @@
 	require_once(SITE_ROOT . "inc/controllers/blog.controller.php");							
 
 	$language = new Language;
-	$lang     = $language->load($_GET['lang']);
+	$lang     = $language->load(LANG);
 
 	$routes	  = new Routes;
 	$routes->call();

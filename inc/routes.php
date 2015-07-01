@@ -3,10 +3,12 @@
 	class Routes {
 				
 		function call() {			
-						
+	
 			if (isset($_GET['p'])) {
 				$controller = $_GET['p'];
-			} else $controller = 'pages';
+			} else {				
+				$controller = 'pages';
+			}
 			
 			if (isset($_GET['action'])) {
 				$action = $_GET['action'];

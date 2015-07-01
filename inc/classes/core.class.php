@@ -5,9 +5,14 @@
 		function startup() {
 				// Defines startup variables
 				
+				if (isset($_GET['lang'])) $lang = $_GET['lang'];
+				else $lang = 'en';
+				if (isset($_GET['p'])) $page = $_GET['p'];
+				else $page = 'en';
 				define("SITE_ROOT", "");
-				define("WP_PATH", "/wp");
-				
+				define("LANG", $lang);
+				define("PAGE", $page);
+								
 				//// DEBUG
 				// 0 Production, no warnings, just fatal errors
 				// 1 Testing, warnings

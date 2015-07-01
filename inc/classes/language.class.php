@@ -63,7 +63,7 @@
 				$strings[$string->keyword] = $string->string;
 		    }
 
-			if ($_GET['lang'] != 'en') {		  
+			if (LANG != 'en') {		  
 			  	$req = $db->query('SELECT * FROM translations WHERE lang = "en"');				
 				foreach($req->fetchAll(PDO::FETCH_ASSOC) as $string) {
 						$strings['english'][$string->keyword] = $string->string;	

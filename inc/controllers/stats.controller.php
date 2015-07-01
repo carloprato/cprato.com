@@ -19,32 +19,33 @@
 										
 		function list_controllers() {
 				
-		Auth::protect(100);
-		$dir    = './inc/controllers';
-		$files1 = scandir($dir);
-		unset($files1[0]);
-		unset($files1[1]);
-		
-		$i = 2;
-    	while (isset($files1[$i])) {
-		
-			$controller = str_replace(".controller.php", "", $files1[$i]);			
-			$controller = ucwords($controller) . "Controller";
-		if (!class_exists($controller))	
-			include("./inc/controllers/" . $files1[$i]);
-
-			$files1[name][$i] = $files1[$i];			
-			$files1[version][$i] = $controller::version();
-			$files1[views][$i] = $controller::views_list();
-			$files1[description][$i] = $controller::description();			
-			unset($files1[$i]);
-			$i++;
-		}
+			Auth::protect(100);
+			$dir    = './inc/controllers';
+			$files1 = scandir($dir);
+			unset($files1[0]);
+			unset($files1[1]);
+			
+			$i = 2;
+	    	while (isset($files1[$i])) {
+			
+				$controller = str_replace(".controller.php", "", $files1[$i]);			
+				$controller = ucwords($controller) . "Controller";
 				
-		$tpl = new TemplateController;
-
-		$tpl->set("controllers_list", "<pre>" . print_r($files1, true) . "</pre>");
-		return($files1);
+				if (!class_exists($controller))	{
+					include("./inc/controllers/" . $files1[$i]);
+				}
+				$files1[name][$i] = $files1[$i];			
+				$files1[version][$i] = $controller::version();
+				$files1[views][$i] = $controller::views_list();
+				$files1[description][$i] = $controller::description();			
+				unset($files1[$i]);
+				$i++;
+			}
+						
+			$tpl = new TemplateController;
+		
+			$tpl->set("controllers_list", "<pre>" . print_r($files1, true) . "</pre>");
+			return($files1);
 		
 		}
 	

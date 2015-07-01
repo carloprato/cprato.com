@@ -44,13 +44,12 @@
 			$q = $db->prepare($sql);
 			$req = $q->execute();	
 			$recent_posts = array();	
-				foreach($q->fetchAll(PDO::FETCH_ASSOC) as $post) {
-					$recent_posts[] = $post;
-		      	}
-
+			foreach($q->fetchAll(PDO::FETCH_ASSOC) as $post) {
+				$recent_posts[] = $post;
+		    }
 					
-				 return $recent_posts;
-					}
+			return $recent_posts;
+		}
 	
 		function view_post($id) {
 		
@@ -64,7 +63,7 @@
 		 		 $tpl->set("post_title", $post->title);
 		 		 $tpl->set("short_title", $post->short_title);
 		 		 $tpl->set("post_date", date("H:m, d-m-Y", strtotime($post->date_created)));
-		 		 $tpl->set("post_id", $id);
+		 		 $tpl->set("post_id", $post->id);
 				 $tpl->set("post_content", $post->content);
 			 	 $tpl->set("comments_list", $this->view_comments($post->id)); 		
 
@@ -75,18 +74,29 @@
 		
 		static function view_comments($id) {
 
-
 			global $tpl;
 			global $comments;
 			
 			$db = Db::getInstance();
-			$sql = 'SELECT * FROM comments WHERE status = 1 and post_id = ? ORDER BY date_created DESC';
+			$sql = 'SELECT 
+				comments.id, 
+				comments.post_id, 
+				comments.content, 
+				comments.date_created, 
+				users.user,
+				users.name
+				FROM comments 
+				INNER JOIN users 
+				ON comments.author = users.id 
+				AND comments.post_id = ? 
+				ORDER BY date_created DESC
+			';
 			$q = $db->prepare($sql);
 			$req = $q->execute(array($id));	
 			$comments = array();	
-				foreach($q->fetchAll(PDO::FETCH_OBJ) as $comment) {
-					$comments[] = $comment;
-		      	}
+			foreach($q->fetchAll(PDO::FETCH_OBJ) as $comment) {
+				$comments[] = $comment;
+		    }
 		}
 
 		function add() {
@@ -107,11 +117,33 @@
 									date("Y-m-d H:i:s"), 
 									1
 									));
-									
+							// ?!?		
 							$success = "Successfully registered";
 				}
 			
 			}			
+			
+			function add_comment($post_id) {
+				// ??? Redirect immediately after insertion
+				// ??? Ask to log in if the user is not yet logged in
+				if (isset($_POST['submitComment'])) {
+					
+					$db = Db::getInstance();
+					$sql = 'INSERT INTO `comments`(`id`, `post_id`, `author`, `content`, `date_created`, `status`) VALUES (?, ?, ?, ?, ?, ?)';
+					$q = $db->prepare($sql);						
+					$req = $q->execute(array(
+							NULL,
+							$post_id, 
+							Auth::getUserID(), 
+							$_POST['comment_content'], 
+							date("Y-m-d H:i:s"), 
+							1
+							));
+					// ?!?				
+		
+				}
+
+			}
 			
 			static public function shorten($text)
 			{ 

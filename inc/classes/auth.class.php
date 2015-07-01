@@ -75,6 +75,7 @@
 		    $db = Db::getInstance();			
 			$sql = 'SELECT * FROM users WHERE user = ? LIMIT 1';
 				$q = $db->prepare($sql);
+				/// !!! $_SESSION not always defined
 				$req = $q->execute(array($_SESSION['user']));	
 				
 				foreach($q->fetchAll(PDO::FETCH_OBJ) as $user) {

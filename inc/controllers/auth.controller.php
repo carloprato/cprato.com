@@ -25,6 +25,7 @@
 		public static function register() {
 							
 			if (isset($_POST['submitButton'])) {	
+					
 				if (strlen($_POST['user']) <= 3) {
 					
 					$error = "Username too short.";
@@ -42,11 +43,13 @@
 					$error = "The invitation code is not valid.";
 				} else {
 												
-							$db = Db::getInstance();
-							$sql = 'INSERT INTO `users`(`id`, `user`, `password`, `name`, `email`, `verified`, `privileges`) VALUES (?, ?, ?, ?, ?, ?, ?)';
-							$q = $db->prepare($sql);						
-							$req = $q->execute(array(NULL, $_POST['user'], Auth::encryptPassword($_POST['password']), $_POST['name'], $_POST['email'], md5($_POST['email']), 0));
-							$success = "Successfully registered";
+					$db = Db::getInstance();
+					// !!! Short term fix, better to redefine $_POST instead
+					$_POST = array_map('trim', $_POST);
+					$sql = 'INSERT INTO `users`(`id`, `user`, `password`, `name`, `email`, `verified`, `privileges`) VALUES (?, ?, ?, ?, ?, ?, ?)';
+					$q = $db->prepare($sql);						
+					$req = $q->execute(array(NULL, $_POST['user'], Auth::encryptPassword($_POST['password']), $_POST['name'], $_POST['email'], md5($_POST['email']), 0));
+					$success = "Successfully registered";
 				}
 			
 			}
