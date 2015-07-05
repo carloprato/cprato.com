@@ -52,13 +52,15 @@
 		}
 	
 		function view_post($id) {
-		
+
 			$db = Db::getInstance();
-			$sql = 'SELECT * FROM posts WHERE short_title = ?';
+			/// !!! only one URL should be processed instead of both short_title and post id.
+			$sql = 'SELECT * FROM posts WHERE short_title = ? OR id = ?';
 				$q = $db->prepare($sql);
-				$req = $q->execute(array($_GET['arg']));	
+				$req = $q->execute(array($_GET['arg'], $_GET['arg']));	
 
 				foreach($q->fetchAll(PDO::FETCH_OBJ) as $post) {
+					
 				 $tpl = new TemplateController;
 		 		 $tpl->set("post_title", $post->title);
 		 		 $tpl->set("short_title", $post->short_title);
@@ -69,8 +71,6 @@
 
 		      	}		   
 		}
-		
-
 		
 		static function view_comments($id) {
 
@@ -101,6 +101,8 @@
 
 		function add() {
 			
+			Auth::protect(100);
+			
 			if (isset($_POST['submit_button'])) {	
 												
 							$db = Db::getInstance();
@@ -126,6 +128,8 @@
 			function add_comment($post_id) {
 				// ??? Redirect immediately after insertion
 				// ??? Ask to log in if the user is not yet logged in
+				
+				Auth::protect(10);
 				if (isset($_POST['submitComment'])) {
 					
 					$db = Db::getInstance();
@@ -140,7 +144,7 @@
 							1
 							));
 					// ?!?				
-		
+					header('Location: /' . $_GET['lang'] . "/blog/view_post/" . $post_id);
 				}
 
 			}

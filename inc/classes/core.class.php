@@ -4,7 +4,7 @@
 	
 		function startup() {
 				// Defines startup variables
-				
+				global $user;			
 				if (isset($_GET['lang'])) $lang = $_GET['lang'];
 				else $lang = 'en';
 				if (isset($_GET['p'])) $page = $_GET['p'];
@@ -23,6 +23,10 @@
 				error_reporting(E_ALL);
 				
 				define("VERSION", "0.0.1a");
+				if (isset($_SESSION['user'])) {
+					define("USER", $_SESSION['user']);
+					$user = $_SESSION['user'];
+				}
 			}
 
 		function absolute_url($url) {
@@ -45,5 +49,9 @@
 				return $message;
 				}
 			}
+		
+		public static function pre($i) {
 			
+			return "<pre>" . $i . "</pre>";
+		}	
 		}

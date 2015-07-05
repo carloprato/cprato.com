@@ -2,6 +2,7 @@
 	
 	class Auth {
 		
+		const USER = "1";
 		public static function login() {
 								
 			// Checks if the user exists and if the password is correct, if yes authorizes them.
@@ -22,7 +23,8 @@
 
 						if ( hash_equals($user['password'], crypt($_POST['password'], $user['password'])) ) {
 							$_SESSION['privileges'] = $user['privileges'];
-							$_SESSION['user'] = $_POST['user'];	
+							$_SESSION['user'] = $_POST['user'];
+							$_SESSION['user_id'] = $user['id'];
 						}
 		      	}
 
@@ -57,8 +59,7 @@
 			}
 		}
 		
-		public static function roles() {
-			
+		public static function roles() {		
 
 			$roles = array(
 					"root"   => 100,
@@ -85,7 +86,19 @@
 						return "Error!";
 		      	}				
 			
-		
+		public static function getUserName($id) {
+		    $db = Db::getInstance();			
+			$sql = 'SELECT * FROM users WHERE id = ? LIMIT 1';
+				$q = $db->prepare($sql);
+
+				$req = $q->execute(array($id));	
+				
+				foreach($q->fetchAll(PDO::FETCH_OBJ) as $user) {
+						
+							return $user->user;
+						}
+						return "Error!";
+		      	}		
 		
 		public static function encryptPassword($password) {
 			

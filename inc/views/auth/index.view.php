@@ -10,7 +10,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type='text'  name='password'>
+                            <input type='password'  name='password'>
                         </td>
                     </tr>
                     <tr>
@@ -20,7 +20,6 @@
                     </tr>                   
                 </table>
             </form>
-            {{user_details}}
         </div>
     </div>
     <div class='fill'></div>

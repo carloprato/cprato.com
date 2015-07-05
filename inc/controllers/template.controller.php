@@ -96,6 +96,7 @@
 				}
 			}
 			$this->replace_foreach();
+			$this->replace_if();
 		}
 		
 		function view() {
@@ -108,6 +109,7 @@
 			$html    .=	$this->load('footer');
 			
 			if (preg_match_all('/{{translate:+(.*?)}}/', $template, $matches)) {
+
 				foreach ($matches[1] as $string) {
 
 					$template = str_replace("{{translate:" . $string . "}}", $language->string($string), $template);
@@ -117,6 +119,10 @@
 			$this->set("p", PAGE);
 			$this->set("lang", LANG);
 			$this->set("SITE_ROOT", SITE_ROOT);
+			if (isset($_SESSION['user'])) {
+				// !!! not good to set up variables like this
+				$this->set("user", $_SESSION['user']);
+			}
 			//$this->set("recent_posts", BlogController::list_posts(3));
 			$this->set("list_posts", BlogController::list_posts(3));
 			$this->replace();
@@ -128,23 +134,59 @@
 			
 			global $template;
 
-			if( preg_match('~\{foreach:(.*?)\}(.*?)\{endforeach\}~s', $template, $matches) ) {
+			if( preg_match_all('~\{foreach:(.*?)\}(.*?)\{endforeach\}~s', $template, $matches) ) {
 			// If the {foreach} element is found, the variable $matches will be created.
 			// Retrieving the array created in the controller and displayed in the template.
 
-				global ${$matches[1]};
+				$i = 0;				
 
-				$foreach_array = ${$matches[1]};
-				$foreach_complete = NULL;			
+				while (isset($matches[1][$i])) {
+					global ${$matches[1][$i]};
 
-				foreach ($foreach_array as $single_array) {
-					$foreach_content = $matches[2];					
-					foreach ($single_array as $key => $value) {								
-						$foreach_content = str_replace("{{loop_element:" . $key . "}}", $value, $foreach_content);					
-					}						
-					$foreach_complete .= $foreach_content;
+					$foreach_array = ${$matches[1][$i]};
+					$foreach_complete = NULL;			
+					
+					foreach ($foreach_array as $single_array) {
+						$foreach_content = $matches[2][$i];					
+						foreach ($single_array as $key => $value) {								
+							$foreach_content = str_replace("{{loop_element:" . $key . "}}", $value, $foreach_content);			
+
+						}						
+						$foreach_complete .= $foreach_content;
+						}
+					$template = preg_replace('~\{foreach:(.*?)\}(.*?)\{endforeach\}~s', $foreach_complete, $template, 1);
+					$i++;
+				}
+			}			
+		}
+		
+		function replace_if() {
+
+			global $template;
+
+			if( preg_match_all('~\{if:(.*?)\}(.*?)\{elseif\}(.*?)\{endif\}~s', $template, $matches) ) {
+			// If the {if} element is found, the variable $matches will be created.
+			// Retrieving the array created in the controller and displayed in the template.
+
+				$i = 0;
+				
+				while (isset($matches[2][$i])) {
+					global ${$matches[1][$i]};	
+					$foreach_array = ${$matches[1][$i]};
+					$replacer = $matches[2][$i];
+					$else = $matches[3][$i];
+
+					if (isset($foreach_array)) {
+	
+						$template = preg_replace('~\{if:(.*?)\}(.*?)\{endif\}~s', $replacer, $template, 1);
+				
+					} else {
+							$template = preg_replace('~\{if:(.*?)\}(.*?)\{endif\}~s', $else, $template, 1);				
 					}
-				$template = preg_replace('~\{foreach:(.*)\}(.*)\{endforeach\}~s', $foreach_complete, $template);
+					
+					$i++;
+				}
+
 			}
 		}
 	}

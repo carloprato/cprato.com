@@ -19,6 +19,9 @@
             <a href='/{{lang}}/auth' class='footer_link'>
                 {{translate:Login}}</a>
             <br/>
+            <a href='/{{lang}}/forum' class='footer_link'>
+                Forum</a>
+            <br/>
         </div>
         <div class='col_3 footer_paragraph'>
             <h2 class='Home' style='border-bottom:1px solid #c1c1c1;'>{{translate:Contact}}</h2>
