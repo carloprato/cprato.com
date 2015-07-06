@@ -306,9 +306,12 @@ body {
 }
 
 .content_paragraph,
-.content_container {
+.content_container,
+.content,
+.evidence {
     min-height:300px;
 }
+
 p {
 
 }

@@ -3,6 +3,8 @@
 	class ForumController {
 		
 		function index() {
+			Auth::protect(10);
+			
 			global $topics;
 			
 			$db = Db::getInstance();
@@ -63,7 +65,7 @@
 			}		
 			
 		function view_topic($id) {
-
+			Auth::protect(10);
 			global $topics;
 			global $replies;
 
@@ -140,7 +142,7 @@
 			}	
 			
 			function delete($id) {
-				
+			Auth::protect(10);				
 					$db = Db::getInstance();
 					$sql = 'DELETE FROM `forum_replies` WHERE id = ? AND author = ?';
 					$q = $db->prepare($sql);						

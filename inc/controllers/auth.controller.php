@@ -23,46 +23,17 @@
 		}
 		
 		public static function register() {
-							
-			if (isset($_POST['submitButton'])) {	
-					
-				if (strlen($_POST['user']) <= 3) {
-					
-					$error = "Username too short.";
-				} else if ($_POST['password'] != $_POST['confirm_password']) {
-					
-					$error = "Passwords do not match.";
-				}	else if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-					
-					$error = "E-Mail not valid.";
-				} else if (!isset($_POST['name'])) {
-					
-					$error = "Please insert your name and surname.";
-				} else if ($_POST['invitation_code'] != 'INVcarlo123') {
-					
-					$error = "The invitation code is not valid.";
-				} else {
-												
-					$db = Db::getInstance();
-					// !!! Short term fix, better to redefine $_POST instead
-					$_POST = array_map('trim', $_POST);
-					$sql = 'INSERT INTO `users`(`id`, `user`, `password`, `name`, `email`, `verified`, `privileges`) VALUES (?, ?, ?, ?, ?, ?, ?)';
-					$q = $db->prepare($sql);						
-					$req = $q->execute(array(NULL, $_POST['user'], Auth::encryptPassword($_POST['password']), $_POST['name'], $_POST['email'], md5($_POST['email']), 0));
-					$success = "Successfully registered";
-				}
 			
-			}
-		
-			if ($error) {
+			global $registration_errors;
+			global $success;
+			$registration_errors = Auth::register();	
 				$tpl = new TemplateController;
-				$tpl->set("error", $error);	
-				return $error;
-			} else {				
-				$tpl = new TemplateController;
-				$tpl->set("success", $success);	
-				return $success;
-			}
+				$tpl->set("error", $registration_errors);	
+				$tpl->set("success", 'The registration was completed successfully.');
+				if (!isset($_POST['user'])) {
+				$tpl->set("success", '');	
+				}	
+				return $registration_errors;	
 
 		}
 
@@ -73,14 +44,24 @@
 		}
 				
 		public static function login() {
-				
-			return Auth::login();			
-			
+
+			global $user;				
+			$user = Auth::login(); // Returns user's details on success, false on failure
+			if ($user != FALSE) {
+				$_SESSION['privileges'] = $user['privileges'];
+				$_SESSION['user_id'] = $user['id'];	
+				$_SESSION['user'] = $user['user'];				
+				$tpl = new TemplateController;
+				$tpl->set("login", "Login successful.");
+			} else {
+				$tpl = new TemplateController;
+				$tpl->set("login", "Login failed.");				
+			}					
 		}
 		
 		public static function logout() {
 				
-			return Auth::logout();			
+			return Auth::logout();	
 			
 		}
 	}

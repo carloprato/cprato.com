@@ -95,8 +95,10 @@
 					$template = str_replace("{{" . $key . "}}", $value, $template);
 				}
 			}
+			
+			$this->replace_if();			
 			$this->replace_foreach();
-			$this->replace_if();
+
 		}
 		
 		function view() {
@@ -169,6 +171,8 @@
 			// Retrieving the array created in the controller and displayed in the template.
 
 				$i = 0;
+
+
 				
 				while (isset($matches[2][$i])) {
 					global ${$matches[1][$i]};	

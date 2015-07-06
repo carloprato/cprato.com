@@ -2,7 +2,7 @@
 	
 	class Auth {
 		
-		const USER = "1";
+
 		public static function login() {
 								
 			// Checks if the user exists and if the password is correct, if yes authorizes them.
@@ -22,13 +22,12 @@
 				foreach($q->fetchAll(PDO::FETCH_ASSOC) as $user) {
 
 						if ( hash_equals($user['password'], crypt($_POST['password'], $user['password'])) ) {
-							$_SESSION['privileges'] = $user['privileges'];
-							$_SESSION['user'] = $_POST['user'];
-							$_SESSION['user_id'] = $user['id'];
+							return $user;
 						}
+						return false;
 		      	}
 
-		    	return "Error.";
+				  return false;
 				}
 
 				header("Location: /en/auth/auth");
@@ -41,8 +40,67 @@
 			
 		}
 		
-		function register() {
-						
+		public static 	function register() {
+			
+			
+			if (isset($_POST['submitButton'])) {	
+			
+				$error = array();
+
+				$db = Db::getInstance();				
+				$sql = 'SELECT * FROM `users` WHERE user = ?';
+				$q = $db->prepare($sql);						
+				$req = $q->execute(array($_POST['user']));
+				if ($q->fetchColumn() > 0) {		
+					  $error[]['error'] = 'The username is taken.';							  
+				}
+				$sql = 'SELECT * FROM `users` WHERE email = ?';
+				$q = $db->prepare($sql);						
+				$req = $q->execute(array($_POST['email']));
+				if ($q->fetchColumn() > 0) {		
+					  $error[]['error'] = 'Another account with the same e-mail exists. Please choose another e-mail.';							  
+				}
+											
+				if (strlen($_POST['user']) <= 3) {
+					
+					$error[]['error'] = "Username too short.";
+				}
+				if ($_POST['password'] != $_POST['confirm_password']) {
+					
+					$error[]['error'] = "Passwords do not match.";
+				}
+				
+				if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+					
+					$error[]['error'] = "E-Mail not valid.";
+				} 
+				
+				if (!isset($_POST['name'])) {
+					
+					$error[]['error'] = "Please insert your name and surname.";
+				} 
+				
+				if ($_POST['invitation_code'] != 'INVcarlo123') {
+					
+					$error[]['error'] = "The invitation code is not valid.";
+				}
+
+											  
+				if (count($error) == 0) {
+												
+					$db = Db::getInstance();
+					// !!! Short term fix, better to redefine $_POST instead
+					
+			
+						$_POST = array_map('trim', $_POST);
+						$sql = 'INSERT INTO `users`(`id`, `user`, `password`, `name`, `email`, `verified`, `privileges`) VALUES (?, ?, ?, ?, ?, ?, ?)';
+						$q = $db->prepare($sql);						
+						$req = $q->execute(array(NULL, $_POST['user'], Auth::encryptPassword($_POST['password']), $_POST['name'], $_POST['email'], md5($_POST['email']), 10));
+						return NULL;
+					  }
+				
+					return $error;
+			}						
 		}
 		
 		public static function protect($privileges) {

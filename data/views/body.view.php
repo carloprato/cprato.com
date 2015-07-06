@@ -7,7 +7,7 @@
                 {if:user}
                     Hello, {{user}}! <a style='color:#8cf;' href='{{SITE_ROOT}}/{{lang}}/auth/logout'>Logout</a>
                 {elseif}
-                    <a style='color:#8cf;' href='{{SITE_ROOT}}/{{lang}}/auth'>Login</a>
+                    <a style='color:#8cf;' href='{{SITE_ROOT}}/{{lang}}/auth'>Login</a> - <a style='color:#8cf;' href='{{SITE_ROOT}}/{{lang}}/auth/register'>Register</a>
                 {endif}
                 <a href='/en/{{p}}'><img alt='English version of the website' width='48' height='48' style='width:48px;height:48px;' src='{{SITE_ROOT}}/data/res/flags/en.png' /></a>
                 <a href='/it/{{p}}'><img alt='Versione italiana del sito web' width='48' height='48' style='width:48px;height:48px;' src='{{SITE_ROOT}}/data/res/flags/it.png' /></a>

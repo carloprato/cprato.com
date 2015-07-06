@@ -1,23 +1,28 @@
 <style>
-    table {
+    table, td {
+        border: 0;
+        background-color:#DEE;
 
     }
-    input[type=text] {
+    th {
+        background-color:#BCC;
+    }
+    table {
         width:100%;
+        border-collapse: collapse;
+         border-radius:8px;
     }
-    input[type=password] {
-        width:100%;
-    }
-    td {
-        width:5%;
-    }
-    tr {
-        line-height:40px;
+    td, th {
+    padding:10px;
+    vertical-align: center;
+         border-radius:8px 8px 0px 0px;
+         border-bottom:1px solid #AAA;
     }
 </style>
+
 <div class='content'>
     <div class="row content">
-        <div class='col_6 content_paragraph'>
+        <div class='col_8 content_paragraph'>
             <h2>Register</h2>
             <form method='post' action='{{SITE_ROOT}}/{{lang}}/auth/register'>
                 <table>
@@ -76,7 +81,26 @@
                     </tr>                   
                 </table>
             </form>
-            {{error}}{{success}}
+
+                {if:registration_errors}
+                <div style='background:#FCC;border-top: 3px solid #F66;border-bottom: 3px solid #F66;padding:5px;'>
+                    <h3>Error</h3>
+                    Some fields were not filled in correctly. Please correct the data you inserted. <br/>
+                    {foreach:registration_errors}
+                        <li> {{loop_element:error}} <br/>  
+                    {endforeach}
+                </div>
+                {elseif}
+                {endif}
+ 
+                {if:success}                    
+                <div style='background:#CFC;border-top: 3px solid #6F6;border-bottom: 3px solid #6F6;padding:5px;'>                    
+                    <h3>Success!</h3>
+                        {{success}}
+                </div>   
+                {elseif}                 
+                {endif}
+            </div>
         </div>
     </div>
     <div class='fill'></div>
