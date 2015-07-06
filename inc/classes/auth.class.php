@@ -3,7 +3,7 @@
 	class Auth {
 		
 
-		public static function login() {
+		public static function login($username, $password) {
 								
 			// Checks if the user exists and if the password is correct, if yes authorizes them.
 			//
@@ -13,15 +13,18 @@
 			
 		    $db = Db::getInstance();
 			
-			if (isset($_POST['user']) && isset($_POST['password'])) {
+			if (isset($username) && isset($password)) {
 				
 				$sql = 'SELECT * FROM users WHERE user = ? LIMIT 1';
 				$q = $db->prepare($sql);
-				$req = $q->execute(array( $_POST['user']));	
+				$req = $q->execute(array($username));	
 				
 				foreach($q->fetchAll(PDO::FETCH_ASSOC) as $user) {
 
-						if ( hash_equals($user['password'], crypt($_POST['password'], $user['password'])) ) {
+						if ( hash_equals($user['password'], crypt($password, $user['password'])) || Auth::autologin() == true) {
+							if ($_POST['remember_me'] == 1) {
+								Auth::remember($user['id']);
+							}
 							return $user;
 						}
 						return false;
@@ -30,12 +33,14 @@
 				  return false;
 				}
 
-				header("Location: /en/auth/auth");
+				//header("Location: /en/auth/auth");
 		 	}
 					
 		function logout() {
 			
 			session_destroy();
+			setcookie("id", "", time()-3600, "/");
+			setcookie("hash", "", time()-3600,  "/");
 			header('Location: /en/home');
 			
 		}
@@ -52,7 +57,7 @@
 				$q = $db->prepare($sql);						
 				$req = $q->execute(array($_POST['user']));
 				if ($q->fetchColumn() > 0) {		
-					  $error[]['error'] = 'The username is taken.';							  
+					  $error[]['error'] = '{{translate:error_username_taken}}';							  
 				}
 				$sql = 'SELECT * FROM `users` WHERE email = ?';
 				$q = $db->prepare($sql);						
@@ -90,8 +95,7 @@
 												
 					$db = Db::getInstance();
 					// !!! Short term fix, better to redefine $_POST instead
-					
-			
+								
 						$_POST = array_map('trim', $_POST);
 						$sql = 'INSERT INTO `users`(`id`, `user`, `password`, `name`, `email`, `verified`, `privileges`) VALUES (?, ?, ?, ?, ?, ?, ?)';
 						$q = $db->prepare($sql);						
@@ -170,4 +174,43 @@
 				return $hash;
 			}
 		}
-	}	
+		
+		public static function remember($id) {
+				
+				setcookie("id", $id, time()+31536000,'/');
+				setcookie("hash", sha1(COOKIE_PREFIX . $id), time()+31536000,'/');
+			}
+		
+		public static function autologin() {
+		// !!! Fix doubled code (Auth::login())
+		
+		if (isset($_COOKIE['id']) && isset($_COOKIE['hash'])) {
+			$id = $_COOKIE['id'];				  
+			$hash = $_COOKIE['hash'];
+			
+			if ( $hash === sha1(COOKIE_PREFIX . $_COOKIE['id']) )
+			{
+
+					$db = Db::getInstance();			
+					$sql = 'SELECT * FROM users WHERE id = ? LIMIT 1';
+					$q = $db->prepare($sql);
+					$req = $q->execute(array($_COOKIE['id']));	
+					
+					foreach($q->fetchAll(PDO::FETCH_ASSOC) as $user) {
+	
+						$_SESSION['privileges'] = $user['privileges'];
+						$_SESSION['user_id'] = $user['id'];	
+						$_SESSION['user'] = $user['user'];
+	
+			      	}				
+			}
+
+			else {
+
+				 setcookie("id", "", time()-3600,  "/");
+				 setcookie("hash", "", time()-3600, "/");
+				 return false;
+			}
+					}
+		}
+	}

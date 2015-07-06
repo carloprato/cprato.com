@@ -6,15 +6,21 @@
                 {endforeach}
                 {foreach:replies}
             
-            #{{loop_element:id}} - {{loop_element:user}} ({{loop_element:date_created}})
+                <div style='background-color:#DEE;padding:10px 10px 5px 10px;border-bottom:2px solid #CDD;'>
+                    #{{loop_element:id}} - ({{loop_element:date_created}})
+                </div>
+                <div style='background-color:#DEE;padding:10px 10px 5px 10px;'>
+                    {{loop_element:user}}
+                </div>
                 <div style='background-color:#DEE;padding:10px 10px 5px 10px;margin-bottom:20px;'>
-
                       {{loop_element:content}}
                 <div style='background-color:#BCC;padding-left:5px;margin-top:10px;'>
 
                         <a href='/{{lang}}/forum/delete/{{loop_element:id}}'>Delete Post</a>
 
-                     - <a href='/en/home'>Quote this post</a>
+                     - 
+                     
+                     <a href='/en/forum/edit/{{loop_element:id}}'>Edit this post</a>
                 </div>
             </div>
 

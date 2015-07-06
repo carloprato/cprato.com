@@ -90,14 +90,17 @@
 			global $values;
 			global $template;
 
+			$this->replace_if();			
+			$this->replace_foreach();
+			
+			
 			foreach ($values as $key=>$value) {
 				if (is_string($values[$key])) { // Excluding arrays which will be converted as foreach loops
 					$template = str_replace("{{" . $key . "}}", $value, $template);
 				}
 			}
 			
-			$this->replace_if();			
-			$this->replace_foreach();
+
 
 		}
 		
@@ -110,13 +113,6 @@
 			$html    .=	$this->load($this->controller . "/" . $this->action);
 			$html    .=	$this->load('footer');
 			
-			if (preg_match_all('/{{translate:+(.*?)}}/', $template, $matches)) {
-
-				foreach ($matches[1] as $string) {
-
-					$template = str_replace("{{translate:" . $string . "}}", $language->string($string), $template);
-				}
-			}			
 			
 			$this->set("p", PAGE);
 			$this->set("lang", LANG);
@@ -128,6 +124,16 @@
 			//$this->set("recent_posts", BlogController::list_posts(3));
 			$this->set("list_posts", BlogController::list_posts(3));
 			$this->replace();
+
+
+			if (preg_match_all('/{{translate:+(.*?)}}/', $template, $matches)) {
+
+				foreach ($matches[1] as $string) {
+
+					$template = str_replace("{{translate:" . $string . "}}", $language->string($string), $template);
+				}
+			}
+			
 			return $template;
 			
 		}

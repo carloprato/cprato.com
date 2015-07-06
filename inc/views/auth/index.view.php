@@ -12,14 +12,22 @@
                 <table>
                     <tr>
                         <td>
-                            <input type='text'  name='user'>
+                            <input type='text'  name='user' placeholder='Username'>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type='password'  name='password'>
+                            <input type='password'  name='password' placeholder='Password'>
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                          <input type='checkbox' name='remember_me' value='1' id='remember'> 
+                          <label for='remember'>
+                              Remember Me
+                          </label>
+                        </td>
+                    </tr>   
                     <tr>
                         <td>
                             <input type='submit' name='submitButton' value='Login'>

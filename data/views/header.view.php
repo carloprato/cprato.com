@@ -66,6 +66,7 @@ tinyMCE.init({
         theme : "modern",
         mode : "specific_textareas",
         editor_selector : "rich_editor",
+        plugins : 'link image code',
         toolbar: "insertfile undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
         menubar : false,
         force_br_newlines : false,

@@ -8,12 +8,14 @@
 	$core = new Core;
 	$core->startup();
 	$core->checkURI();
+
 		
 	require_once(SITE_ROOT . "inc/classes/auth.class.php");		
 	require_once(SITE_ROOT . "inc/classes/language.class.php");	
 	require_once(SITE_ROOT . "inc/routes.php");
 	require_once(SITE_ROOT . "inc/controllers/template.controller.php");							
 	require_once(SITE_ROOT . "inc/controllers/blog.controller.php");							
+	Auth::autologin();
 
 	$language = new Language;
 	$lang     = $language->load(LANG);

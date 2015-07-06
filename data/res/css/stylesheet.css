@@ -123,10 +123,7 @@ img {
 li {
     display: list-item
 }
-table {
-    border-collapse: collapse;
-    border-spacing: 0
-}
+
 caption,
 td,
 th {
@@ -389,6 +386,10 @@ p {
     box-shadow: 0 0 5px 0 #000;
     z-index: 4
 }
+.content_paragraph {
+    
+            padding-left:10px; 
+}
 .footer_container {
     background: url(../images/header_bg.png) center #323232;
     z-index: 3;
@@ -428,11 +429,11 @@ blockquote p {
 }
 body {
     min-width: 960px;
-    margin: auto
+    margin: auto;
 }
 .row {
     width: 960px;
-    margin: auto
+    margin: auto;
 }
 .col_1,
 .col_12,

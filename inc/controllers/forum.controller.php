@@ -151,4 +151,23 @@
 							$_SESSION['user_id']
 							));							
 			}	
+			
+			function edit($id) {
+			
+			global $edit_reply;
+			$db = Db::getInstance();
+			$sql = 'SELECT *
+				FROM forum_replies 
+				WHERE forum_replies.id = ?
+			';
+				$q = $db->prepare($sql);
+				$req = $q->execute(array($id));	
+
+				foreach($q->fetchAll(PDO::FETCH_ASSOC) as $reply) {
+
+					$edit_reply[] = $reply;	
+
+		      	}	
+							
+		}
 	}
