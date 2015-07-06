@@ -92,50 +92,14 @@
 
 			$this->replace_if();			
 			$this->replace_foreach();
-			
-			
+	
 			foreach ($values as $key=>$value) {
-				if (is_string($values[$key])) { // Excluding arrays which will be converted as foreach loops
+				// !!! Kind of wrong...
+				if (!is_array($values[$key])) { // Excluding arrays which will be converted as foreach loops
+
 					$template = str_replace("{{" . $key . "}}", $value, $template);
 				}
 			}
-			
-
-
-		}
-		
-		function view() {
-			
-			global $template;
-			global $language;
-			$html     =	$this->load('header');
-			$html    .= $this->load('body');
-			$html    .=	$this->load($this->controller . "/" . $this->action);
-			$html    .=	$this->load('footer');
-			
-			
-			$this->set("p", PAGE);
-			$this->set("lang", LANG);
-			$this->set("SITE_ROOT", SITE_ROOT);
-			if (isset($_SESSION['user'])) {
-				// !!! not good to set up variables like this
-				$this->set("user", $_SESSION['user']);
-			}
-			//$this->set("recent_posts", BlogController::list_posts(3));
-			$this->set("list_posts", BlogController::list_posts(3));
-			$this->replace();
-
-
-			if (preg_match_all('/{{translate:+(.*?)}}/', $template, $matches)) {
-
-				foreach ($matches[1] as $string) {
-
-					$template = str_replace("{{translate:" . $string . "}}", $language->string($string), $template);
-				}
-			}
-			
-			return $template;
-			
 		}
 		
 		function replace_foreach() {
@@ -158,7 +122,6 @@
 						$foreach_content = $matches[2][$i];					
 						foreach ($single_array as $key => $value) {								
 							$foreach_content = str_replace("{{loop_element:" . $key . "}}", $value, $foreach_content);			
-
 						}						
 						$foreach_complete .= $foreach_content;
 						}
@@ -177,8 +140,6 @@
 			// Retrieving the array created in the controller and displayed in the template.
 
 				$i = 0;
-
-
 				
 				while (isset($matches[2][$i])) {
 					global ${$matches[1][$i]};	
@@ -196,7 +157,37 @@
 					
 					$i++;
 				}
-
 			}
+		}
+		
+		function view() {
+			
+			global $template;
+			global $language;
+			
+			$this->load('header');
+			$this->load('body');
+			$this->load($this->controller . "/" . $this->action);
+			$this->load('footer');
+						
+			$this->set("p", PAGE);
+			$this->set("lang", LANG);
+			$this->set("SITE_ROOT", SITE_ROOT);
+			if (isset($_SESSION['user'])) {
+				// !!! not good to set up variables like this
+				$this->set("user", $_SESSION['user']);
+			}
+
+			$this->set("list_posts", BlogController::list_posts(3));
+			$this->replace();
+
+			if (preg_match_all('/{{translate:+(.*?)}}/', $template, $matches)) {
+
+				foreach ($matches[1] as $string) {
+
+					$template = str_replace("{{translate:" . $string . "}}", $language->string($string), $template);
+				}
+			}
+			return $template; 		
 		}
 	}

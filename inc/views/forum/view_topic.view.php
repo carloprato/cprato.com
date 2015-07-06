@@ -4,6 +4,12 @@
                 {foreach:topics}
                     <h2>{{loop_element:title}}</h2>
                 {endforeach}
+                Page:
+                {foreach:pagination}
+                 <a href='{{SITE_ROOT}}/{{lang}}/forum/view_topic/{{id}}/{{loop_element:page}}'>
+                    {{loop_element:page}}
+                </a>
+                {endforeach} 
                 {foreach:replies}
             
                 <div style='background-color:#DEE;padding:10px 10px 5px 10px;border-bottom:2px solid #CDD;'>
@@ -25,7 +31,11 @@
             </div>
 
                 {endforeach}
-
+                Page: 
+                {foreach:pagination}
+                 <a href='{{SITE_ROOT}}/{{lang}}/forum/view_topic/{{id}}/{{loop_element:page}}'>
+                    {{loop_element:page}}</a>
+                {endforeach}
             {if:user}
                 <form method='post' action='{{SITE_ROOT}}/{{lang}}/forum/add_reply/{{id}}'>
                     <h3>Reply</h3>

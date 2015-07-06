@@ -5,6 +5,9 @@
 		function startup() {
 				// Defines startup variables
 				global $user;			
+				
+				session_start();
+
 				if (isset($_GET['lang'])) $lang = $_GET['lang'];
 				else $lang = 'en';
 				if (isset($_GET['p'])) $page = $_GET['p'];
@@ -28,18 +31,17 @@
 					define("USER", $_SESSION['user']);
 					$user = $_SESSION['user'];
 				}
+				
+				Auth::autologin();
 			}
 
-		function absolute_url($url) {
-						
-		}		
-				
+	
 		function checkURI() { 
 			// Check if language and page to display are set, otherwise redirects to the homepage
 			
 			if (!isset($_GET['p']) || !isset($_GET['lang'])) {
 				
-				//header("Location: " . SITE_ROOT . "en/home");
+				header("Location: " . SITE_ROOT . "en/home");
 				}
 			}
 			
