@@ -17,10 +17,6 @@
 			return "Essential module to protect pages and modules from unauthorized access.";
 		}
 							
-				
-		public static function auth() {
-			
-		}
 		
 		public static function register() {
 			
@@ -41,6 +37,7 @@
 			
 			$tpl = new TemplateController;
 			$tpl->set("user_details", print_r($_SESSION, true));
+
 		}
 				
 		public static function login() {

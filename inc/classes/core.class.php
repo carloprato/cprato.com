@@ -2,7 +2,7 @@
 	
 	class Core {
 	
-		function startup() {
+		function __construct() {
 				// Defines startup variables
 				global $user;			
 				
@@ -31,7 +31,7 @@
 					define("USER", $_SESSION['user']);
 					$user = $_SESSION['user'];
 				}
-				
+				$this->checkURI();
 				Auth::autologin();
 			}
 
@@ -52,12 +52,5 @@
 				return $message;
 				}
 			}
-		
-		public static function pre($i) {
-			
-			return "<pre>" . $i . "</pre>";
-		}	
-		
-	
 		}
 		

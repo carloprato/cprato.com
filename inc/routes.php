@@ -1,32 +1,52 @@
 <?php
 	
 	class Routes {
+		
+		static $controller;
+		static $action;
+		static $arg;
+		static $arg2;
+		
+		function __construct() {	
+
+			if (isset($_GET['action'])) {
+				// Defines action not to incur in the undefined variable later on
 				
-		function call() {			
-	
-			if (isset($_GET['p'])) {
-				$controller = $_GET['p'];
-			} else {				
-				$controller = 'pages';
+				self::$action = $_GET['action'];
+			}	else self::$action = NULL;	
+			 
+			if (isset($_GET['action']))  {
+				// If there is an action there is a controller as well, so both are set
+				
+				self::$action   = $_GET['action'];
+				self::$controller = $_GET['p'];	
+								
+			} else if (!isset($_GET['action']) && isset($_GET['p']) && !file_exists("data/views/pages/" . $_GET['p'] . ".view.php")) {
+				// If there is not action and the view file with the same name 
+				// does not exist the index() method will be called
+				
+				self::$action = 'index';
+				self::$controller = $_GET['p'];
+				
+			} else if (!isset($_GET['action']) && !isset($_GET['p']) && !file_exists("data/views/pages/" . PAGE . ".view.php")) {
+
+				self::$action = 'index';
+				self::$controller = 'pages';				
+				
+			} else if (file_exists("data/views/pages/" . PAGE . ".view.php")) {
+				// If the view file exists the default controller pages will be called
+				
+				self::$controller = 'pages';	
+				self::$action   = PAGE;
 			}
 			
-			if (isset($_GET['action'])) {
-				$action = $_GET['action'];
-			} else $action = 'index';
-											
-			if (isset($_GET['arg'])) {
-				$arg = $_GET['arg'];
-			} else $arg = NULL;
+			$class = ucwords(self::$controller)."Controller";				
 
-			if (isset($_GET['arg2'])) {
-				$arg2 = $_GET['arg2'];
-			} else $arg2 = NULL;
-							
-			if (file_exists(SITE_ROOT . "inc/controllers/" . $controller . ".controller.php")) {
-				require_once(SITE_ROOT . "inc/controllers/" . $controller . ".controller.php");
-				$class = ucwords($controller)."Controller";				
-				${$controller} = new $class;
-				${$controller}->{$action}($arg, $arg2);															
-			}				
+			if (class_exists($class)) {
+														
+				${self::$controller} = new $class;
+				
+				${self::$controller}->{self::$action}(self::$arg, self::$arg2);	
+				}
 		}
 	}

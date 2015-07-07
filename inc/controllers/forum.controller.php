@@ -1,6 +1,6 @@
 <?php
 	
-	class ForumController {
+	class ForumController extends BaseController {
 		
 		function index() {
 			Auth::protect(10);

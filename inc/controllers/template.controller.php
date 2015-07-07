@@ -22,36 +22,8 @@
 									
 		function __construct() {
 			
-			if (isset($_GET['action'])) {
-				// Defines action not to incur in the undefined variable later on
-				
-				$action = $_GET['action'];
-			}	else $action = NULL;	
-			 
-			if (isset($_GET['action']))  {
-				// If there is an action there is a controller as well, so both are set
-				
-				$this->action   = $action;
-				$this->controller = $_GET['p'];	
-								
-			} else if (!isset($_GET['action']) && isset($_GET['p']) && !file_exists("data/views/pages/" . $_GET['p'] . ".view.php")) {
-				// If there is not action and the view file with the same name 
-				// does not exist the index() method will be called
-				
-				$this->action = 'index';
-				$this->controller = $_GET['p'];
-				
-			} else if (!isset($_GET['action']) && !isset($_GET['p']) && !file_exists("data/views/pages/" . PAGE . ".view.php")) {
-
-				$this->action = 'index';
-				$this->controller = 'pages';				
-				
-			} else if (file_exists("data/views/pages/" . PAGE . ".view.php")) {
-				// If the view file exists the default controller pages will be called
-				
-				$this->controller = 'pages';	
-				$this->action   = PAGE;
-			}
+			$this->controller = Routes::$controller;
+			$this->action = Routes::$action;
 		}	
 		
 		function load($page, $type = 'view') {

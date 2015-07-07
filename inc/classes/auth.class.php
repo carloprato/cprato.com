@@ -45,8 +45,7 @@
 			
 		}
 		
-		public static 	function register() {
-			
+		public static function register() {
 			
 			if (isset($_POST['submitButton'])) {	
 			
@@ -89,7 +88,6 @@
 					
 					$error[]['error'] = "The invitation code is not valid.";
 				}
-
 											  
 				if (count($error) == 0) {
 												

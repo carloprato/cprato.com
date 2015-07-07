@@ -24,7 +24,6 @@
 											
 		function __construct() {
 			
-
 		}
 		
 		function index() {
