@@ -1,6 +1,6 @@
 <?php
 	
-	class TranslateController {
+	class TranslateController extends BaseController {
 
 		static public function version() {
 			
@@ -18,7 +18,7 @@
 		}
 							
 									
-		public static function index() {
+		function index() {
  			
 			Auth::protect(100);
 			$strings1 = Language::load($_GET['lang']);
@@ -40,18 +40,16 @@
 					</tr>
 					";                                                  
 			}	
-			$tpl = new TemplateController;
-			$tpl->set("translation_table", $strings, $tpl);
+			$this->tpl->set("translation_table", $strings);
 			return $strings;
 		}
 		
-		public static function update() {
+		function update() {
 
 			Auth::protect(100);						
 			if (isset($_POST['saveButton'])) {
 
 				$strings = [];
-		      	$db = Db::getInstance();
 				$post = array();
 				$post = $_POST;
 				unset($post['saveButton']);
@@ -63,13 +61,13 @@
 				foreach ($post as $key=>$value) {
 
 					$sql = 'SELECT count(*) FROM translations WHERE keyword = ? AND lang = ?';
-					$q = $db->prepare($sql);
+					$q = $this->db->prepare($sql);
 					$req = $q->execute(array( $key, $lang ));					
 
 			   		if ( $q->fetchColumn() > 0 ) {
 						   
 						$sql = 'UPDATE translations SET string = ? WHERE lang = ? AND keyword = ?';
-						$q = $db->prepare($sql);						
+						$q = $this->db->prepare($sql);						
 						$req = $q->execute(array( $value, $lang, $key));
 					} 
 				}
@@ -80,7 +78,7 @@
 					$value = $_POST['new_value'];
 					$lang = $_GET['lang'];
 					$sql = 'INSERT INTO `translations`(`id`, `keyword`, `string`, `lang`) VALUES (?, ?, ?, ?)';
-					$q = $db->prepare($sql);						
+					$q = $this->db->prepare($sql);						
 					$req = $q->execute(array(NULL, $key, $value, $lang));
 				}
 			}		

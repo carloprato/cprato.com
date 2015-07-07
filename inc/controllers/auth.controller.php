@@ -1,6 +1,6 @@
 <?php
 	
-	class AuthController {
+	class AuthController extends BaseController {
 		
 		static public function version() {
 			
@@ -17,17 +17,16 @@
 			return "Essential module to protect pages and modules from unauthorized access.";
 		}
 							
-		
 		public static function register() {
 			
 			global $registration_errors;
 			global $success;
 			$registration_errors = Auth::register();	
-				$tpl = new TemplateController;
-				$tpl->set("error", $registration_errors);	
-				$tpl->set("success", 'The registration was completed successfully.');
+
+				$this->tpl->set("error", $registration_errors);	
+				$this->tpl->set("success", 'The registration was completed successfully.');
 				if (!isset($_POST['user'])) {
-				$tpl->set("success", '');	
+				$this->tpl->set("success", '');	
 				}	
 				return $registration_errors;	
 
@@ -35,8 +34,8 @@
 
 		public static function index() {
 			
-			$tpl = new TemplateController;
-			$tpl->set("user_details", print_r($_SESSION, true));
+
+			//$this->tpl->set("user_details", print_r($_SESSION, true));
 
 		}
 				
@@ -48,11 +47,11 @@
 				$_SESSION['privileges'] = $user['privileges'];
 				$_SESSION['user_id'] = $user['id'];	
 				$_SESSION['user'] = $user['user'];				
-				$tpl = new TemplateController;
-				$tpl->set("login", "Login successful.");
+
+				$this->tpl->set("login", "Login successful.");
 			} else {
-				$tpl = new TemplateController;
-				$tpl->set("login", "Login failed.");				
+
+				$this->tpl->set("login", "Login failed.");				
 			}					
 		}
 		

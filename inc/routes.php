@@ -38,6 +38,7 @@
 				
 				self::$controller = 'pages';	
 				self::$action   = PAGE;
+				
 			}
 			
 			$class = ucwords(self::$controller)."Controller";				

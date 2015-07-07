@@ -11,6 +11,7 @@
 		foreach ($classes as $single_class) {
 	    	if (file_exists($single_class)) {
 				require_once($single_class);
+				//echo "Loaded " . $single_class . "<br/>";
 			}
 		}
 	}	

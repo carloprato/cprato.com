@@ -1,20 +1,10 @@
 <?php
 	
-	class TemplateController {
+	class TemplateController extends BaseController {
 
 		protected $action;
 		protected $controller;
-
-		static public function version() {
-			
-			return "0.0.1";
-		}
 		
-		static public function views_list() {
-			
-			return array();
-		}
-
 		static public function description() {
 			
 			return "Essential module to set up and display the template.";
@@ -24,11 +14,11 @@
 			
 			$this->controller = Routes::$controller;
 			$this->action = Routes::$action;
+
 		}	
 		
 		function load($page, $type = 'view') {
 			
-			global $template;
 		 	global $lang;
 			global $language;
 
@@ -36,22 +26,21 @@
 
 				if (file_exists(SITE_ROOT . "data/views/" . $page . ".view.php")) {
 
-					return $template .= file_get_contents(SITE_ROOT . "data/views/" . $page . ".view.php");
+					return $this->template .= file_get_contents(SITE_ROOT . "data/views/" . $page . ".view.php");
 					
 				} else if (file_exists(SITE_ROOT . "inc/views/" . $page . ".view.php")) {
 
-					return $template .= file_get_contents(SITE_ROOT . "inc/views/" . $page . ".view.php");
+					return $this->template .= file_get_contents(SITE_ROOT . "inc/views/" . $page . ".view.php");
 										
 				} else {
 					header("HTTP/1.0 404 Not Found");
-					return $template .= file_get_contents(SITE_ROOT . "inc/views/errors/404.view.php");					
+					return $this->template .= file_get_contents(SITE_ROOT . "inc/views/errors/404.view.php");					
 				}
 			}	
 		}
 		
 		function set($var, $content) {
 			global $language;
-			global $template;
 			global $values;
 			$values[$var] = $content;
 
@@ -60,7 +49,6 @@
 		function replace() {
 			
 			global $values;
-			global $template;
 
 			$this->replace_if();			
 			$this->replace_foreach();
@@ -69,16 +57,14 @@
 				// !!! Kind of wrong...
 				if (!is_array($values[$key])) { // Excluding arrays which will be converted as foreach loops
 
-					$template = str_replace("{{" . $key . "}}", $value, $template);
+					$this->template = str_replace("{{" . $key . "}}", $value, $this->template);
 				}
 			}
 		}
 		
 		function replace_foreach() {
-			
-			global $template;
 
-			if( preg_match_all('~\{foreach:(.*?)\}(.*?)\{endforeach\}~s', $template, $matches) ) {
+			if( preg_match_all('~\{foreach:(.*?)\}(.*?)\{endforeach\}~s', $this->template, $matches) ) {
 			// If the {foreach} element is found, the variable $matches will be created.
 			// Retrieving the array created in the controller and displayed in the template.
 
@@ -97,7 +83,7 @@
 						}						
 						$foreach_complete .= $foreach_content;
 						}
-					$template = preg_replace('~\{foreach:(.*?)\}(.*?)\{endforeach\}~s', $foreach_complete, $template, 1);
+					$this->template = preg_replace('~\{foreach:(.*?)\}(.*?)\{endforeach\}~s', $foreach_complete, $this->template, 1);
 					$i++;
 				}
 			}			
@@ -105,9 +91,7 @@
 		
 		function replace_if() {
 
-			global $template;
-
-			if( preg_match_all('~\{if:(.*?)\}(.*?)\{elseif\}(.*?)\{endif\}~s', $template, $matches) ) {
+			if( preg_match_all('~\{if:(.*?)\}(.*?)\{elseif\}(.*?)\{endif\}~s', $this->template, $matches) ) {
 			// If the {if} element is found, the variable $matches will be created.
 			// Retrieving the array created in the controller and displayed in the template.
 
@@ -121,10 +105,10 @@
 
 					if (isset($foreach_array)) {
 	
-						$template = preg_replace('~\{if:(.*?)\}(.*?)\{endif\}~s', $replacer, $template, 1);
+						$this->template = preg_replace('~\{if:(.*?)\}(.*?)\{endif\}~s', $replacer, $this->template, 1);
 				
 					} else {
-							$template = preg_replace('~\{if:(.*?)\}(.*?)\{endif\}~s', $else, $template, 1);				
+							$this->template = preg_replace('~\{if:(.*?)\}(.*?)\{endif\}~s', $else, $this->template, 1);				
 					}
 					
 					$i++;
@@ -134,7 +118,6 @@
 		
 		function view() {
 			
-			global $template;
 			global $language;
 			
 			$this->load('header');
@@ -149,17 +132,18 @@
 				// !!! not good to set up variables like this
 				$this->set("user", $_SESSION['user']);
 			}
-
-			$this->set("list_posts", BlogController::list_posts(3));
+			$blog = new BlogController;
+			
+			$this->set("list_posts", $blog->list_posts(3));
 			$this->replace();
 
-			if (preg_match_all('/{{translate:+(.*?)}}/', $template, $matches)) {
+			if (preg_match_all('/{{translate:+(.*?)}}/', $this->template, $matches)) {
 
 				foreach ($matches[1] as $string) {
 
-					$template = str_replace("{{translate:" . $string . "}}", $language->string($string), $template);
+					$this->template = str_replace("{{translate:" . $string . "}}", $language->string($string), $this->template);
 				}
 			}
-			return $template; 		
+			return $this->template; 		
 		}
 	}

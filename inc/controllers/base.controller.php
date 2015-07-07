@@ -2,8 +2,16 @@
 	
 	abstract class BaseController {
 		
-		function index() {
+		public $template;
+		public $db;
+		public $tpl;
+
+		function __construct() {
 			
-			return "Index method not defined.";
+			$this->db = Db::getInstance();
+			$this->tpl = new TemplateController;
+			
 		}
+	
 	}
+	
