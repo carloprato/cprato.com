@@ -1,14 +1,12 @@
 <div class='content_container'>
     <div class="row content">
         <div class='col_12 content_paragraph'>
-                {foreach:topics}
-                    <h2>{{loop_element:title}}</h2>
-                {endforeach}
+                <h2>{{topic_title}}</h2>
+                
                 Page:
                 {foreach:pagination}
-                     <a href='{{SITE_ROOT}}/{{lang}}/forum/view_topic/{{id}}/{{loop_element:page}}'>
-                        {{loop_element:page}}
-                    </a>
+                     <a href='{{SITE_ROOT}}/{{lang}}/forum/view_topic/{{topic_id}}/{{loop_element:page}}'>
+                        {{loop_element:open_b_tag}}{{loop_element:page_name}}{{loop_element:close_b_tag}}</a>
                 {endforeach}
                 <p style='margin-bottom:10px;'></p> 
                 {foreach:replies}
@@ -26,20 +24,20 @@
                             {{loop_element:content}}
                         </div>
                         <div style='background-color:#BCC;padding-left:5px;box-shadow:4px 0px 5px #888888;'>
-                            <a href='/{{lang}}/forum/delete/{{loop_element:id}}'>Delete Post</a>
+                            <a href='/{{lang}}/forum/delete/{{loop_element:reply_id}}'>Delete Post</a>
                              -          
-                            <a href='/en/forum/edit/{{loop_element:id}}'>Edit this post</a>
+                            <a href='/en/forum/edit/{{loop_element:reply_id}}'>Edit this post</a>
                         </div>
                     </div>
                 {endforeach}
                 
-                Page: 
+                Page:
                 {foreach:pagination}
-                    <a href='{{SITE_ROOT}}/{{lang}}/forum/view_topic/{{id}}/{{loop_element:page}}'>
-                        {{loop_element:page}}</a>
+                     <a href='{{SITE_ROOT}}/{{lang}}/forum/view_topic/{{topic_id}}/{{loop_element:page}}'>
+                        {{loop_element:open_b_tag}}{{loop_element:page_name}}{{loop_element:close_b_tag}}</a>
                 {endforeach}
                 {if:user}
-                    <form method='post' action='{{SITE_ROOT}}/{{lang}}/forum/add_reply/{{id}}'>
+                    <form method='post' action='{{SITE_ROOT}}/{{lang}}/forum/add_reply/{{topic_id}}'>
                         <h3>Reply</h3>
                         <textarea class='rich_editor' name='reply_content'></textarea><br/>
                         <input type='submit' style='width:200px;margin:0 auto;display:block;margin-bottom:50px; ' name='submitReply' value='Submit Reply'>            

@@ -6,12 +6,8 @@
 		public $controller;
 		public $arg;
 		public $arg2;
+		public static $values;
 		
-		static public function description() {
-			
-			return "Essential module to set up and display the template.";
-		}
-
 		function __construct() {
 			
 			$this->controller = Routes::$controller;
@@ -43,23 +39,21 @@
 			}	
 		}
 		
-		function set($var, $content) {
+		public static function set($var, $content) {
 			global $language;
-			global $values;
-			$values[$var] = $content;
 
+			TemplateController::$values[$var] = $content;
 		}
 		
 		function replace() {
 			
-			global $values;
-
 			$this->replace_if();			
 			$this->replace_foreach();
-	
-			foreach ($values as $key=>$value) {
+			
+			foreach (TemplateController::$values as $key=>$value) {
 				// !!! Kind of wrong...
-				if (!is_array($values[$key])) { // Excluding arrays which will be converted as foreach loops
+
+				if (!is_array(TemplateController::$values[$key])) { // Excluding arrays which will be converted as foreach loops
 
 					$this->template = str_replace("{{" . $key . "}}", $value, $this->template);
 				}
@@ -71,13 +65,14 @@
 			if( preg_match_all('~\{foreach:(.*?)\}(.*?)\{endforeach\}~s', $this->template, $matches) ) {
 			// If the {foreach} element is found, the variable $matches will be created.
 			// Retrieving the array created in the controller and displayed in the template.
-
+			
 				$i = 0;		
-				
+
 				while (isset($matches[1][$i])) {
 					
-					global ${$matches[1][$i]};
-					$foreach_array = ${$matches[1][$i]};
+					$loop_name = $matches[1][$i];
+
+					$foreach_array = TemplateController::$values[$loop_name];
 					
 					$foreach_complete = NULL;			
 					
@@ -86,7 +81,7 @@
 						foreach ($single_array as $key => $value) {								
 							$foreach_content = str_replace("{{loop_element:" . $key . "}}", $value, $foreach_content);			
 						}						
-						$foreach_complete .= $foreach_content;
+							$foreach_complete .= $foreach_content;
 						}
 					$this->template = preg_replace('~\{foreach:(.*?)\}(.*?)\{endforeach\}~s', $foreach_complete, $this->template, 1);
 					$i++;
@@ -103,13 +98,14 @@
 				$i = 0;
 				
 				while (isset($matches[2][$i])) {
+						$loop_name = $matches[1][$i];
 
-					global ${$matches[1][$i]};
-					$foreach_array = ${$matches[1][$i]};
+					$foreach_array = TemplateController::$values[$loop_name];				
+					
 					$replacer = $matches[2][$i];
 					$else = $matches[3][$i];
 
-					if (isset($foreach_array)) {
+					if ($foreach_array == TRUE) {
 	
 						$this->template = preg_replace('~\{if:(.*?)\}(.*?)\{endif\}~s', $replacer, $this->template, 1);
 				

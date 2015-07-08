@@ -26,8 +26,7 @@
                 </form>
             {elseif}
                 You need to <a href='/{{lang}}/auth'>login</a> to comment on this post.
-            {endif}
-            
+            {endif}            
         </div>
     </div>
     <div class='fill'>

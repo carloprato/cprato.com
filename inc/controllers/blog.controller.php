@@ -24,7 +24,8 @@
 			foreach($q->fetchAll(PDO::FETCH_ASSOC) as $post) {
 				$recent_posts[] = $post;
 		    }
-					
+			
+			TemplateController::set("recent_posts", $recent_posts);		
 			return $recent_posts;
 		}
 	
@@ -69,6 +70,8 @@
 			foreach($q->fetchAll(PDO::FETCH_OBJ) as $comment) {
 				$comments[] = $comment;
 		    }
+			
+			TemplateController::set("comments", $comments);
 		}
 
 		function add() {
