@@ -30,7 +30,6 @@
 	
 		function view_post($id) {
 
-
 			/// !!! only one URL should be processed instead of both short_title and post id.
 			$sql = 'SELECT * FROM posts WHERE short_title = ? OR id = ?';
 				$q = $this->db->prepare($sql);

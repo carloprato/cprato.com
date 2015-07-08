@@ -18,8 +18,8 @@
     td, th {
     padding:10px;
     vertical-align: center;
-         border-radius:8px 8px 0px 0px;
-    }
+    box-shadow:4px 0px 5px #888888;
+   }
 </style>
             <h2>Forum</h2>
 			<table>

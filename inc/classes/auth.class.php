@@ -95,9 +95,9 @@
 					// !!! Short term fix, better to redefine $_POST instead
 								
 						$_POST = array_map('trim', $_POST);
-						$sql = 'INSERT INTO `users`(`id`, `user`, `password`, `name`, `email`, `verified`, `privileges`) VALUES (?, ?, ?, ?, ?, ?, ?)';
+						$sql = 'INSERT INTO `users`(`id`, `user`, `password`, `name`, `email`, `verified`, `privileges`, `date_created`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
 						$q = $db->prepare($sql);						
-						$req = $q->execute(array(NULL, $_POST['user'], Auth::encryptPassword($_POST['password']), $_POST['name'], $_POST['email'], md5($_POST['email']), 10));
+						$req = $q->execute(array(NULL, $_POST['user'], Auth::encryptPassword($_POST['password']), $_POST['name'], $_POST['email'], md5($_POST['email']), 10, date("Y-m-d H:i:s")));
 						return NULL;
 					  }
 				

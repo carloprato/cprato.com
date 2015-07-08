@@ -1,23 +1,8 @@
 <?php
 	
 	class AuthController extends BaseController {
-		
-		static public function version() {
-			
-			return "0.0.1";
-		}
-		
-		static public function views_list() {
-			
-			return array('index', 'list_posts', 'view_post');
-		}
-		
-		static public function description() {
-			
-			return "Essential module to protect pages and modules from unauthorized access.";
-		}
-							
-		public static function register() {
+						
+		function register() {
 			
 			global $registration_errors;
 			global $success;
@@ -34,12 +19,10 @@
 
 		public static function index() {
 			
-
-			//$this->tpl->set("user_details", print_r($_SESSION, true));
-
+ 
 		}
 				
-		public static function login() {
+		function login() {
 			
 			global $user;				
 			$user = Auth::login($_POST['user'], $_POST['password']); // Returns user's details on success, false on failure
@@ -55,7 +38,7 @@
 			}					
 		}
 		
-		public static function logout() {
+		function logout() {
 				
 			return Auth::logout();	
 			

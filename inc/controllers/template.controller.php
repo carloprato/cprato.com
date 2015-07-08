@@ -2,20 +2,24 @@
 	
 	class TemplateController extends BaseController {
 
-		protected $action;
-		protected $controller;
+		public $action;
+		public $controller;
+		public $arg;
+		public $arg2;
 		
 		static public function description() {
 			
 			return "Essential module to set up and display the template.";
 		}
-									
+
 		function __construct() {
 			
 			$this->controller = Routes::$controller;
 			$this->action = Routes::$action;
-
-		}	
+			$this->arg = Routes::$arg;
+			$this->arg2 = Routes::$arg2;
+			
+		}
 		
 		function load($page, $type = 'view') {
 			
@@ -68,12 +72,13 @@
 			// If the {foreach} element is found, the variable $matches will be created.
 			// Retrieving the array created in the controller and displayed in the template.
 
-				$i = 0;				
-
+				$i = 0;		
+				
 				while (isset($matches[1][$i])) {
+					
 					global ${$matches[1][$i]};
-
 					$foreach_array = ${$matches[1][$i]};
+					
 					$foreach_complete = NULL;			
 					
 					foreach ($foreach_array as $single_array) {
@@ -98,7 +103,8 @@
 				$i = 0;
 				
 				while (isset($matches[2][$i])) {
-					global ${$matches[1][$i]};	
+
+					global ${$matches[1][$i]};
 					$foreach_array = ${$matches[1][$i]};
 					$replacer = $matches[2][$i];
 					$else = $matches[3][$i];
@@ -128,6 +134,7 @@
 			$this->set("p", PAGE);
 			$this->set("lang", LANG);
 			$this->set("SITE_ROOT", SITE_ROOT);
+			$this->set("arg", $this->arg);
 			if (isset($_SESSION['user'])) {
 				// !!! not good to set up variables like this
 				$this->set("user", $_SESSION['user']);

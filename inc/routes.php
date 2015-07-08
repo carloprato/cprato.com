@@ -9,6 +9,18 @@
 		
 		function __construct() {	
 
+			if (isset($_GET['arg'])) {
+				// Defines action not to incur in the undefined variable later on
+				
+				self::$arg = $_GET['arg'];
+			}	else self::$arg = NULL;	
+
+			if (isset($_GET['arg2'])) {
+				// Defines action not to incur in the undefined variable later on
+				
+				self::$arg2 = $_GET['arg2'];
+			}	else self::$arg2 = NULL;	
+									
 			if (isset($_GET['action'])) {
 				// Defines action not to incur in the undefined variable later on
 				

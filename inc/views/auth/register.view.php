@@ -24,6 +24,25 @@
     <div class="row content">
         <div class='col_8 content_paragraph'>
             <h2>Register</h2>
+                {if:registration_errors}
+                <div style='background:#FCC;border-top: 3px solid #F66;border-bottom: 3px solid #F66;padding:5px;'>
+                    <h3>Error</h3>
+                    Some fields were not filled in correctly. Please correct the data you inserted. <br/>
+                    {foreach:registration_errors}
+                        <li> {{loop_element:error}} <br/>  
+                    {endforeach}
+                </div>
+                {elseif}
+                {endif}
+ 
+                {if:success}                    
+                <div style='background:#CFC;border-top: 3px solid #6F6;border-bottom: 3px solid #6F6;padding:5px;'>                    
+                    <h3>Success!</h3>
+                        {{success}}
+                </div>   
+                {elseif}                 
+                {endif}
+                
             <form method='post' action='{{SITE_ROOT}}/{{lang}}/auth/register'>
                 <table>
                     <tr>
@@ -81,25 +100,6 @@
                     </tr>                   
                 </table>
             </form>
-
-                {if:registration_errors}
-                <div style='background:#FCC;border-top: 3px solid #F66;border-bottom: 3px solid #F66;padding:5px;'>
-                    <h3>Error</h3>
-                    Some fields were not filled in correctly. Please correct the data you inserted. <br/>
-                    {foreach:registration_errors}
-                        <li> {{loop_element:error}} <br/>  
-                    {endforeach}
-                </div>
-                {elseif}
-                {endif}
- 
-                {if:success}                    
-                <div style='background:#CFC;border-top: 3px solid #6F6;border-bottom: 3px solid #6F6;padding:5px;'>                    
-                    <h3>Success!</h3>
-                        {{success}}
-                </div>   
-                {elseif}                 
-                {endif}
             </div>
         </div>
     </div>
