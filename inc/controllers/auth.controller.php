@@ -4,15 +4,18 @@
 						
 		function register() {
 			
-			global $registration_errors;
-			global $success;
+
 			$registration_errors = Auth::register();	
 
-				$this->tpl->set("error", $registration_errors);	
-				$this->tpl->set("success", 'The registration was completed successfully.');
-				if (!isset($_POST['user'])) {
-				$this->tpl->set("success", '');	
-				}	
+				TemplateController::set("error", $registration_errors);	
+
+				if ($registration_errors == NULL && isset($_POST['user'])) {
+
+					TemplateController::set("success", 'The registration was completed successfully.');				
+
+				}
+				
+				TemplateController::set("registration_errors", $registration_errors);
 				return $registration_errors;	
 
 		}

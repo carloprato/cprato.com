@@ -44,7 +44,13 @@
 
 			TemplateController::$values[$var] = $content;
 		}
-		
+
+		public static function remove($template_value) {
+			global $language;
+
+			unset(TemplateController::$values[$template_value]);
+		}
+				
 		function replace() {
 			
 			$this->replace_if();			

@@ -1,6 +1,6 @@
 <?php
 	
-	class TopicModel extends BaseController {
+	class TopicModel extends BaseModel {
 		
 		function getTopic() {
 			

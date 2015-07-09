@@ -45,63 +45,24 @@
 			
 		}
 		
-		public static function register() {
+		 function register() {
 			
 			if (isset($_POST['submitButton'])) {	
 			
 				$error = array();
+				$user = new UserModel;
+				  
+				$user_details = array_map('trim', $_POST);
 
-				$db = Db::getInstance();				
-				$sql = 'SELECT * FROM `users` WHERE user = ?';
-				$q = $db->prepare($sql);						
-				$req = $q->execute(array($_POST['user']));
-				if ($q->fetchColumn() > 0) {		
-					  $error[]['error'] = '{{translate:error_username_taken}}';							  
-				}
-				$sql = 'SELECT * FROM `users` WHERE email = ?';
-				$q = $db->prepare($sql);						
-				$req = $q->execute(array($_POST['email']));
-				if ($q->fetchColumn() > 0) {		
-					  $error[]['error'] = 'Another account with the same e-mail exists. Please choose another e-mail.';							  
-				}
-											
-				if (strlen($_POST['user']) <= 3) {
+				$error = Auth::validate($user_details);
+						
+				if (empty($error)) {
 					
-					$error[]['error'] = "Username too short.";
-				}
-				if ($_POST['password'] != $_POST['confirm_password']) {
-					
-					$error[]['error'] = "Passwords do not match.";
-				}
-				
-				if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-					
-					$error[]['error'] = "E-Mail not valid.";
-				} 
-				
-				if (!isset($_POST['name'])) {
-					
-					$error[]['error'] = "Please insert your name and surname.";
-				} 
-				
-				if ($_POST['invitation_code'] != 'INVcarlo123') {
-					
-					$error[]['error'] = "The invitation code is not valid.";
-				}
-											  
-				if (count($error) == 0) {
-												
-					$db = Db::getInstance();
-					// !!! Short term fix, better to redefine $_POST instead
+					$user_details = (object) $user_details;											
+					$user->add($user_details);
 								
-						$_POST = array_map('trim', $_POST);
-						$sql = 'INSERT INTO `users`(`id`, `user`, `password`, `name`, `email`, `verified`, `privileges`, `date_created`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-						$q = $db->prepare($sql);						
-						$req = $q->execute(array(NULL, $_POST['user'], Auth::encryptPassword($_POST['password']), $_POST['name'], $_POST['email'], md5($_POST['email']), 10, date("Y-m-d H:i:s")));
-						return NULL;
-					  }
-				
-					return $error;
+				}
+				return $error;
 			}						
 		}
 		
@@ -133,32 +94,62 @@
 		}
 		
 		public static function getUserID() {
-		    $db = Db::getInstance();			
-			$sql = 'SELECT * FROM users WHERE user = ? LIMIT 1';
-				$q = $db->prepare($sql);
-				/// !!! $_SESSION not always defined
-				$req = $q->execute(array($_SESSION['user']));	
-				
-				foreach($q->fetchAll(PDO::FETCH_OBJ) as $user) {
-						
-							return $user->id;
-						}
-						return "Error!";
+			
+				$user = new UserModel;	
+				return $user->getByUser($_SESSION['user'])->id;
+
 		      	}				
 			
 		public static function getUserName($id) {
-		    $db = Db::getInstance();			
-			$sql = 'SELECT * FROM users WHERE id = ? LIMIT 1';
-				$q = $db->prepare($sql);
 
-				$req = $q->execute(array($id));	
-				
-				foreach($q->fetchAll(PDO::FETCH_OBJ) as $user) {
-						
-							return $user->user;
-						}
-						return "Error!";
+				$user = new UserModel;	
+				return $user->getById($id)->user;
+
 		      	}		
+		
+		function validate($data) {
+
+				$user = new UserModel;
+				$username_exists = $user->getByUser($data['user']);
+				$email_exists = $user->getByEmail($data['email']);
+				
+				if (isset($username_exists->user)) {
+					
+					$error[]['error'] = "{{translate:error_username_taken}}";
+				}	
+				
+				if (isset($email_exists->email)) {
+					
+					$error[]['error'] = "{{translate:error_email_taken}}";
+				}
+				
+				if (strlen($data['user']) <= 3) {
+					
+					$error[]['error'] = "Username too short.";
+				}
+				
+				if ($data['password'] != $data['confirm_password']) {
+					
+					$error[]['error'] = "Passwords do not match.";
+				}
+				
+				if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+					
+					$error[]['error'] = "E-Mail not valid.";
+				} 
+				
+				if (!isset($data['name'])) {
+					
+					$error[]['error'] = "Please insert your name and surname.";
+				} 
+				
+				if ($data['invitation_code'] != 'INVcarlo123') {
+					
+					$error[]['error'] = "The invitation code is not valid.";
+				}
+						
+			return $error;
+		}
 		
 		public static function encryptPassword($password) {
 			
@@ -167,10 +158,6 @@
 			$hash = crypt($password, $salt);
 			return $hash;
 			
-			// Hashing the password with its hash as the salt returns the same hash
-			if ( hash_equals($hash, crypt($password, $hash)) ) {
-				return $hash;
-			}
 		}
 		
 		public static function remember($id) {

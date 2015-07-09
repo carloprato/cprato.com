@@ -71,6 +71,7 @@
 							
 					$topic = new TopicModel;
 					$topic->add_reply();
+					
 					TemplateController::set("errors", 0);					
 					TemplateController::set("topic_id", $this->arg);
 				} else {
