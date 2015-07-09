@@ -2,6 +2,15 @@
 <div class="row content">
 <div class="col_8 content_paragraph" style="text-align: justify; padding-left: 10px;">
 <h2>Changelog</h2>
+<p>To do:</p>
+<ul>
+<li>User profile for the forum and the blog</li>
+<li>Private messages</li>
+<li>Chat (?)</li>
+<li>Fix multilanguage</li>
+<li>Administration menu</li>
+<li>Fix editor</li>
+</ul>
 <p>07/07/2015 - 0.2.0</p>
 <ul>
 <li>Created forum</li>

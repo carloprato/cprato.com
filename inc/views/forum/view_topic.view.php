@@ -10,8 +10,8 @@
                 {endforeach}
                 <p style='margin-bottom:10px;'></p> 
                 {foreach:replies}
-                    <div style='background-color:#CDD;border:2px solid #ABB; min-height:100px;margin-bottom:10px;'>             
-                        <div style='vertical-align:top;  border:1px solid #CDD;background-color:#DEE;margin:0 auto;  height:100%;  box-shadow:5px 0px 5px #888888;' class='col_3'>
+                    <div class='forum_post_container'>             
+                        <div class='col_3 forum_post_user'>
                             <a href='{{SITE_ROOT}}/{{lang}}/user/profile/{{loop_element:user_id}}'>
                                 {{loop_element:user}}
                             </a>
@@ -20,10 +20,10 @@
                             Registered: {{loop_element:date_created}} <br/>
                             <img src='/data/res/images/avatar.png' style='width:100px;'/>
                         </div>
-                        <div style=' margin:0;padding-left:10px' class='col_8'> 
+                        <div class='col_8 forum_post_content'> 
                             {{loop_element:content}}
                         </div>
-                        <div style='background-color:#BCC;padding-left:5px;box-shadow:4px 0px 5px #888888;'>
+                        <div class='forum_post_footer'>
                             <a href='/{{lang}}/forum/delete/{{loop_element:reply_id}}'>Delete Post</a>
                              -          
                             <a href='/en/forum/edit/{{loop_element:reply_id}}'>Edit this post</a>

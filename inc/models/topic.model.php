@@ -169,7 +169,7 @@
 
 				$i = $this->arg2 + 5;
 				$higher = $this->arg2 + 1;
-				while ($higher <= $i && $higher < $pages) {
+				while ($higher <= $i && $higher < $pages && $higher > 0) {
 					
 					if ($this->arg2 == $higher) {
 						$open_b_tag = '<span style="font-size:150%"><b>';
@@ -186,23 +186,24 @@
 					);
 					$higher++;					
 				}
-								
-					if ($this->arg2 == NULL) $this->arg2 = 1;	
-					if ($this->arg2 == $i) {
-						$open_b_tag = '<span style="font-size:150%"><b>';
-						$close_b_tag = '</b></span>';
-					} else {
-						$open_b_tag = false;
-						$close_b_tag = false;
-					}
-									
-				$pagination[] = array(
-					"page" => $pages-1,
-					"page_name" => 'Last',
-					"open_b_tag" => $open_b_tag,
-					"close_b_tag" => $close_b_tag						
-				);
-			
+				
+				if ($pages > 1) {				
+						if ($this->arg2 == NULL) $this->arg2 = 1;	
+						if ($this->arg2 == $i) {
+							$open_b_tag = '<span style="font-size:150%"><b>';
+							$close_b_tag = '</b></span>';
+						} else {
+							$open_b_tag = false;
+							$close_b_tag = false;
+						}
+										
+					$pagination[] = array(
+						"page" => $pages-1,
+						"page_name" => 'Last',
+						"open_b_tag" => $open_b_tag,
+						"close_b_tag" => $close_b_tag						
+					);
+				}
 				return $pagination;
 			}
 		}

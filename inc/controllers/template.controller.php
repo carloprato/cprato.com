@@ -99,7 +99,7 @@
 				
 				while (isset($matches[2][$i])) {
 						$loop_name = $matches[1][$i];
-
+						
 					$foreach_array = TemplateController::$values[$loop_name];				
 					
 					$replacer = $matches[2][$i];

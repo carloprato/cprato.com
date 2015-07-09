@@ -1,26 +1,6 @@
 <div class='content_container'>
     <div class="row content">
         <div class='col_12 content_paragraph'>
-<style>
-    table, td {
-        border: 0;
-        background-color:#DEE;
-
-    }
-    th {
-        background-color:#BCC;
-    }
-    table {
-        width:100%;
-        border-collapse: collapse;
-         border-radius:8px;
-    }
-    td, th {
-    padding:10px;
-    vertical-align: center;
-    box-shadow:4px 0px 5px #888888;
-   }
-</style>
             <h2>Forum</h2>
 			<table>
                     <tr>
