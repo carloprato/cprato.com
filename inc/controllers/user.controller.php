@@ -13,11 +13,11 @@
 			
 			$user = new UserModel;
 
-			if (isset($_POST['editButton']) && $_POST['new_password'] === $_POST['confirm_password']) {
+			if (isset($_POST['editButton']) && $_POST['new_password'] == $_POST['confirm_password']) {
 				
 				$_POST['new_password'] = Auth::encryptPassword($_POST['new_password']);				
 				$user->update($_POST);
-			}			
+			}			else echo "Password not equal";
 			
 			$user_details[] = $user->getById($_SESSION['user_id']);
 	

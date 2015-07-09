@@ -64,7 +64,7 @@
 			$user = new UserModel;
 			
 			$fields_to_update = array(
-				'name' => 'new_name',
+				'name' => 'new_name',				
 				'password' => 'new_password',
 				'email' => 'new_email'
 			);

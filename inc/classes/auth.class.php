@@ -45,7 +45,7 @@
 			
 		}
 		
-		 function register() {
+		 public static function register() {
 			
 			if (isset($_POST['submitButton'])) {	
 			
@@ -107,7 +107,7 @@
 
 		      	}		
 		
-		function validate($data) {
+		public static function validate($data) {
 
 				$user = new UserModel;
 				$username_exists = $user->getByUser($data['user']);
