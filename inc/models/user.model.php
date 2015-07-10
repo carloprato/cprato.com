@@ -4,9 +4,10 @@
 		
 		function add($user_details) {
 		
-			$sql = 'INSERT INTO `users`(`id`, `user`, `password`, `name`, `email`, `verified`, `privileges`, `date`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+			$sql = 'INSERT INTO `users`(`id`, `user`, `fb_user`, `password`, `name`, `email`, `verified`, `privileges`, `date`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
 			$q = $this->db->prepare($sql);						
-			$req = $q->execute(array(NULL, $user_details->user, Auth::encryptPassword($user_details->password), $user_details->name, $user_details->email, md5($user_details->email), 10, date("Y-m-d H:i:s")));
+			$req = $q->execute(array(NULL, $user_details->user, $user_details->fb_user, Auth::encryptPassword($user_details->password), $user_details->name, $user_details->email, md5($user_details->email), 10, date("Y-m-d H:i:s")));
+
 		}
 		
 		function getById($id) {

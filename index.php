@@ -2,6 +2,7 @@
 
 	require_once("inc/classes/autoloader.class.php"); // Autoload classes
 	require_once("data/config/db.config.php"); // Database details
+    require_once 'vendor/autoload.php'; // Composer
 
 	$core     = new Core; // Class with basic functions
 
@@ -12,3 +13,4 @@
 	
 	$tpl 	  = new TemplateController; // Starts template
 	echo $tpl -> view(); // Let's go!
+

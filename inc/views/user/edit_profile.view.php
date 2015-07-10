@@ -45,6 +45,18 @@
                         </tr>
                         <tr>
                             <td>
+                                Facebook ID
+                            </td>
+                            <td>
+                                {if:fb_user}
+                                    {{loop_element:fb_user}}
+                                {elseif}
+                                Not linked
+                                {endif}
+                            </td>  
+                        </tr>
+                        <tr>
+                            <td>
                                 Permissions
                             </td>
                             <td>

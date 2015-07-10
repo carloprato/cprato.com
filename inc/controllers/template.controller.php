@@ -104,8 +104,7 @@
 				$i = 0;
 				
 				while (isset($matches[2][$i])) {
-						$loop_name = $matches[1][$i];
-						
+					$loop_name = $matches[1][$i];	
 					$foreach_array = TemplateController::$values[$loop_name];				
 					
 					$replacer = $matches[2][$i];
@@ -140,6 +139,11 @@
 			if (isset($_SESSION['user'])) {
 				// !!! not good to set up variables like this
 				$this->set("user", $_SESSION['user']);
+				$this->set("name", $_SESSION['name']);
+			} else {
+				
+				$this->set("user", 0);
+				$this->set("name", 0);				
 			}
 			$blog = new BlogController;
 			

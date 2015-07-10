@@ -15,11 +15,12 @@
 			Auth::protect(10);
 			
 			$user = new UserModel;
-			if (!empty($id)) {
+			if (!empty($id) && $id != $_SESSION['user_id']) {
 				$user_details[] = $user->getById($id);
 				$user_details[0]->role = $user->roles($id)['name'];
 				TemplateController::set("edit_profile", NULL);	
-			} else {				
+
+			} else {	
 				$user_details[] = $user->getByUser($_SESSION['user']);
 				$user_details[0]->role = $user->roles($_SESSION['user_id'])['name'];
 				TemplateController::set("edit_profile", 1);	
@@ -49,9 +50,9 @@
 
 			$user_details[] = $user->getById($id);
 			$user_details[0]->role = $user->roles($id)['name'];			
-	
+			
 			TemplateController::set("edit_profile_errors", $edit_profile_errors);	
+			TemplateController::set("fb_user", $user_details[0]->fb_user);	
 			TemplateController::set("user_details", $user_details);
 		}
 	}
-	

@@ -61,17 +61,44 @@
         ga('send', 'pageview');
     </script>
     <script type="text/javascript" src="/data/res/js/tinymce/tinymce.min.js" ></script >  
-<script type="text/javascript">
-tinyMCE.init({
-        theme : "modern",
-        mode : "specific_textareas",
-        editor_selector : "rich_editor",
-        plugins : 'link image code',
-        toolbar: "insertfile undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-        menubar : false,
-        force_br_newlines : false,
-        force_p_newlines : false,
-        forced_root_block : ''
-});
-</script>
+    <script type="text/javascript">
+        tinyMCE.init({
+                theme : "modern",
+                mode : "specific_textareas",
+                editor_selector : "rich_editor",
+                plugins : 'link image code',
+                toolbar: "insertfile undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+                menubar : false,
+                force_br_newlines : false,
+                force_p_newlines : false,
+                forced_root_block : ''
+        });
+    </script>
+    <script>
+      logInWithFacebook = function() {
+        FB.login(function(response) {
+          if (response.authResponse) {
+            window.location.replace("{{SITE_ROOT}}/{{lang}}/auth/facebook");
+          } else {
+            
+          }
+        },  {scope: 'email'});
+        return false;
+      };
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId: '1612484382341510',
+          cookie: true,
+          version: 'v2.2'
+        });
+      };
+    
+      (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
 </head>

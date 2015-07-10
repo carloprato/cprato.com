@@ -15,6 +15,7 @@
 			
 			if (isset($username) && isset($password)) {
 				
+				
 				$sql = 'SELECT * FROM users WHERE user = ? LIMIT 1';
 				$q = $db->prepare($sql);
 				$req = $q->execute(array($username));	
@@ -22,7 +23,13 @@
 				foreach($q->fetchAll(PDO::FETCH_ASSOC) as $user) {
 
 						if ( hash_equals($user['password'], crypt($password, $user['password'])) || Auth::autologin() == true) {
-							if ($_POST['remember_me'] == 1) {
+		
+								$_SESSION['privileges'] = $user['privileges'];
+								$_SESSION['user_id'] = $user['id'];	
+								$_SESSION['user'] = $user['user'];
+								$_SESSION['name'] = $user['name'];
+									
+							if (!empty($_POST['remember_me'])) {
 								Auth::remember($user['id']);
 							}
 							return $user;
@@ -112,6 +119,9 @@
 		public static function validate($data) {
 
 				$user = new UserModel;
+				
+				$error = array();
+				
 				$username_exists = $user->getByUser($data['user']);
 				$email_exists = $user->getByEmail($data['email']);
 				
@@ -188,7 +198,7 @@
 						$_SESSION['privileges'] = $user['privileges'];
 						$_SESSION['user_id'] = $user['id'];	
 						$_SESSION['user'] = $user['user'];
-	
+						$_SESSION['name'] = $user['name'];	
 			      	}				
 			}
 
