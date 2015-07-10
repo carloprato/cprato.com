@@ -3,6 +3,9 @@
         <div class='col_6 content_paragraph'>
 
 				<h2>Edit Profile</h2>
+            {foreach:edit_profile_errors}
+                {{loop_element:error}}
+            {endforeach}
             {foreach:user_details}    
                 <form method='post' action=''>
                     <table>
@@ -26,8 +29,10 @@
                             <td>
                                 Password
                             </td>
-                            <td style='align:right'>
-                                <input type='password' name='new_password' placeholder='New password'/><input type='password' name='confirm_password' placeholder='Confirm new password'/>
+                            <td style='align:right'>                                
+                                <input type='password' name='old_password' placeholder='Old password'/><br/>
+                                <input type='password' name='new_password' placeholder='New password'/><br/>
+                                <input type='password' name='confirm_password' placeholder='Confirm new password'/>
                             </td>  
                         </tr>
                         <tr>
@@ -43,7 +48,7 @@
                                 Permissions
                             </td>
                             <td>
-                                {{loop_element:privileges}}
+                                {{loop_element:role}}
                             </td>  
                         </tr>
                         <tr>

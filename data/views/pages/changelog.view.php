@@ -4,12 +4,13 @@
 <h2>Changelog</h2>
 <p>To do:</p>
 <ul>
-<li>User profile for the forum and the blog</li>
+<li><strong>User profile for the forum and the blog&nbsp;</strong></li>
 <li>Private messages</li>
 <li>Chat (?)</li>
 <li>Fix multilanguage</li>
 <li>Administration menu</li>
 <li>Fix editor</li>
+<li>Facebook registration</li>
 </ul>
 <p>07/07/2015 - 0.2.0</p>
 <ul>

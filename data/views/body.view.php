@@ -5,7 +5,7 @@
             </div>
             <div class='col_6' style='color:#DFDFDF'>
                 {if:user}
-                    Hello, {{user}}! <a style='color:#8cf;' href='{{SITE_ROOT}}/{{lang}}/auth/logout'>Logout</a>
+                    Hello, <a style='color:#8cf;' href='{{SITE_ROOT}}/{{lang}}/user/profile/'>{{user}}</a>! <a style='color:#8cf;' href='{{SITE_ROOT}}/{{lang}}/auth/logout'>Logout</a>
                 {elseif}
                     <a style='color:#8cf;' href='{{SITE_ROOT}}/{{lang}}/auth'>Login</a> - <a style='color:#8cf;' href='{{SITE_ROOT}}/{{lang}}/auth/register'>Register</a>
                 {endif}

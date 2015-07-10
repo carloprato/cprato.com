@@ -26,11 +26,15 @@
                             Permissions
                         </td>
                         <td>
-                            {{loop_element:privileges}}
+                            {{loop_element:role}}
                         </td>  
                     </tr>
-                </table>		   
-			{endforeach}
+                </table>
+                {if:edit_profile}
+                    <a href='{{SITE_ROOT}}/{{lang}}/user/edit_profile'>{{translate:edit_your_profile}}</a>		   
+			    {elseif}
+                {endif}
+            {endforeach}
         </div>
     <div class='fill'>
     </div>

@@ -66,17 +66,19 @@
 			}						
 		}
 		
-		public static function protect($privileges) {
+		public static function protect($privileges, $redirect = true) {
 			
 			if (isset($_SESSION['privileges']) && $_SESSION['privileges'] >= $privileges) {
 				
 				return true;
-			} else if (isset($_SESSION['privileges']) && $_SESSION['privileges'] < $privileges) {
+			} else if (isset($_SESSION['privileges']) && $_SESSION['privileges'] < $privileges && $redirect == true) {
 
 		 		header("Location: /en/auth");
-			} else {
+			} else if ($redirect == false && isset($_SESSION['privileges']) && $_SESSION['privileges'] ) {
 
-				header("Location: /en/auth");
+				return false;
+			} else {
+		 		header("Location: /en/auth");				
 			}
 		}
 		

@@ -1,5 +1,5 @@
 <?php
-	
+
 	class TemplateController extends BaseController {
 
 		public $action;

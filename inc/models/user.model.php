@@ -36,6 +36,18 @@
 			return $user_data;
 		}
 		
+		function list_all() {
+
+			$sql = 'SELECT * FROM `users`';
+			$q = $this->db->prepare($sql);						
+			$req = $q->execute();			
+			foreach($q->fetchAll(PDO::FETCH_OBJ) as $single_user) {
+
+					$user_list[] = $single_user;
+				}
+			return $user_list;						
+		}
+		
 		function roles($id) {
 			
 			$roles = array(
@@ -52,6 +64,7 @@
 			$role = array();
 			$role['privileges'] = (int) $user->getById($id)->privileges;
 			$role['name'] = $roles[$role['privileges']];
+			$role['name'] = ucwords($role['name']);
 			return $role;
 		}
 		

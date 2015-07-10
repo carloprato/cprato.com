@@ -21,7 +21,8 @@
                             {{loop_element:title}}
                         </td>
                         <td>
-                            {{loop_element:user}}
+                            <a href='{{SITE_ROOT}}/{{lang}}/user/profile/{{loop_element:author}}'>
+                                {{loop_element:user}}</a>
                         </td>
                         <td>
                             {{loop_element:date_created}}
