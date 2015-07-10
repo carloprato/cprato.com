@@ -50,9 +50,14 @@
 
 			$user_details[] = $user->getById($id);
 			$user_details[0]->role = $user->roles($id)['name'];			
+			if (1 == 2 && !empty($user_details[0]->fb_user)) { // Enabled editing for all accounts
+				$input_disabled = "disabled";
+			} else $input_disabled = NULL;
 			
+			TemplateController::set("input_disabled", $input_disabled);
 			TemplateController::set("edit_profile_errors", $edit_profile_errors);	
 			TemplateController::set("fb_user", $user_details[0]->fb_user);	
 			TemplateController::set("user_details", $user_details);
+			
 		}
 	}

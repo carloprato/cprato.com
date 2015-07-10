@@ -13,7 +13,7 @@
 		
 		function add() {
 			
-			Auth::protect(100);
+			Auth::protect(50);
 			
 			if (isset($_POST['submit_button']))  {	
 			
@@ -48,6 +48,7 @@
 			$topic = new TopicModel;
 			$replies = array();
 			$replies = $topic->getTopic();
+
 			$pagination = $topic->pagination($id, 5);
 			TemplateController::set("replies", $replies);
 			TemplateController::set("topic_title", $topic->getTopicTitle($replies[0]['topic_id']));
@@ -58,7 +59,7 @@
 		function add_reply($topic_id) {
 			// ??? Redirect immediately after insertion
 			
-			Auth::protect(10);
+			Auth::protect(50);
 			
 			if (isset($_POST['submitReply'])) {
 			
@@ -96,17 +97,31 @@
 		}	
 		
 		function edit($id) {
-		
-			global $edit_reply;
+			  
+			  if (!empty($_POST['reply_content'])) {
+	
+				$sql = '
+					UPDATE 
+					forum_replies 
+					SET `content` = ? WHERE forum_replies.id = ?
+					LIMIT 1
+				';
+				$q = $this->db->prepare($sql);
+				$req = $q->execute(array($_POST['reply_content'], $id));					  
+				  
+			  }
 			$sql = '
 				SELECT *
 				FROM forum_replies 
 				WHERE forum_replies.id = ?
-			';
+				AND author = ?
+			';			  
 			$q = $this->db->prepare($sql);
-			$req = $q->execute(array($id));	
+			$req = $q->execute(array($id, $_SESSION['user_id']));	
 			foreach($q->fetchAll(PDO::FETCH_ASSOC) as $reply) {
 				$edit_reply[] = $reply;	
-	      	}				
+	      	}		
+
+			  TemplateController::set("edit_reply", $edit_reply);	
 		}
 	}

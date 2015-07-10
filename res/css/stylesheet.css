@@ -233,8 +233,7 @@ ul {
 
 .content_paragraph,
 .content_container,
-.content,
-.evidence {
+.content {
     min-height:300px;
 }
 

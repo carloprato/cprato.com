@@ -58,7 +58,7 @@
 			
 				$error = array();
 				$user = new UserModel;
-				  
+				$_POST['fb_user'] = 0;  
 				$user_details = array_map('trim', $_POST);
 
 				$error = Auth::validate($user_details);

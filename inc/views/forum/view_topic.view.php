@@ -25,8 +25,8 @@
                         </div>
                         <div class='forum_post_footer'>
                             <a href='/{{lang}}/forum/delete/{{loop_element:reply_id}}'>Delete Post</a>
-                             -          
-                            <a href='/en/forum/edit/{{loop_element:reply_id}}'>Edit this post</a>
+                            -
+			                <a href='/en/forum/edit/{{loop_element:reply_id}}'>Edit this post</a>
                         </div>
                     </div>
                 {endforeach}

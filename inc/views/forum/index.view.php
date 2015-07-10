@@ -30,12 +30,11 @@
                     </tr>
                 {endforeach}
                     <tr>
-                        <td colspan='3' style='background-color:#BCC;text-align:center'>
+                        <th colspan='3' style='text-align:center'>
+                            <b>
                             <a href='{{SITE_ROOT}}/{{lang}}/forum/add'>
-                                New Topic</a>
-                            Page: <a href='{{SITE_ROOT}}/{{lang}}/forum/add'>
-                                1 2 3 4 5 ... 50
-                            </a>
+                                New Topic</a></b>
+                          </th>
                     </tr>
             </table> 
         </div>

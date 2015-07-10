@@ -10,7 +10,7 @@
                 {foreach:comments}
                     <p>
                         <strong>
-                            {{loop_element:name}} - {{loop_element:user}}
+                            {{loop_element:user}}
                         </strong>
                         ({{loop_element:date_created}}): 
                         {{loop_element:content}}

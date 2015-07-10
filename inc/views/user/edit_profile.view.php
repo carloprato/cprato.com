@@ -22,7 +22,7 @@
                                 Name
                             </td>
                             <td>
-                                <input type='text' name='new_name' placeholder='{{loop_element:name}}'/>
+                                <input type='text' name='new_name' placeholder='{{loop_element:name}}'  {{input_disabled}}/>
                             </td>  
                         </tr>
                         <tr>
@@ -30,9 +30,9 @@
                                 Password
                             </td>
                             <td style='align:right'>                                
-                                <input type='password' name='old_password' placeholder='Old password'/><br/>
-                                <input type='password' name='new_password' placeholder='New password'/><br/>
-                                <input type='password' name='confirm_password' placeholder='Confirm new password'/>
+                                <input type='password' name='old_password' placeholder='Old password' {{input_disabled}} /><br/>
+                                <input type='password' name='new_password' placeholder='New password' {{input_disabled}} /><br/>
+                                <input type='password' name='confirm_password' placeholder='Confirm new password' {{input_disabled}}/>
                             </td>  
                         </tr>
                         <tr>
@@ -40,7 +40,7 @@
                                 E-mail
                             </td>
                             <td>
-                                <input type='text' name='new_email' placeholder='{{loop_element:email}}'/>
+                                <input type='text' name='new_email' placeholder='{{loop_element:email}}' {{input_disabled}} />
                             </td>  
                         </tr>
                         <tr>
