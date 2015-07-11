@@ -1,13 +1,13 @@
 <div class='content_container'>
     <div class="row content">
-        <div class='col_6 content_paragraph'>
+        <div class='col_10 content_paragraph'>
 
 				<h2>Edit Profile</h2>
             {foreach:edit_profile_errors}
                 {{loop_element:error}}
             {endforeach}
             {foreach:user_details}    
-                <form method='post' action=''>
+                <form method='post' action='' enctype="multipart/form-data">
                     <table>
                         <tr>
                             <td>
@@ -63,6 +63,16 @@
                                 {{loop_element:role}}
                             </td>  
                         </tr>
+
+                        <tr>
+                            <td>
+                                Profile Image
+                            </td>
+                            <td>
+                                <img src='/data/res/images/users/{{loop_element:id}}.jpg' style='width:100px;'/><br/>
+                                <input type='file' name='profile_image' id='profile_image'>
+                            </td>  
+                        </tr>
                         <tr>
                             <td colspan='2'>
                                 <input style='margin:0 auto;display:block;width:200px' type='submit' name='editButton' value='Edit'>
@@ -70,6 +80,7 @@
                         </tr>
                     </table>		   
     		      </form>
+                                    
             {endforeach}
         </div>
     <div class='fill'>

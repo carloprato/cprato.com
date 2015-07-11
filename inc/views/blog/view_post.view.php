@@ -1,7 +1,7 @@
 <div class='content_container'>
     <div class="row content">
         <div class='col_12 content_paragraph'>
-			<h2>{{post_title}} ({{post_date}})</h2>
+			<h2>{{post_title}} ({{post_date}}) <span style='font-size:16px;'>by {{author}}</span></h2>
             
             {{post_content}}
             
@@ -17,15 +17,16 @@
                     </p>
                 {endforeach}
             </p>
+                    <h3>Insert comment</h3>
             {if:user}
 
                 <form method='post' action='{{SITE_ROOT}}/{{lang}}/blog/add_comment/{{post_id}}'>
-                    <h3>Insert comment</h3>
+
                     <textarea class='rich_editor' name='comment_content'></textarea><br/>
                     <input type='submit' style='width:200px;margin:0 auto;display:block;margin-bottom:50px;' name='submitComment' value='Submit Comment'>            
                 </form>
             {elseif}
-                You need to <a href='/{{lang}}/auth'>login</a> to comment on this post.
+                You need to <a href='/{{lang}}/auth'>login</a> to comment on this post. <br/><br/>
             {endif}            
         </div>
     </div>

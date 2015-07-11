@@ -35,11 +35,12 @@
 			$sql = 'SELECT * FROM posts WHERE short_title = ? OR id = ?';
 				$q = $this->db->prepare($sql);
 				$req = $q->execute(array($_GET['arg'], $_GET['arg']));	
-
+				$user = new UserModel;
 				foreach($q->fetchAll(PDO::FETCH_OBJ) as $post) {
 					
 		 		 $this->tpl->set("post_title", $post->title);
 		 		 $this->tpl->set("short_title", $post->short_title);
+		 		 $this->tpl->set("author", $user->getById($post->author)->user);
 		 		 $this->tpl->set("post_date", date("H:m, d-m-Y", strtotime($post->date_created)));
 		 		 $this->tpl->set("post_id", $post->id);
 				 $this->tpl->set("post_content", $post->content);

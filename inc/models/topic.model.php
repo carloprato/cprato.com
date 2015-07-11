@@ -17,7 +17,8 @@
 				forum_replies.topic as topic_id,
 				users.id as user_id,
 				users.user,
-				users.name
+				users.name,
+				users.date
 				FROM forum_replies 
 				INNER JOIN users 
 				ON forum_replies.topic = ?
@@ -36,6 +37,7 @@
 
 					$replies[$i] = $reply;
 		      		$replies[$i]['count_posts']	= $this->countUserPosts($replies[$i]['user_id']);
+					$replies[$i]['date'] = date("d/m/Y", strtotime($replies[$i]['date']));
 					$i++;
 				}	
 

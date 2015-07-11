@@ -59,7 +59,7 @@
 			foreach (TemplateController::$values as $key=>$value) {
 				// !!! Kind of wrong...
 
-				if (!is_array(TemplateController::$values[$key])) { // Excluding arrays which will be converted as foreach loops
+				if (!is_array(TemplateController::$values[$key]) && !is_object(TemplateController::$values[$key])) { // Excluding arrays which will be converted as foreach loops
 
 					$this->template = str_replace("{{" . $key . "}}", $value, $this->template);
 				}

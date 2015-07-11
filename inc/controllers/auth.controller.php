@@ -114,7 +114,7 @@
 				$user_details->password = 'facebook';
 				$user_details['password'] = 'facebook';
 				$user_details['confirm_password'] = 'facebook';
-				$user_details['invitation_code'] = 'INVcarlo123';
+				$user_details['invitation_code'] = 'selfhelp2015';
 				
 				if (Auth::validate($user_details) == NULL) {
 					$user->add($user_details);

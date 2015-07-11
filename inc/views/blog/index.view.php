@@ -12,6 +12,7 @@
                         {{loop_element:short_content}}...<b><a href="{{SITE_ROOT}}/{{lang}}/blog/view_post/{{loop_element:short_title}}">Continue reading</a>
     				</b></p>
     				<br/>
+                        <hr/>
                 {endforeach}
         </div>
     </div>

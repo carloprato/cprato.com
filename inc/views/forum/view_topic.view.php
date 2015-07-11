@@ -11,14 +11,14 @@
                 <p style='margin-bottom:10px;'></p> 
                 {foreach:replies}
                     <div class='forum_post_container'>             
-                        <div class='col_3 forum_post_user'>
-                            <a href='{{SITE_ROOT}}/{{lang}}/user/profile/{{loop_element:user_id}}'>
+                        <div class='forum_post_user col_3'>
+                            <a style='text-align:center;display:block;margin:0; padding:0;' href='{{SITE_ROOT}}/{{lang}}/user/profile/{{loop_element:user_id}}'>
                                 {{loop_element:user}}
                             </a>
-                            <br/>
-                            Posts: {{loop_element:count_posts}} <br/>
-                            Registered: {{loop_element:date_created}} <br/>
-                            <img src='/data/res/images/avatar.png' style='width:100px;'/>
+                            <img src='/data/res/images/users/{{loop_element:user_id}}.jpg' style='width:100px;margin:0 auto;display:block'/>
+                            <span style='text-align:center;display:block;'>{{loop_element:count_posts}} posts</span>
+                            <span style='text-align:center;display:block;'>Registered: {{loop_element:date}}</span>
+
                         </div>
                         <div class='col_8 forum_post_content'> 
                             {{loop_element:content}}

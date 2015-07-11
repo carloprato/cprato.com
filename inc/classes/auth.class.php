@@ -69,6 +69,8 @@
 					$user->add($user_details);
 								
 				}
+									$user_details = (object) $user_details;
+				TemplateController::set("user_wrong_details", $user_details);											
 				return $error;
 			}						
 		}
@@ -155,7 +157,7 @@
 					$error[]['error'] = "Please insert your name and surname.";
 				} 
 				
-				if ($data['invitation_code'] != 'INVcarlo123') {
+				if ($data['invitation_code'] != 'selfhelp2015') {
 					
 					$error[]['error'] = "The invitation code is not valid.";
 				}

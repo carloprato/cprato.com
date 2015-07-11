@@ -7,7 +7,7 @@ li {
     <div class="row content">
         <div class='col_8 content_paragraph' style='text-align:justify;padding-left:10px;float:left;'>
 
- 	<h2>Admin Menu</h2>
+ 				<h2>Admin Menu</h2>
                 <h4>Forum</h4>
                 <i>The forum is a place where all the registered users can create discussions,
                    regarding any topic they feel like talking about. The <b>moderators</b> look 
@@ -52,7 +52,9 @@ li {
                 do not speak English to be able to use the website comfortably.</i>
                 <li><i><b>Chat</b>: users will be able to communicate in real time with a chat integrated in the website.</i>                
                 <li><i><b>Extended user profile</b>: the user profile will contain more information and functionalities.</i>                
-                <br/><br/>                                               
+                <br/><br/>                
+
+                               
         </div>
     </div>
     <div class='fill'>

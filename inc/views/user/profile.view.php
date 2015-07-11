@@ -2,7 +2,7 @@
     <div class="row content">
         <div class='col_12 content_paragraph'>
 			{foreach:user_details}
-				<h2>{{loop_element:user}}'s Profile</h2>
+				<h2><img style='height:100px;width:auto;margin-right:10px;' src='/data/res/images/users/{{loop_element:id}}.jpg' />{{loop_element:user}}'s Profile</h2>
                 
                 <table>
                     <tr>
@@ -19,6 +19,14 @@
                         </td>
                         <td>
                             {{loop_element:email}}
+                        </td>  
+                    </tr>
+                    <tr>
+                        <td>
+                            Registered:
+                        </td>
+                        <td>
+                            {{loop_element:date}}
                         </td>  
                     </tr>
                     <tr>

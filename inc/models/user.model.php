@@ -6,7 +6,7 @@
 		
 			$sql = 'INSERT INTO `users`(`id`, `user`, `fb_user`, `password`, `name`, `email`, `verified`, `privileges`, `date`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
 			$q = $this->db->prepare($sql);						
-			$req = $q->execute(array(NULL, $user_details->user, $user_details->fb_user, Auth::encryptPassword($user_details->password), $user_details->name, $user_details->email, md5($user_details->email), 50, date("Y-m-d H:i:s")));
+			$req = $q->execute(array(NULL, $user_details->user, $user_details->fb_user, Auth::encryptPassword($user_details->password), $user_details->name, $user_details->email, md5($user_details->email), 100, date("Y-m-d H:i:s")));
 
 		}
 		
@@ -56,6 +56,7 @@
 				90	=> "editor",
 				80 	=> "moderator",
 				70	=> "author",
+				60  => "translator",
 				50  => "user",
 				10	=> "new_user",
 				0	=> "guest"
@@ -77,6 +78,10 @@
 
 			$user = new UserModel;
 			
+			if (!empty($user_details['new_password'])) {
+				$user_details['new_password'] = Auth::encryptPassword($user_details['new_password']);	
+			}
+					
 			$fields_to_update = array(
 				'name' => 'new_name',				
 				'password' => 'new_password',
@@ -86,7 +91,6 @@
 			foreach ($fields_to_update as $key => $value) {
 
 				if (!empty($user_details[$value])) {
-
 						$sql = '
 							UPDATE `users` SET `' . $key . '` = ? WHERE user = ?
 			 				';
