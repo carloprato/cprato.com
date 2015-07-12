@@ -61,18 +61,27 @@
         ga('send', 'pageview');
     </script>
     <script type="text/javascript" src="/data/res/js/tinymce/tinymce.min.js" ></script >  
-    <script type="text/javascript">
-        tinyMCE.init({
-                theme : "modern",
-                mode : "specific_textareas",
-                editor_selector : "rich_editor",
-                plugins : 'link image code',
-                toolbar: "insertfile undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-                menubar : false,
-                force_br_newlines : false,
-                force_p_newlines : false,
-                forced_root_block : ''
-        });
+    <script  type="text/javascript">
+    tinyMCE.init({
+            theme : "modern",
+            mode : "specific_textareas",
+            editor_selector : "rich_editor",
+            plugins : 'link image code table smileys',
+            toolbar: "insertfile undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image smileys",
+            menu : { // this is the complete default configuration
+                edit   : {title : 'Edit'  , items : 'undo redo | cut copy paste pastetext | selectall'},
+                insert : {title : 'Insert', items : 'link media | template hr'},
+                view   : {title : 'View'  , items : 'visualaid'},
+                format : {title : 'Format', items : 'bold italic underline strikethrough superscript subscript | formats | removeformat'},
+                table  : {title : 'Table' , items : 'inserttable tableprops deletetable | cell row column'},
+                tools  : {title : 'Tools' , items : 'spellchecker code'}
+            },
+            force_br_newlines : false,
+            force_p_newlines : false,
+            forced_root_block : '',
+            auto_convert_smileys: true
+    
+    });
     </script>
     <script>
       logInWithFacebook = function() {

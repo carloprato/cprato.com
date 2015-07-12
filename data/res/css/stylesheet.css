@@ -223,3 +223,9 @@ blockquote:after {
 blockquote p {
     display: inline
 }
+
+.smiley {
+    
+    width:24px;
+    height:24px;
+}

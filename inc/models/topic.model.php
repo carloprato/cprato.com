@@ -35,9 +35,12 @@
 				$i = 0;
 				foreach($q->fetchAll(PDO::FETCH_ASSOC) as $reply) {
 
+					$user = new UserModel;
+					
 					$replies[$i] = $reply;
 		      		$replies[$i]['count_posts']	= $this->countUserPosts($replies[$i]['user_id']);
 					$replies[$i]['date'] = date("d/m/Y", strtotime($replies[$i]['date']));
+					$replies[$i]['role'] = $user->roles($replies[$i]['user_id'])['name'];
 					$i++;
 				}	
 

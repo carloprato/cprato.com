@@ -16,6 +16,7 @@
                                 {{loop_element:user}}
                             </a>
                             <img src='/data/res/images/users/{{loop_element:user_id}}.jpg' style='width:100px;margin:0 auto;display:block'/>
+                            <span style='text-align:center;display:block;'>{{loop_element:role}}</span>
                             <span style='text-align:center;display:block;'>{{loop_element:count_posts}} posts</span>
                             <span style='text-align:center;display:block;'>Registered: {{loop_element:date}}</span>
 

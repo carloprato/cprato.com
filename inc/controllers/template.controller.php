@@ -145,9 +145,9 @@
 				$this->set("user", 0);
 				$this->set("name", 0);				
 			}
-			$blog = new BlogController;
-			
+			$blog = new BlogController;			
 			$this->set("list_posts", $blog->list_posts(3));
+			
 			$this->replace();
 
 			if (preg_match_all('/{{translate:+(.*?)}}/', $this->template, $matches)) {

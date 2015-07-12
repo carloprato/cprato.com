@@ -4,12 +4,12 @@
 			<h2>Blog</h2>
                 {foreach:recent_posts}
                     <h3>
-    					<a href="{{SITE_ROOT}}/{{lang}}/blog/view_post/{{loop_element:short_title}}">
+    					<a href="{{SITE_ROOT}}/{{lang}}/blog/view_post/{{loop_element:id}}">
     						{{loop_element:title}}
     					</a>
     				</h3>  				
     				<p>
-                        {{loop_element:short_content}}...<b><a href="{{SITE_ROOT}}/{{lang}}/blog/view_post/{{loop_element:short_title}}">Continue reading</a>
+                        {{loop_element:short_content}}...<b><a href="{{SITE_ROOT}}/{{lang}}/blog/view_post/{{loop_element:id}}">Continue reading</a>
     				</b></p>
     				<br/>
                         <hr/>
