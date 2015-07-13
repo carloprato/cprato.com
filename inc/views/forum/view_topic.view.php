@@ -10,7 +10,8 @@
                 {endforeach}
                 <p style='margin-bottom:10px;'></p> 
                 {foreach:replies}
-                    <div class='forum_post_container'>             
+                    <div class='forum_post_container'>
+                                                    <a name='reply{{loop_element:reply_id}}'></a>             
                         <div class='forum_post_user col_3'>
                             <a style='text-align:center;display:block;margin:0; padding:0;' href='{{SITE_ROOT}}/{{lang}}/user/profile/{{loop_element:user_id}}'>
                                 {{loop_element:user}}
@@ -19,15 +20,20 @@
                             <span style='text-align:center;display:block;'>{{loop_element:role}}</span>
                             <span style='text-align:center;display:block;'>{{loop_element:count_posts}} posts</span>
                             <span style='text-align:center;display:block;'>Registered: {{loop_element:date}}</span>
-
                         </div>
                         <div class='col_8 forum_post_content'> 
+                            <p style='color:#AAA;text-align:right;'>
+                                #{{loop_element:reply_id}} {{loop_element:date_created}}
+                            </p>
                             {{loop_element:content}}
                         </div>
                         <div class='forum_post_footer'>
-                            <a href='/{{lang}}/forum/delete/{{loop_element:reply_id}}'>Delete Post</a>
+                            {if:user_id == {{loop_element:author}}}
+                            <a href='/{{lang}}/forum/delete/{{loop_element:reply_id}}'>Delete</a>
                             -
-			                <a href='/en/forum/edit/{{loop_element:reply_id}}'>Edit this post</a>
+			                <a href='/en/forum/edit/{{loop_element:reply_id}}'>Edit</a>
+                            {elseif}
+                            {endif}
                         </div>
                     </div>
                 {endforeach}

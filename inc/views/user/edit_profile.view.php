@@ -29,10 +29,14 @@
                             <td>
                                 Password
                             </td>
-                            <td style='align:right'>                                
-                                <input type='password' name='old_password' placeholder='Old password' {{input_disabled}} /><br/>
-                                <input type='password' name='new_password' placeholder='New password' {{input_disabled}} /><br/>
-                                <input type='password' name='confirm_password' placeholder='Confirm new password' {{input_disabled}}/>
+                            <td style='align:right'>
+                                {if:fb_user}
+                                    Authentication via Facebook
+                                {elseif}                                                          
+                                <input type='password' name='old_password' placeholder='Old password' /><br/>
+                                <input type='password' name='new_password' placeholder='New password' /><br/>
+                                <input type='password' name='confirm_password' placeholder='Confirm new password' />
+                                {endif}
                             </td>  
                         </tr>
                         <tr>

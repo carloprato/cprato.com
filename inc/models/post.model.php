@@ -44,14 +44,14 @@
 		function add() {
 			
 			// !!! Need to filter variables
-			
+			$short_content = strip_tags(substr($_POST['post_content'], 0, 200));
 			$sql = 'INSERT INTO `posts`(`id`, `author`, `content`, `short_content`, `title`, `short_title`, `date_created`, `date_modified`, `status`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
 			$q = $this->db->prepare($sql);						
 			$req = $q->execute(array(
 				NULL, 
 				Auth::getUserID(), 
 				$_POST['post_content'], 
-				substr($_POST['post_content'], 0, 200),
+				$short_content,
 				$_POST['post_title'], 
 				BlogController::shorten($_POST['post_title']),
 				date("Y-m-d H:i:s"), 

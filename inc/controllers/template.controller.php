@@ -53,8 +53,9 @@
 				
 		function replace() {
 			
-			$this->replace_if();			
 			$this->replace_foreach();
+			$this->replace_if();			
+
 			
 			foreach (TemplateController::$values as $key=>$value) {
 				// !!! Kind of wrong...
@@ -105,18 +106,59 @@
 				
 				while (isset($matches[2][$i])) {
 					$loop_name = $matches[1][$i];	
-					$foreach_array = TemplateController::$values[$loop_name];				
-					
+					$if_test = (explode(' ', $loop_name));
+
+					if (isset($if_test[0])) 
+					$first = TemplateController::$values[$if_test[0]];				
+
+					if (isset($if_test[2])) 
+					$second = $if_test[2];
+					//$second = TemplateController::$values[$if_test[2]];
+
 					$replacer = $matches[2][$i];
 					$else = $matches[3][$i];
+					
+					if (isset($if_test[1])) {
+						switch($if_test[1]) {
+							
+							default:
+							
+							if (isset($first)) {
+								
+									$this->template = preg_replace('~\{if:(.*?)\}(.*?)\{endif\}~s', $replacer, $this->template, 1);								
+								} else {
+									
+									$this->template = preg_replace('~\{if:(.*?)\}(.*?)\{endif\}~s', $else, $this->template, 1);
+								}																							
+							
+							case "==":
+								if ($first == $second) {
+									
+									$this->template = preg_replace('~\{if:(.*?)\}(.*?)\{endif\}~s', $replacer, $this->template, 1);								
+								} else {
+									
+									$this->template = preg_replace('~\{if:(.*?)\}(.*?)\{endif\}~s', $else, $this->template, 1);
+								}
+							case ">":
+								if ($first >= $second) {
+									
+									$this->template = preg_replace('~\{if:(.*?)\}(.*?)\{endif\}~s', $replacer, $this->template, 1);								
+								} else {
+									
+									$this->template = preg_replace('~\{if:(.*?)\}(.*?)\{endif\}~s', $else, $this->template, 1);
+								}
+							}
+						} else {
 
-					if ($foreach_array == TRUE) {
-	
-						$this->template = preg_replace('~\{if:(.*?)\}(.*?)\{endif\}~s', $replacer, $this->template, 1);
-				
-					} else {
-							$this->template = preg_replace('~\{if:(.*?)\}(.*?)\{endif\}~s', $else, $this->template, 1);				
-					}
+							if (!empty($first)) {
+								
+									$this->template = preg_replace('~\{if:(.*?)\}(.*?)\{endif\}~s', $replacer, $this->template, 1);								
+								} else {
+									
+									$this->template = preg_replace('~\{if:(.*?)\}(.*?)\{endif\}~s', $else, $this->template, 1);
+								}							
+							
+						}
 					
 					$i++;
 				}
@@ -136,10 +178,12 @@
 			$this->set("lang", LANG);
 			$this->set("SITE_ROOT", SITE_ROOT);
 			$this->set("arg", $this->arg);
+			$this->set("privileges", $_SESSION['privileges']);
 			if (isset($_SESSION['user'])) {
 				// !!! not good to set up variables like this
 				$this->set("user", $_SESSION['user']);
 				$this->set("name", $_SESSION['name']);
+				$this->set("user_id", $_SESSION['user_id']);
 			} else {
 				
 				$this->set("user", 0);

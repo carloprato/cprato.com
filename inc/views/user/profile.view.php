@@ -2,8 +2,15 @@
     <div class="row content">
         <div class='col_12 content_paragraph'>
 			{foreach:user_details}
-				<h2><img style='height:100px;width:auto;margin-right:10px;' src='/data/res/images/users/{{loop_element:id}}.jpg' />{{loop_element:user}}'s Profile</h2>
-                
+				<h2>
+                {if:edit_profile}
+                    <a href='/{{lang}}/user/edit_profile'>{elseif}
+                {endif}
+                    <img style='height:100px;width:auto;margin-right:10px;' src='/data/res/images/users/{{loop_element:id}}.jpg' />                 
+                 {if:edit_profile}
+                    </a>{elseif}
+                {endif}{{loop_element:user}}'s profile</h2>
+                    
                 <table>
                     <tr>
                         <td>

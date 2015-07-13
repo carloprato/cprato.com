@@ -24,7 +24,7 @@
 				ON forum_replies.topic = ?
 				AND users.id = forum_replies.author 
 				ORDER BY date_created ASC
-				LIMIT ?, 5
+				LIMIT ?, 12
 			';
 				$q = $this->db->prepare($sql);
 				
@@ -41,6 +41,11 @@
 		      		$replies[$i]['count_posts']	= $this->countUserPosts($replies[$i]['user_id']);
 					$replies[$i]['date'] = date("d/m/Y", strtotime($replies[$i]['date']));
 					$replies[$i]['role'] = $user->roles($replies[$i]['user_id'])['name'];
+					
+					if ($replies[$i]['author'] == $_SESSION['user_id']) {
+						
+					 	$replies[$i]['edit_reply'] = 1;
+					} else $replies[$i]['edit_reply'] = 0;
 					$i++;
 				}	
 
@@ -119,7 +124,8 @@
 				$_POST['topic_content'], 
 				date("Y-m-d H:i:s"), 
 				$topic_id
-				));								
+				));		
+						
 		}
 		
 		function countUserPosts($user) {
@@ -230,6 +236,9 @@
 				date("Y-m-d H:i:s"), 
 				$this->arg
 			));
+			
+			$reply_id = $this->db->lastInsertId();							
+			return $reply_id;
 		}
 		
 		function getData() {

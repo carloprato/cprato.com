@@ -61,7 +61,7 @@
 				10	=> "new_user",
 				0	=> "guest"
 			);
-			
+
 			$user = new UserModel;
 			$role = array();
 			$role['privileges'] = (int) $user->getById($id)->privileges;

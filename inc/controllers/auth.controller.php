@@ -111,9 +111,9 @@
 				$user_details->user  = $random_username;
 				$user_details->email = $user_details['email'];
 				$user_details->fb_user = $user_details['id']; 
-				$user_details->password = 'facebook';
-				$user_details['password'] = 'facebook';
-				$user_details['confirm_password'] = 'facebook';
+				$user_details->password = FB_PASSWORD;
+				$user_details['password'] = FB_PASSWORD;
+				$user_details['confirm_password'] = FB_PASSWORD;
 				$user_details['invitation_code'] = 'selfhelp2015';
 				
 				if (Auth::validate($user_details) == NULL) {

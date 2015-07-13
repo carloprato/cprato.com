@@ -48,8 +48,9 @@
 			$topic = new TopicModel;
 			$replies = array();
 			$replies = $topic->getTopic();
-
+			
 			$pagination = $topic->pagination($id, 5);
+			
 			TemplateController::set("replies", $replies);
 			TemplateController::set("topic_title", $topic->getTopicTitle($replies[0]['topic_id']));
 			TemplateController::set("topic_id", $replies[0]['topic_id']); 		
@@ -71,10 +72,11 @@
 				if (empty($errors)) {
 							
 					$topic = new TopicModel;
-					$topic->add_reply();
+					$last_id = $topic->add_reply();
 					
 					TemplateController::set("errors", 0);					
 					TemplateController::set("topic_id", $this->arg);
+					header("Location: /" . $_GET['lang'] . "/forum/view_topic/" . $this->arg . "/#reply" . $last_id);
 				} else {
 					TemplateController::set("new_reply_errors", $errors);
 					TemplateController::set("errors", 1);
