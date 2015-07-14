@@ -32,7 +32,7 @@
 				
 		function login() {
 			
-			global $user;				
+				
 			$user = Auth::login($_POST['user'], $_POST['password']); // Returns user's details on success, false on failure
 			if ($user != FALSE) {
 				$_SESSION['privileges'] = $user['privileges'];

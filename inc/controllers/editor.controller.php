@@ -10,12 +10,25 @@
 		
 		function index() {
 			// List all possible actions related to this module
-			Auth::protect(100);						
+			Auth::protect(80);
+			
+			$pages = scandir($_SERVER['DOCUMENT_ROOT'] . '/data/views/pages/');
+
+			$i = 2;
+			$page_editor = array();
+			while (isset($pages[$i])) {
+				$str = explode(".", $pages[$i]);
+				$page_editor[$i]['page_name'] = $pages[$i];
+				$page_editor[$i]['page_id'] = $str[0];
+				$i++;
+			}		
+
+			TemplateController::set("page_editor", $page_editor);
 		}
 		
 		function add() {
 			
-			Auth::protect(100);
+			Auth::protect(80);
 			
 			// Adds a new static page
 			if (isset($_POST['page_name'])) {
@@ -36,7 +49,7 @@
 		
 		function edit($page_id) {
 			// Edits a created static page
-			Auth::protect(100);
+			Auth::protect(80);
 			
 			global $language;
 			

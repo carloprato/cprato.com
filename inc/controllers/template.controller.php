@@ -178,12 +178,13 @@
 			$this->set("lang", LANG);
 			$this->set("SITE_ROOT", SITE_ROOT);
 			$this->set("arg", $this->arg);
-			$this->set("privileges", $_SESSION['privileges']);
+
 			if (isset($_SESSION['user'])) {
 				// !!! not good to set up variables like this
 				$this->set("user", $_SESSION['user']);
 				$this->set("name", $_SESSION['name']);
 				$this->set("user_id", $_SESSION['user_id']);
+			$this->set("privileges", $_SESSION['privileges']);
 			} else {
 				
 				$this->set("user", 0);

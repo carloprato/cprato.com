@@ -13,7 +13,7 @@
 		
 		function add() {
 			
-			Auth::protect(50);
+			Auth::protect(10);
 			
 			if (isset($_POST['submit_button']))  {	
 			

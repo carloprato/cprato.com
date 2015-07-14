@@ -16,7 +16,7 @@
 		function list_posts() {
 			
 			$post = new PostModel;
-			$recent_posts = $post->getLatestPosts(3);
+			$recent_posts = $post->getLatestPosts(5);
 			TemplateController::set("recent_posts", $recent_posts);		
 
 		}
@@ -34,7 +34,7 @@
 
 		function add() {
 			
-			Auth::protect(100);
+			Auth::protect(80);
 			
 			if (isset($_POST['submit_button'])) {	
 												

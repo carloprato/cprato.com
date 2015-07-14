@@ -4,7 +4,7 @@
 		
 		function list_all() {
 			
-			Auth::protect(50);
+			Auth::protect(80);
 			$user = new UserModel;
 			$user_list = $user->list_all();
 			TemplateController::set("user_list", $user_list);
@@ -40,14 +40,15 @@
 			$user = new UserModel;
 			$edit_profile_errors = array();
 			
-			if (isset($_POST['editButton']) && $_POST['new_password'] == $_POST['confirm_password']) {
-
-				$user->update($_POST);
-			} else if (isset($_POST['editButton']) && $_POST['new_password'] != $_POST['confirm_password']) {
-				
-				$edit_profile_errors[]['error'] = "The passwords you entered do not match.";
+			if (isset($_POST['new_password']) && isset($_POST['confirm_password'])) {	
+				if (isset($_POST['editButton']) && $_POST['new_password'] == $_POST['confirm_password']) {
+	
+					$user->update($_POST);
+				} else if (isset($_POST['editButton']) && $_POST['new_password'] != $_POST['confirm_password']) {
+					
+					$edit_profile_errors[]['error'] = "The passwords you entered do not match.";
+				}
 			}
-			
 			if (!empty($_FILES['profile_image']['name'])) {
 				
 

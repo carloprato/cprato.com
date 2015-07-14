@@ -43,15 +43,11 @@
                      <a href='{{SITE_ROOT}}/{{lang}}/forum/view_topic/{{topic_id}}/{{loop_element:page}}'>
                         {{loop_element:open_b_tag}}{{loop_element:page_name}}{{loop_element:close_b_tag}}</a>
                 {endforeach}
-                {if:user}
                     <form method='post' action='{{SITE_ROOT}}/{{lang}}/forum/add_reply/{{topic_id}}'>
                         <h3>Reply</h3>
                         <textarea class='rich_editor' name='reply_content'></textarea><br/>
                         <input type='submit' style='width:200px;margin:0 auto;display:block;margin-bottom:50px; ' name='submitReply' value='Submit Reply'>            
-                    </form>   
-                {elseif}
-                    You need to <a href='/{{lang}}/auth'>login</a> to comment on this post.
-                {endif}      
+                    </form>       
             </div>
         </div>
     <div class='fill'>

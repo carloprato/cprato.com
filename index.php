@@ -1,5 +1,5 @@
 <?php
-			$permissions = array(
+/*			$permissions = array(
 				"admin"      => 1, // Can do everything
 				"translator" => 1, // Can translate
 				"editor"	 => 1, // Can add static pages and review blog posts
@@ -18,6 +18,7 @@
 			}
 		//echo authorise('10001', 1);
 		//echo authorise('00111', 3);			
+*/
 	require_once("inc/classes/autoloader.class.php"); // Autoload classes
 	require_once("data/config/db.config.php"); // Database details
     require_once 'vendor/autoload.php'; // Composer

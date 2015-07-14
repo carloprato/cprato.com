@@ -4,7 +4,7 @@
 
 		public function index() {
 			
-			//Auth::protect(100);
+			Auth::protect(60);
 			
 		}
 		public function guide() {
