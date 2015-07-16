@@ -4,7 +4,8 @@
 		
 		function list_all() {
 			
-			Auth::protect(80);
+			Auth::authorise(array("moderator"), true);
+			
 			$user = new UserModel;
 			$user_list = $user->list_all();
 			TemplateController::set("user_list", $user_list);
@@ -12,28 +13,52 @@
 		
 		function profile($id) {
 			
-			Auth::protect(10);
+			Auth::authorise(array("user"), true);
 			
 			$user = new UserModel;
 			if (!empty($id) && $id != $_SESSION['user_id']) {
 				$user_details[] = $user->getById($id);
-				$user_details[0]->role = $user->roles($id)['name'];
+				$user_details[0]->role = Auth::roles();
 				TemplateController::set("edit_profile", NULL);	
 
 			} else {	
 				$user_details[] = $user->getByUser($_SESSION['user']);
-				$user_details[0]->role = $user->roles($_SESSION['user_id'])['name'];
+				$user_details[0]->role = Auth::roles();
 				TemplateController::set("edit_profile", 1);	
 			}
 
 			$user_details[0]->date = date("d/m/Y", strtotime($user_details[0]->date));
+			
+			if (!(VISIBLE_NAME & $user_details[0]->profile_visibility) && $user_details[0]->id != $_SESSION['user_id'] && !Auth::authorise(array("admin", "moderator"))) {
+				
+				$user_details[0]->name = "Hidden";
+			}
+			
+			if (!(VISIBLE_EMAIL & $user_details[0]->profile_visibility) && $user_details[0]->id != $_SESSION['user_id'] && !Auth::authorise(array("admin", "moderator"))) {
+				
+				$user_details[0]->email = "Hidden";
+			}
+						
 			TemplateController::set("user_details", $user_details);
 		}
 		
 		function edit_profile($id) {
 			
-			Auth::protect(10);
-			if (Auth::protect(100, false) != true || $id == NULL) {				
+			Auth::authorise(array("user"), true);
+			
+			if (!empty($_POST['editButton'])) {
+				$profile_visibility = 3;
+	
+				foreach($_POST['profile_visibility'] as $hidden) {
+					
+					$profile_visibility = $profile_visibility - $hidden;
+				}
+				
+				$_POST['profile_visibility'] = $profile_visibility;
+				
+			}
+			
+			if (Auth::authorise(array("admin")) != true || $id == NULL) {				
 				$id = $_SESSION['user_id'];
 			}
 				
@@ -121,7 +146,10 @@
 			
 			
 			$user_details[] = $user->getById($id);
-			$user_details[0]->role = $user->roles($id)['name'];			
+			$user_details[0]->role = $user->roles($id)['name'];	
+
+			if((VISIBLE_EMAIL & $user_details[0]->profile_visibility) == 0) $user_details[0]->email_visibility = 'checked';
+			if((VISIBLE_NAME & $user_details[0]->profile_visibility) == 0) $user_details[0]->name_visibility = 'checked';
 			if (1 == 2 && !empty($user_details[0]->fb_user)) { // Enabled editing for all accounts
 				$input_disabled = "disabled";
 			} else $input_disabled = NULL;
@@ -133,3 +161,5 @@
 			
 		}
 	}
+	
+	

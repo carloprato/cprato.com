@@ -26,14 +26,8 @@
                                 #{{loop_element:reply_id}} {{loop_element:date_created}}
                             </p>
                             {{loop_element:content}}
-                        </div>
-                        <div class='forum_post_footer'>
-                            {if:user_id == {{loop_element:author}}}
-                            <a href='/{{lang}}/forum/delete/{{loop_element:reply_id}}'>Delete</a>
-                            -
-			                <a href='/en/forum/edit/{{loop_element:reply_id}}'>Edit</a>
-                            {elseif}
-                            {endif}
+                        </div>                        <div class='forum_post_footer'>
+                            {{loop_element:edit_options}}
                         </div>
                     </div>
                 {endforeach}

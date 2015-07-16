@@ -10,7 +10,8 @@
 		
 		function index() {
 			// List all possible actions related to this module
-			Auth::protect(80);
+			
+			Auth::authorise(array("editor"), true);
 			
 			$pages = scandir($_SERVER['DOCUMENT_ROOT'] . '/data/views/pages/');
 
@@ -28,7 +29,7 @@
 		
 		function add() {
 			
-			Auth::protect(80);
+			Auth::authorise(array("editor"), true);
 			
 			// Adds a new static page
 			if (isset($_POST['page_name'])) {
@@ -49,7 +50,7 @@
 		
 		function edit($page_id) {
 			// Edits a created static page
-			Auth::protect(80);
+			Auth::authorise(array("editor"), true);
 			
 			global $language;
 			

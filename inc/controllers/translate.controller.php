@@ -20,7 +20,8 @@
 									
 		function index() {
  			
-			Auth::protect(60);
+			Auth::authorise(array("translator"), true);
+			
 			$strings1 = Language::load($_GET['lang']);
 			$strings = NULL;	
 			foreach ($strings1 as $key=>$value) {
@@ -46,7 +47,8 @@
 		
 		function update() {
 
-			Auth::protect(60);						
+			Auth::authorise(array("translator"), true);
+			
 			if (isset($_POST['saveButton'])) {
 
 				$strings = [];

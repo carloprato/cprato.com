@@ -22,6 +22,8 @@
 			// 1 Testing, warnings
 			// 2 Extended errors
 			////
+			define('VISIBLE_NAME', 0x00000001);
+			define('VISIBLE_EMAIL', 0x00000002);
 			
 			define("DEBUG", "2");
 			error_reporting(E_ALL);
@@ -52,3 +54,4 @@
 				}
 			}
 		}
+

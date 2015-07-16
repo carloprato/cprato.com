@@ -4,11 +4,12 @@
 
 		public function index() {
 			
-			Auth::protect(60);
+			Auth::authorise(array("translator", "editor", "author", "moderator"), true);
 			
 		}
 		public function guide() {
+
+			Auth::authorise(array("translator", "editor", "author", "moderator"), true);			
 			
-			Auth::protect(100);
 		}
 	}

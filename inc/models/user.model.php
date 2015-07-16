@@ -65,7 +65,7 @@
 			$user = new UserModel;
 			$role = array();
 			$role['privileges'] = (int) $user->getById($id)->privileges;
-			$role['name'] = $roles[$role['privileges']];
+			$role['name'] = $role['privileges'];
 			$role['name'] = ucwords($role['name']);
 			return $role;
 		}
@@ -77,23 +77,26 @@
 		function update($user_details) {
 
 			$user = new UserModel;
-			
 			if (!empty($user_details['new_password'])) {
 				$user_details['new_password'] = Auth::encryptPassword($user_details['new_password']);	
 			}
-					
+
 			$fields_to_update = array(
 				'name' => 'new_name',				
 				'password' => 'new_password',
-				'email' => 'new_email'
+				'email' => 'new_email',
+				'profile_visibility' => 'profile_visibility'
 			);
 
 			foreach ($fields_to_update as $key => $value) {
 
-				if (!empty($user_details[$value])) {
+			// !!! find better way to give different results if string is empty vs 0
+				if (strlen($user_details[$value]) > 0) {
 						$sql = '
 							UPDATE `users` SET `' . $key . '` = ? WHERE user = ?
 			 				';
+
+
 						$q = $this->db->prepare($sql);						
 						$req = $q->execute(array(
 							$user_details[$value],

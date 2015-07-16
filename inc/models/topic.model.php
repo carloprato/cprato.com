@@ -43,16 +43,22 @@
 					$replies[$i]['role'] = $user->roles($replies[$i]['user_id'])['name'];
 					
 					if ($replies[$i]['author'] == $_SESSION['user_id']) {
-						
+					// !!! Spaghetti code, need to fix IF loop	
 					 	$replies[$i]['edit_reply'] = 1;
-					} else $replies[$i]['edit_reply'] = 0;
+						$replies[$i]['edit_options'] = "<a href='/{{lang}}/forum/delete/" . $replies[$i]['reply_id'] . "'>Delete</a>
+                            -
+			                <a href='/en/forum/edit/" . $replies[$i]['reply_id'] . "'>Edit</a>";
+					} else {
+						$replies[$i]['edit_reply'] = 0;
+						$replies[$i]['edit_options'] = "";						
+					} 
 					$i++;
 				}	
 
 			return $replies;
 		}
 		
-		function getTopicList() {
+		function getTopicList($limit = 10) {
 			
 			$sql = 'SELECT 
 				forum_topics.id, 
@@ -66,10 +72,11 @@
 				INNER JOIN users 
 				ON forum_topics.author = users.id 
 				ORDER BY date_created DESC
+				LIMIT 0,' . $limit . '
 			';
 			$q = $this->db->prepare($sql);
-			$req = $q->execute();	
-			$recent_posts = array();	
+			$req = $q->execute(array($limit));	
+			$topics = array();	
 			foreach($q->fetchAll(PDO::FETCH_ASSOC) as $topic) {
 				$topics[] = $topic;
 		    }					

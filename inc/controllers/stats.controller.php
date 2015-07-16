@@ -19,7 +19,7 @@
 										
 		function list_controllers() {
 				
-			Auth::protect(100);
+
 			$dir    = './inc/controllers';
 			$files1 = scandir($dir);
 			unset($files1[0]);

@@ -16,6 +16,8 @@
                             <td>
                                 {{loop_element:user}}
                             </td>  
+                            <td>
+                            </td>   
                         </tr>
                         <tr>
                             <td>
@@ -23,6 +25,9 @@
                             </td>
                             <td>
                                 <input type='text' name='new_name' placeholder='{{loop_element:name}}'  {{input_disabled}}/>
+                            </td>  
+                            <td>
+                                Hidden <input type='checkbox' name='profile_visibility[]' value='1' {{loop_element:name_visibility}}/>
                             </td>  
                         </tr>
                         <tr>
@@ -38,6 +43,8 @@
                                 <input type='password' name='confirm_password' placeholder='Confirm new password' />
                                 {endif}
                             </td>  
+                            <td>
+                            </td>                            
                         </tr>
                         <tr>
                             <td>
@@ -45,7 +52,10 @@
                             </td>
                             <td>
                                 <input type='text' name='new_email' placeholder='{{loop_element:email}}' {{input_disabled}} />
-                            </td>  
+                            </td>
+                            <td>
+                                Hidden <input type='checkbox' name='profile_visibility[]' value='2' {{loop_element:email_visibility}}/>
+                            </td>    
                         </tr>
                         <tr>
                             <td>
@@ -58,6 +68,8 @@
                                 Not linked
                                 {endif}
                             </td>  
+                            <td>
+                            </td>    
                         </tr>
                         <tr>
                             <td>
@@ -65,7 +77,9 @@
                             </td>
                             <td>
                                 {{loop_element:role}}
-                            </td>  
+                            </td>
+                            <td>
+                            </td>                               
                         </tr>
 
                         <tr>
@@ -76,9 +90,11 @@
                                 <img src='/data/res/images/users/{{loop_element:id}}.jpg' style='width:100px;'/><br/>
                                 <input type='file' name='profile_image' id='profile_image'>
                             </td>  
+                            <td>
+                            </td>   
                         </tr>
                         <tr>
-                            <td colspan='2'>
+                            <td colspan='3'>
                                 <input style='margin:0 auto;display:block;width:200px' type='submit' name='editButton' value='Edit'>
                             </td>  
                         </tr>

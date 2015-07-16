@@ -34,7 +34,7 @@
 
 		function add() {
 			
-			Auth::protect(80);
+			Auth::authorise(array("editor", "author"), true);
 			
 			if (isset($_POST['submit_button'])) {	
 												
@@ -48,7 +48,8 @@
 				// ??? Redirect immediately after insertion
 				// ??? Ask to log in if the user is not yet logged in
 				
-				Auth::protect(10);
+				Auth::authorise(array("user"), true);
+				
 				if (isset($_POST['submitComment'])) {
 					
 					$post = new PostModel;

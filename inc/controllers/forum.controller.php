@@ -3,7 +3,8 @@
 	class ForumController extends BaseController {
 				
 		function index() {
-			Auth::protect(10);
+			
+			Auth::authorise(array("user"), true);
 			
 			$topic = new TopicModel;
 			$topics = $topic->getTopicList();
@@ -13,7 +14,7 @@
 		
 		function add() {
 			
-			Auth::protect(10);
+			Auth::authorise(array("user"), true);
 			
 			if (isset($_POST['submit_button']))  {	
 			
@@ -43,14 +44,14 @@
 			
 		function view_topic($id, $page = 1) {
 		
-			Auth::protect(10);
+			Auth::authorise(array("user"), true);
 
 			$topic = new TopicModel;
 			$replies = array();
 			$replies = $topic->getTopic();
 			
 			$pagination = $topic->pagination($id, 5);
-			
+
 			TemplateController::set("replies", $replies);
 			TemplateController::set("topic_title", $topic->getTopicTitle($replies[0]['topic_id']));
 			TemplateController::set("topic_id", $replies[0]['topic_id']); 		
@@ -60,7 +61,7 @@
 		function add_reply($topic_id) {
 			// ??? Redirect immediately after insertion
 			
-			Auth::protect(50);
+			Auth::authorise(array("user"), true);
 			
 			if (isset($_POST['submitReply'])) {
 			
@@ -89,7 +90,8 @@
 		
 		function delete($id) {
 			
-			Auth::protect(10);				
+			Auth::authorise(array("user"), true);
+			
 				$sql = 'DELETE FROM `forum_replies` WHERE id = ? AND author = ?';
 				$q = $this->db->prepare($sql);						
 				$req = $q->execute(array(
@@ -100,6 +102,8 @@
 		
 		function edit($id) {
 			  
+			Auth::authorise(array("user"), true);	  
+
 			  if (!empty($_POST['reply_content'])) {
 	
 				$sql = '

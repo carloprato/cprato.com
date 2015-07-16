@@ -1,8 +1,14 @@
 <?php
 	
-	class Auth {
+	class Auth extends BaseModel {
 		
-
+		const ADMIN_RIGHTS	 	= 32;
+		const EDITOR_RIGHTS 	= 16;
+		const AUTHOR_RIGHTS		=  8;
+		const MODERATOR_RIGHTS  =  4;
+		const TRANSLATOR_RIGHTS =  2;
+		const USER_RIGHTS		=  1;
+			
 		public static function login($username, $password) {
 								
 			// Checks if the user exists and if the password is correct, if yes authorizes them.
@@ -73,10 +79,51 @@
 				TemplateController::set("user_wrong_details", $user_details);											
 				return $error;
 			}						
-		}
-		
-		public static function protect($privileges, $redirect = true) {
+		 }
 			
+		public static function authorise($role, $redirect = false, $user_permissions = NULL) {
+			
+			$user_permissions = 0;
+			
+			if ($user_permissions == NULL) {
+				
+				$user_permissions = (int) $_SESSION['privileges'];
+			}
+			
+				$permissions = array(
+					"admin"			=> self::ADMIN_RIGHTS,
+					"editor"		=> self::EDITOR_RIGHTS,		 // Can do everything
+					"author"		=> self::AUTHOR_RIGHTS, // Can translate
+					"moderator"		=> self::MODERATOR_RIGHTS, // Can add static pages and review blog posts
+					"translator"	=> self::TRANSLATOR_RIGHTS, // Can add blog posts
+					"user"			=> self::USER_RIGHTS // Can ban users and discussions in the forum
+				);
+			
+			if (is_array($role)) {
+				
+				foreach ($role as $single_role) {
+					
+					if (($user_permissions & $permissions[$single_role]) == true) {
+						
+						return true;
+					}
+				}				
+
+			} else {
+				
+				if (($user_permissions & $permissions[$role]) == true) return true;
+				
+			}
+			
+			if ($redirect == true) {
+				
+					header("Location: /en/auth");
+			}
+				return false;
+			}
+
+
+		public static function protect($privileges, $redirect = true) {
 			if (isset($_SESSION['privileges']) && $_SESSION['privileges'] >= $privileges) {
 				
 				return true;
@@ -91,17 +138,24 @@
 			}
 		}
 		
-		public static function roles() {		
-
-			$roles = array(
-					"root"   => 100,
-					"admin"  => 90,
-					"editor" => 80,
-					"author" => 70,
-					"translator" => 60,
-					"reader" => 0
+		public static function roles() {	
+							
+			$permissions = array(
+				"admin"			=> self::ADMIN_RIGHTS,
+				"editor"		=> self::EDITOR_RIGHTS,
+				"author"		=> self::AUTHOR_RIGHTS,
+				"moderator"		=> self::MODERATOR_RIGHTS,
+				"translator"	=> self::TRANSLATOR_RIGHTS,
+				"user"			=> self::USER_RIGHTS
 			);
-			return $roles;
+		
+			foreach ($permissions as $key => $value) {
+				
+				if (($permissions[$key] & $_SESSION['privileges']) == true) {
+					
+					return ucwords($key);
+				}
+			}
 		}
 		
 		public static function getUserID() {
