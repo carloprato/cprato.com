@@ -126,7 +126,8 @@ img {
     vertical-align: middle
 }
 li {
-    display: list-item
+    display: list-item;
+    text-align:left;
 }
 
 caption,
@@ -265,7 +266,13 @@ ul {
 .padding_fix {
     padding-left: 0
 }
-
+.admin_menu {
+    
+    background-color: rgba(136, 204, 102, 0.6);
+    border-radius:8px 16px;
+    margin:5px;
+    padding:5px;
+}
     .icon {
         width:64px;
         height:64px;
@@ -276,6 +283,19 @@ ul {
         text-align:center;
 
     }
+    
+    .current {
+        
+        box-shadow: inset 0px 0px 10px #555555;
+
+    }
+.admin {
+        box-shadow:  0px 0px 5px #555555;
+    float:left;
+    border-radius:8px 16px;
+    background-color: rgba(136, 204, 102, 0.5);    
+    
+}
     span {
                text-align:center;
     }
@@ -334,7 +354,9 @@ body {
     width: 300px
 }
 img {
-    width: 100%
+    width: auto;
+    height: auto;
+    max-width:500px;
 }
 @media only screen and (min-width: 768px) and (max-width: 959px) {
     body {

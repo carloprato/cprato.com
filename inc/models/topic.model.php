@@ -18,14 +18,16 @@
 				users.id as user_id,
 				users.user,
 				users.name,
-				users.date
+				users.date,
+				users.privileges
 				FROM forum_replies 
 				INNER JOIN users 
 				ON forum_replies.topic = ?
 				AND users.id = forum_replies.author 
 				ORDER BY date_created ASC
-				LIMIT ?, 12
+				LIMIT ?, 5
 			';
+			
 				$q = $this->db->prepare($sql);
 				
 				$pages = intval(5 * $this->arg2)-5;
@@ -40,9 +42,9 @@
 					$replies[$i] = $reply;
 		      		$replies[$i]['count_posts']	= $this->countUserPosts($replies[$i]['user_id']);
 					$replies[$i]['date'] = date("d/m/Y", strtotime($replies[$i]['date']));
-					$replies[$i]['role'] = $user->roles($replies[$i]['user_id'])['name'];
-					
-					if ($replies[$i]['author'] == $_SESSION['user_id']) {
+					$replies[$i]['role'] = Auth::roles($replies[$i]['privileges']);
+
+					if ($replies[$i]['author'] == $_SESSION['user_id'] || !empty(Auth::authorise(array("moderator")))) {
 					// !!! Spaghetti code, need to fix IF loop	
 					 	$replies[$i]['edit_reply'] = 1;
 						$replies[$i]['edit_options'] = "<a href='/{{lang}}/forum/delete/" . $replies[$i]['reply_id'] . "'>Delete</a>
@@ -60,20 +62,24 @@
 		
 		function getTopicList($limit = 10) {
 			
-			$sql = 'SELECT 
-				forum_topics.id, 
-				forum_topics.author,
-				forum_topics.title, 
-				forum_topics.content, 
-				forum_topics.date_created, 
-				users.user,
-				users.name
-				FROM forum_topics 
-				INNER JOIN users 
-				ON forum_topics.author = users.id 
-				ORDER BY date_created DESC
-				LIMIT 0,' . $limit . '
-			';
+			$sql = '
+				SELECT 
+					forum_topics.*, 
+					forum_topics.id as topic_id, 
+					max(forum_replies.id) as last_reply,
+					max(forum_replies.date_created) as last_reply_date,
+					forum_replies.*,
+					COUNT(*) as count_replies, 
+					users.*
+				FROM `forum_topics`
+				LEFT JOIN forum_replies
+				ON forum_topics.id = forum_replies.topic
+				LEFT JOIN users
+				ON forum_replies.author = users.id
+				GROUP BY forum_topics.id
+				ORDER BY last_reply DESC
+				LIMIT ' . $limit;
+			
 			$q = $this->db->prepare($sql);
 			$req = $q->execute(array($limit));	
 			$topics = array();	
@@ -146,15 +152,17 @@
 			}
 		}
 		
-		function pagination($topic_id, $posts_per_page) {
+		function pagination($topic_id, $posts_per_page = 5, $table = 'forum_replies', $column = 'topic') {
 			
-			$sql = 'SELECT COUNT(*) as post_number FROM forum_replies WHERE topic = ?';
+			$sql = 'SELECT COUNT(*) as post_number FROM ' . $table . ' WHERE ' . $column .' = ?';
 			$q = $this->db->prepare($sql);
 			$req = $q->execute(array($topic_id));	
 			foreach($q->fetchAll(PDO::FETCH_ASSOC) as $count_reply) {
 		
 				$pages = $count_reply['post_number']/$posts_per_page;
+				
 				$pages = ceil($pages);
+
 				$i = 1;
 									
 				$pagination[] = array(
@@ -187,7 +195,7 @@
 
 				$i = $this->arg2 + 5;
 				$higher = $this->arg2 + 1;
-				while ($higher <= $i && $higher < $pages && $higher > 0) {
+				while ($higher <= $i && $higher <= $pages && $higher > 0) {
 					
 					if ($this->arg2 == $higher) {
 						$open_b_tag = '<span style="font-size:150%"><b>';
@@ -216,12 +224,13 @@
 						}
 										
 					$pagination[] = array(
-						"page" => $pages-1,
+						"page" => $pages,
 						"page_name" => 'Last',
 						"open_b_tag" => $open_b_tag,
 						"close_b_tag" => $close_b_tag						
 					);
 				}
+
 				return $pagination;
 			}
 		}

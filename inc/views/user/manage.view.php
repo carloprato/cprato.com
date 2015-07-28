@@ -1,9 +1,9 @@
 <div class='content_container'>
     <div class="row content">
         <div class='col_12 content_paragraph'>
-            <h2>User List</h2>
-            <a href='/en/user/manage'>Manage new users</a>
-            	<table>
+            <h2>Manage Users</h2>
+            	{if:user_list}
+                <table>
                     <tr>
                         <th>
                             Username
@@ -15,10 +15,6 @@
                             Email
                         </th>
                         <th>
-                            Role
-                        </th>
-                        <th>
-                            Created
                         </th>
                     </tr>
                     {foreach:user_list}			
@@ -32,16 +28,17 @@
                         </td>
                         <td>
                             {{loop_element:email}}
-                        </td>
+                        </td>                     
                         <td>
-                            {{loop_element:role}}
+                            <a href='/{{lang}}/user/accept/{{loop_element:id}}'>Accept user</a> - <b><a href='/{{lang}}/user/refuse/{{loop_element:id}}'><span style='color:#F00';>Refuse user</span></a></b>
                         </td>
-                        <td>
-                            {{loop_element:date}}
-                        </td>                        
-                    </tr>
+                        </tr>
             {endforeach}
             </table> 
+            {elseif}
+                All users have been accepted.
+            {endif}
+
 
         </div>
     <div class='fill'>

@@ -19,9 +19,6 @@
 		
 		function load($page, $type = 'view') {
 			
-		 	global $lang;
-			global $language;
-
 			if (isset($_GET['p']) && isset($_GET['lang'])) {
 
 				if (file_exists(SITE_ROOT . "data/views/" . $page . ".view.php")) {
@@ -40,24 +37,22 @@
 		}
 		
 		public static function set($var, $content) {
-			global $language;
 
 			TemplateController::$values[$var] = $content;
 		}
 
 		public static function remove($template_value) {
-			global $language;
 
 			unset(TemplateController::$values[$template_value]);
 		}
 				
 		function replace() {
 			
-
 			$this->replace_foreach();
-
-			$this->replace_if();			
-
+			$this->replace_if();
+			$this->replace_translation();	
+			$this->replace_auth();		
+			$this->replace_layout();
 			
 			foreach (TemplateController::$values as $key=>$value) {
 				// !!! Kind of wrong...
@@ -120,16 +115,25 @@
 					
 					if (isset($if_test[2])) 
 					$second = $if_test[2]; else $second = 0;
-					
-					//$second = TemplateController::$values[$if_test[2]];
 
 					$replacer = $matches[2][$i];
 
 					$else = $matches[3][$i];
-					
+
 					if (isset($if_test[1])) {
 						switch($if_test[1]) {
 							
+							default:
+								if (!empty($first)) {
+
+									$this->template = preg_replace('~\{if:' . $if_test[0] . '\}(.*?)\{endif\}~s', $replacer, $this->template, 1);								
+
+								} else {
+
+									$this->template = preg_replace('~\{if:' . $if_test[0] . '\}(.*?)\{endif\}~s', $else, $this->template, 1);
+
+								}
+												
 							case "==":
 								if ($first == $second) {
 
@@ -158,7 +162,6 @@
 									
 									$this->template = preg_replace('~\{if:(.*?)\}(.*?)\{endif\}~s', $else, $this->template, 1);
 								}							
-							
 						}
 					
 					$i++;
@@ -166,47 +169,20 @@
 			}
 		}
 		
-		function view() {
+		function replace_translation() {
 			
-			global $language;
-			
-			$this->load('header');
-			$this->load('body');
-			$this->load($this->controller . "/" . $this->action);
-			$this->load('footer');
-						
-			$this->set("p", PAGE);
-			$this->set("lang", LANG);
-			$this->set("SITE_ROOT", SITE_ROOT);
-			$this->set("arg", $this->arg);
-
-			if (isset($_SESSION['user'])) {
-				// !!! not good to set up variables like this
-				$this->set("user", $_SESSION['user']);
-				$this->set("name", $_SESSION['name']);
-				$this->set("user_id", $_SESSION['user_id']);
-			$this->set("privileges", $_SESSION['privileges']);
-			} else {
-				
-				$this->set("user", 0);
-				$this->set("name", 0);				
-				$this->set("user_id", 0);
-			}
-			$blog = new BlogController;			
-			TemplateController::set("list_posts", $blog->list_posts(3));
-						
-			$forum = new TopicModel;
-			TemplateController::set("list_topics", $forum->getTopicList(3));
-			
-			$this->replace();
-
 			if (preg_match_all('/{{translate:+(.*?)}}/', $this->template, $matches)) {
 
 				foreach ($matches[1] as $string) {
 
-					$this->template = str_replace("{{translate:" . $string . "}}", $language->string($string), $this->template);
+					$this->template = str_replace("{{translate:" . $string . "}}", Language::string($string), $this->template);
 				}
 			}
+		}
+		
+		function replace_auth() {
+			
+			// !!! No real need for this function
 			
 			if (preg_match_all('/{auth:(.*?)}(.*?){endauth}/s', $this->template, $matches)) {
 
@@ -220,12 +196,58 @@
 											
 					} else {
 						
-						$this->template = preg_replace('/{auth:(.*?)}(.*?){endauth}/s', 'Not authorised', $this->template, 1);					
+						$this->template = preg_replace('/{auth:(.*?)}(.*?){endauth}/s', '', $this->template, 1);					
 					}		
 					$i++;
-
 				}
-			}			
+			}	
+		}
+		
+		function replace_layout() {
+			
+			$this->template = str_replace("{layout:start}", "", $this->template);
+            $this->template = str_replace("{endlayout}", "", $this->template);
+			$this->template = preg_replace("/{layout:evidence}/s", "
+				<div class='evidence_container'>
+							<div class='row evidence'>
+								<div class='evidence_paragraph col_12 '>
+									
+				", $this->template);	
+			$this->template = str_replace("{endlayout:evidence}", "
+							</div>
+						</div>
+			            <div class='fill'></div>
+				        </div>
+					</div>
+				", $this->template);
+		}
+		
+		function menu_items() {
+			
+			$folder = scandir($_SERVER['DOCUMENT_ROOT'] . "/data/views/pages/");
+			$i = 2;
+			while (isset($folder[$i])) {
+				if ($folder[$i] != '.' && $folder[$i] != '..' && $folder[$i] != "home.view.php") {
+									 
+				 	$test = explode(".", $folder[$i]); 
+				 	$menu_items[$i]['file'] = $test[0];					
+					$menu_items[$i]['name'] = ucwords($test[0]);
+				}		
+				$i++;				
+			}
+			TemplateController::set("menu_items", $menu_items);
+		}
+		
+		function view() {
+					
+			$this->load('header');
+			$this->load('body');
+			$this->load($this->controller . "/" . $this->action);
+			$this->load('footer');
+							
+			$this->menu_items();
+			$this->replace();			
+						
 			return $this->template; 		
 		}
 	}

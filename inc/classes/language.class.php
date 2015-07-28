@@ -2,20 +2,20 @@
 	
 	class Language {
 		
-		function string($key) {
+		public static $lang;	
+		
+		public static function string($key) {
 
 			// Loads string from array defined in function Language->load().
 			// If the string is not found, the default language is loaded (English).
 			// 
 			//
 			
-			global $lang;					
-			if (isset($lang["$key"])) {	
-				return $lang["$key"];
-			} else if (!isset($lang["key"])) {
+			if (isset(Language::$lang["$key"])) {	
+				return Language::$lang["$key"];
+			} else if (!isset(Language::$lang["key"])) {
 
-				return $lang['english']["$key"];
-			
+				return Language::$lang['english']["$key"];			
 			} 
 		}
 		

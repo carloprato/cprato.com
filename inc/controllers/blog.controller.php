@@ -9,8 +9,10 @@
 		
 		function index() {
 
+			$topic = new TopicModel;
+
 			$this->list_posts();
-         
+			        
 		}
 
 		function list_posts() {
@@ -42,6 +44,40 @@
 				$post->add();
 							
 				}			
+			}			
+
+		function edit($id) {
+			
+			Auth::authorise(array("editor", "author"), true);									
+							
+			$post = new PostModel;			
+
+
+			if (isset($_POST['submit_button'])) {	
+				
+				$post->edit($id);
+							
+				}		
+			$post_to_edit = $post->getPost($id);				
+			TemplateController::set("post_to_edit", $post_to_edit);	
+			}	
+
+		function delete($id) {
+			
+			Auth::authorise(array("editor", "author"), true);									
+							
+			$post = new PostModel;	
+		
+			$post->delete($id);
+			header("Location: /en/blog/menu");
+		}	
+			
+						
+			function menu() {
+				
+				$post = new PostModel;
+				$blog_editor = 	$post->getLatestPosts(20);
+				TemplateController::set("blog_editor", $blog_editor);
 			}			
 			
 			function add_comment($post_id) {

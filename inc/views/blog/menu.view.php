@@ -1,10 +1,9 @@
 <div class='content_container'>
     <div class="row content">
-        <div class='col_12 content_paragraph' style='text-align:justify;padding-left:10px;float:left;'>
+        <div class='col_12 content_paragraph' style='text-align:justify;padding-left:10px;float:left;'> 
+            <h2>Blog Admin</h2>
 
- 			<h2>Page Editor</h2>                     
             {auth:editor}
-
 
             <div style='float:left;text-align:center;clear:both;' class='admin'>      
                 <a href='/{{lang}}/admin'>
@@ -12,13 +11,12 @@
                         <img src='/res/images/icons/home.png' class='icon'/><br/>Home          
                     </span>
              </a>
-             <a href='/{{lang}}/editor/add'>
+             <a href='/{{lang}}/blog/add'>
                 <span class='admin_menu' style='float:left; text-align:center; '>
-                    <img src='/res/images/icons/page_add.png' class='icon'/><br/>Add new page          
+                    <img src='/res/images/icons/news.png' class='icon'/><br/>Add new post          
                 </span>
             </a>
             </div>
-            
             <p style='clear:both'>
             <table>
                 <tr>
@@ -32,18 +30,18 @@
                         Delete
                     </th>
                 </tr>    
-            {foreach:page_editor}
+            {foreach:blog_editor}
                 <tr>
                     <td>
-                        {{loop_element:page_id}}
+                        {{loop_element:title}}
                     </td>
                     <td>
-                        <a href='/en/editor/edit/{{loop_element:page_id}}'>
+                        <a href='/en/blog/edit/{{loop_element:id}}'>
                             Edit
                         </a>
                      </td>
                      <td>
-                         <a href='/en/editor/delete/{{loop_element:page_id}}'>
+                         <a href='/en/blog/delete/{{loop_element:id}}'>
                            <b>
                         <span style='color:red;'>
                             Delete [use with care]
@@ -56,10 +54,10 @@
             {endforeach}
             </table>
             {endauth}
-
-        </div>
+            </p>
+         </table>
+         </div>
     </div>
     <div class='fill'>
     </div>
 </div>
-

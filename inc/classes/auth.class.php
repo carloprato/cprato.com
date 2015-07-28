@@ -9,7 +9,7 @@
 		const TRANSLATOR_RIGHTS =  2;
 		const USER_RIGHTS		=  1;
 			
-		public static function login($username, $password) {
+		public  function login($username, $password) {
 								
 			// Checks if the user exists and if the password is correct, if yes authorizes them.
 			//
@@ -20,34 +20,45 @@
 		    $db = Db::getInstance();
 			
 			if (isset($username) && isset($password)) {
-				
-				
+					
 				$sql = 'SELECT * FROM users WHERE user = ? LIMIT 1';
-				$q = $db->prepare($sql);
+				$q = $this->db->prepare($sql);
 				$req = $q->execute(array($username));	
 				
 				foreach($q->fetchAll(PDO::FETCH_ASSOC) as $user) {
 
-						if ( hash_equals($user['password'], crypt($password, $user['password'])) || Auth::autologin() == true) {
-		
-								$_SESSION['privileges'] = $user['privileges'];
-								$_SESSION['user_id'] = $user['id'];	
-								$_SESSION['user'] = $user['user'];
-								$_SESSION['name'] = $user['name'];
-									
-							if (!empty($_POST['remember_me'])) {
-								Auth::remember($user['id']);
-							}
-							return $user;
-						}
+					if (!hash_equals($user['password'], crypt($password, $user['password']))) {
+						
+						$login_errors[]['error'] = "Username and password do not match, or username is not registered.";
+						TemplateController::set("login_errors", $login_errors);											
 						return false;
+					} else if ($user['verified'] != 1) {
+						
+						$login_errors[]['error'] = "You have not been accepted yet. Come back later!";
+						TemplateController::set("login_errors", $login_errors);											
+						return false;
+					}
+
+					 else if (Auth::autologin() == true || hash_equals($user['password'], crypt($password, $user['password']))) {
+		
+						$_SESSION['privileges'] = $user['privileges'];
+						$_SESSION['user_id'] = $user['id'];	
+						$_SESSION['user'] = $user['user'];
+						$_SESSION['name'] = $user['name'];
+									
+						if (!empty($_POST['remember_me'])) {
+							Auth::remember($user['id']);
+						}
+						
+						$login_errors[]['error'] = "Login successful.";
+						TemplateController::set("login_errors", $login_errors);																	
+						return $user;
+					}
+					return false;
 		      	}
-
 				  return false;
-				}
-
-				//header("Location: /en/auth/auth");
-		 	}
+			}
+		}
 					
 		function logout() {
 			
@@ -75,11 +86,11 @@
 					$user->add($user_details);
 								
 				}
-									$user_details = (object) $user_details;
+				$user_details = (object) $user_details;
 				TemplateController::set("user_wrong_details", $user_details);											
 				return $error;
 			}						
-		 }
+		}
 			
 		public static function authorise($role, $redirect = false, $user_permissions = NULL) {
 			
@@ -90,14 +101,14 @@
 				$user_permissions = (int) $_SESSION['privileges'];
 			}
 			
-				$permissions = array(
-					"admin"			=> self::ADMIN_RIGHTS,
-					"editor"		=> self::EDITOR_RIGHTS,		 // Can do everything
-					"author"		=> self::AUTHOR_RIGHTS, // Can translate
-					"moderator"		=> self::MODERATOR_RIGHTS, // Can add static pages and review blog posts
-					"translator"	=> self::TRANSLATOR_RIGHTS, // Can add blog posts
-					"user"			=> self::USER_RIGHTS // Can ban users and discussions in the forum
-				);
+			$permissions = array(
+				"admin"			=> self::ADMIN_RIGHTS,
+				"editor"		=> self::EDITOR_RIGHTS,
+				"author"		=> self::AUTHOR_RIGHTS,
+				"moderator"		=> self::MODERATOR_RIGHTS,
+				"translator"	=> self::TRANSLATOR_RIGHTS,
+				"user"			=> self::USER_RIGHTS
+			);
 			
 			if (is_array($role)) {
 				
@@ -138,7 +149,12 @@
 			}
 		}
 		
-		public static function roles() {	
+		public static function roles($user_privileges = 0) {	
+			
+			if (empty($user_privileges)) {
+				$user_privileges = (object) 0;
+				$user_privileges = $_SESSION['privileges'];
+			}
 							
 			$permissions = array(
 				"admin"			=> self::ADMIN_RIGHTS,
@@ -151,7 +167,7 @@
 		
 			foreach ($permissions as $key => $value) {
 				
-				if (($permissions[$key] & $_SESSION['privileges']) == true) {
+				if (($permissions[$key] & $user_privileges) == true) {
 					
 					return ucwords($key);
 				}
@@ -163,14 +179,14 @@
 				$user = new UserModel;	
 				return $user->getByUser($_SESSION['user'])->id;
 
-		      	}				
+		}
 			
 		public static function getUserName($id) {
 
 				$user = new UserModel;	
 				return $user->getById($id)->user;
 
-		      	}		
+		}		
 		
 		public static function validate($data) {
 
@@ -232,7 +248,7 @@
 				
 				setcookie("id", $id, time()+31536000,'/');
 				setcookie("hash", sha1(COOKIE_PREFIX . $id), time()+31536000,'/');
-			}
+		}
 		
 		public static function autologin() {
 		// !!! Fix doubled code (Auth::login())

@@ -4,9 +4,11 @@
 		
 		function add($user_details) {
 		
+			echo "This will be the e-mail's content:<br/><br/>" .
+			 	 "Hello, " . $user_details->user . ". You are receiving this e-mail because you need to confirm you are the owner of the account. Your code is " . md5($user_details->email);
 			$sql = 'INSERT INTO `users`(`id`, `user`, `fb_user`, `password`, `name`, `email`, `verified`, `privileges`, `date`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
 			$q = $this->db->prepare($sql);						
-			$req = $q->execute(array(NULL, $user_details->user, $user_details->fb_user, Auth::encryptPassword($user_details->password), $user_details->name, $user_details->email, md5($user_details->email), 50, date("Y-m-d H:i:s")));
+			$req = $q->execute(array(NULL, $user_details->user, $user_details->fb_user, Auth::encryptPassword($user_details->password), $user_details->name, $user_details->email, 0, 1, date("Y-m-d H:i:s")));
 
 		}
 		
@@ -37,16 +39,63 @@
 			return $user_data;
 		}
 		
+		function acceptUser($id) {
+
+			$sql = '
+				UPDATE `users` SET `verified` = ? WHERE id = ?
+			';
+
+			$q = $this->db->prepare($sql);						
+			$req = $q->execute(array(
+				1,
+				$id
+			));		
+			
+		}
+		
+		function refuseUser($id) {
+
+			$sql = '
+				UPDATE `users` SET `verified` = ? WHERE id = ?
+			';
+
+			$q = $this->db->prepare($sql);						
+			$req = $q->execute(array(
+				-1,
+				$id
+			));		
+			
+		}
+		
 		function list_all() {
 
 			$sql = 'SELECT * FROM `users`';
 			$q = $this->db->prepare($sql);						
 			$req = $q->execute();			
+			$i = 0;
 			foreach($q->fetchAll(PDO::FETCH_OBJ) as $single_user) {
 
-					$user_list[] = $single_user;
+					$user_list[$i] = $single_user;
+					$user_list[$i]->role = Auth::roles($user_list[$i]->privileges);
+					$i++;
 				}
 			return $user_list;						
+		}
+		
+		function getPending() {
+
+			$sql = 'SELECT * FROM `users` WHERE verified = ?';
+			$q = $this->db->prepare($sql);						
+			$req = $q->execute(array(0));			
+			$i = 0;
+			foreach($q->fetchAll(PDO::FETCH_OBJ) as $single_user) {
+
+					$user_list[$i] = $single_user;
+					$user_list[$i]->role = Auth::roles($user_list[$i]->privileges);
+					$i++;
+				}
+			return $user_list;				
+			
 		}
 		
 		function roles($id) {
@@ -96,7 +145,6 @@
 							UPDATE `users` SET `' . $key . '` = ? WHERE user = ?
 			 				';
 
-
 						$q = $this->db->prepare($sql);						
 						$req = $q->execute(array(
 							$user_details[$value],
@@ -107,6 +155,7 @@
 			}
 		
 		function changePermissions($user_id) {
-		
+			//$this->getById($user_id);
+			
 		}
 	}

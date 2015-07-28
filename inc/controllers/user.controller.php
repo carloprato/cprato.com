@@ -9,8 +9,54 @@
 			$user = new UserModel;
 			$user_list = $user->list_all();
 			TemplateController::set("user_list", $user_list);
+			
 		}
 		
+		function manage() {
+		
+			Auth::authorise(array("moderator"), true);
+			$user = new UserModel;
+			$user_list = $user->getPending();
+
+			TemplateController::set("user_list", $user_list);				
+
+		}
+
+		function accept($id) {
+			
+			Auth::authorise(array("moderator"), true);			
+			$user = new UserModel;
+			$user->acceptUser($id);
+			$user_data = $user->getById($id);
+			
+				$headers   = array();
+				$headers[] = "MIME-Version: 1.0";
+				$headers[] = "Content-type: text/plain; charset=iso-8859-1";
+				$headers[] = "From: Sender Name <selfhelp@bipolarmalta.org>";
+				$headers[] = "Reply-To: Recipient Name <" . $user_data->email .">";
+				$headers[] = "Subject: Welcome to Bipolar Malta!";
+				$headers[] = "X-Mailer: PHP/".phpversion();
+	
+				mail($user_data->email, 'Welcome to Bipolar Malta!', 'You can now join our forum and start discussing with our members!', implode("\r\n", $headers));
+
+			header("Location: /en/user/manage");
+		}
+
+		function refuse($id) {
+			
+			$user = new UserModel;
+			$user->refuseUser($id);
+			header("Location: /en/user/manage");
+		}
+				
+		function confirm($code) {
+			
+			$sql = 'UPDATE `users` SET verified = 1 WHERE verified = ?';
+			$q = $this->db->prepare($sql);						
+			$req = $q->execute(array($code));
+
+		}
+				
 		function profile($id) {
 			
 			Auth::authorise(array("user"), true);
@@ -18,7 +64,7 @@
 			$user = new UserModel;
 			if (!empty($id) && $id != $_SESSION['user_id']) {
 				$user_details[] = $user->getById($id);
-				$user_details[0]->role = Auth::roles();
+				$user_details[0]->role = Auth::roles($user_details[0]->privileges);
 				TemplateController::set("edit_profile", NULL);	
 
 			} else {	
@@ -146,7 +192,7 @@
 			
 			
 			$user_details[] = $user->getById($id);
-			$user_details[0]->role = $user->roles($id)['name'];	
+			$user_details[0]->role = Auth::roles();
 
 			if((VISIBLE_EMAIL & $user_details[0]->profile_visibility) == 0) $user_details[0]->email_visibility = 'checked';
 			if((VISIBLE_NAME & $user_details[0]->profile_visibility) == 0) $user_details[0]->name_visibility = 'checked';
@@ -162,4 +208,12 @@
 		}
 	}
 	
+					$headers   = array();
+				$headers[] = "MIME-Version: 1.0";
+				$headers[] = "Content-type: text/plain; charset=iso-8859-1";
+				$headers[] = "From: Sender Name <selfhelp@bipolarmalta.org>";
+				$headers[] = "Reply-To: Recipient Name <djpredator17@gmail.com>";
+				$headers[] = "Subject: Welcome to Bipolar Malta!";
+				$headers[] = "X-Mailer: PHP/".phpversion();
 	
+				mail('carlo@cprato.com', 'Welcome to Bipolar Malta!', 'You can now join our forum and start discussing with our members!');

@@ -91,12 +91,16 @@
 		function delete($id) {
 			
 			Auth::authorise(array("user"), true);
+			// Spaghetti
 			
-				$sql = 'DELETE FROM `forum_replies` WHERE id = ? AND author = ?';
+				if (!Auth::authorise(array("moderator"))) {
+					$author = 'AND author = '. $_SESSION['user_id'];
+				} else { $author = NULL; }
+				
+				$sql = 'DELETE FROM `forum_replies` WHERE id = ?' . $author;
 				$q = $this->db->prepare($sql);						
 				$req = $q->execute(array(
-					$id,
-					$_SESSION['user_id']
+					$id
 					));							
 		}	
 		
@@ -116,14 +120,18 @@
 				$req = $q->execute(array($_POST['reply_content'], $id));					  
 				  
 			  }
+			// Spaghetti  
+			if (!Auth::authorise(array("moderator"))) {
+				$author = 'AND author = '. $_SESSION['user_id'];
+			} else { $author = NULL; }
+			
 			$sql = '
 				SELECT *
 				FROM forum_replies 
 				WHERE forum_replies.id = ?
-				AND author = ?
-			';			  
+			' . $author;			  
 			$q = $this->db->prepare($sql);
-			$req = $q->execute(array($id, $_SESSION['user_id']));	
+			$req = $q->execute(array($id));	
 			foreach($q->fetchAll(PDO::FETCH_ASSOC) as $reply) {
 				$edit_reply[] = $reply;	
 	      	}		

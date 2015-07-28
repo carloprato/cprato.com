@@ -7,30 +7,37 @@
                         <th>
                             Title
                         </th>
-                        <th>
-                            Author
+                        <th  style='text-align:center;'>
+                            Started
                         </th>
-                        <th>
-                            Created
+                        <th  style='text-align:center;'>
+                            Replies
+                        </th>
+                        <th  style='text-align:center;'>
+                            Last reply
                         </th>
                     </tr>
                     {foreach:topics}			
                         <tr>
                         <td>
-                            <a href='{{SITE_ROOT}}/{{lang}}/forum/view_topic/{{loop_element:id}}'>
-                            {{loop_element:title}}
+                            <a href='{{SITE_ROOT}}/{{lang}}/forum/view_topic/{{loop_element:topic_id}}'>
+                            {{loop_element:title}}                    </a><br/><span style='font-size:14px;color:#AAA;'>     by    
+                              </span><a href='{{SITE_ROOT}}/{{lang}}/user/profile/{{loop_element:author}}'><span style='font-size:14px;color:#AAA;'>    
+                                {{loop_element:user}}</span></a>
                         </td>
-                        <td>
-                            <a href='{{SITE_ROOT}}/{{lang}}/user/profile/{{loop_element:author}}'>
-                                {{loop_element:user}}</a>
-                        </td>
-                        <td>
+                        <td style='text-align:right;'>
                             {{loop_element:date_created}}
+                        </td>
+                        <td style='text-align:right;'>
+                            {{loop_element:count_replies}}
+                        </td>
+                        <td style='text-align:right;'>
+                            {{loop_element:last_reply_date}} 
                         </td>
                     </tr>
                 {endforeach}
                     <tr>
-                        <th colspan='3' style='text-align:center'>
+                        <th colspan='4' style='text-align:center'>
                             <b>
                             <a href='{{SITE_ROOT}}/{{lang}}/forum/add'>
                                 New Topic</a></b>

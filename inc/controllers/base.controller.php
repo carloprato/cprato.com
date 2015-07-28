@@ -16,5 +16,6 @@
 			$this->action = Routes::$action;
 			$this->arg = Routes::$arg;
 			$this->arg2 = Routes::$arg2;
+			
 		}	
 	}

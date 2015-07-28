@@ -6,8 +6,7 @@
 
 	$core     = new Core; // Class with basic functions
 
-	$language = new Language; // Translation class
-	$lang     = $language->load(LANG); // Loads language
+	Language::$lang     = Language::load(LANG); // Loads language
 
 	$routes	  = new Routes; // Router
 	

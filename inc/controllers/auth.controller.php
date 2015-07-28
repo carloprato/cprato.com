@@ -32,19 +32,16 @@
 				
 		function login() {
 			
-				
-			$user = Auth::login($_POST['user'], $_POST['password']); // Returns user's details on success, false on failure
+			$auth = new Auth;
+			$user = $auth->login($_POST['user'], $_POST['password']); // Returns user's details on success, false on failure
+			
 			if ($user != FALSE) {
 				$_SESSION['privileges'] = $user['privileges'];
 				$_SESSION['user_id'] = $user['id'];	
 				$_SESSION['user'] = $user['user'];				
 				$_SESSION['name'] = $user['name'];
 												
-				$this->tpl->set("login", "Login successful.");
-			} else {
-
-				$this->tpl->set("login", "Login failed.");				
-			}					
+			}				
 		}
 		
 		function logout() {
@@ -115,12 +112,13 @@
 				$user_details['password'] = FB_PASSWORD;
 				$user_details['confirm_password'] = FB_PASSWORD;
 				$user_details['invitation_code'] = 'selfhelp2015';
-				
+				$auth = new Auth;
 				if (Auth::validate($user_details) == NULL) {
 					$user->add($user_details);
-					Auth::login($user_details->user, $user_details->password);
+					
+					$auth->login($user_details->user, $user_details->password);
 				} else {
-					Auth::login($user_details->user, $user_details->password);	
+					$auth->login($user_details->user, $user_details->password);	
 				}
 							$user_profile[] = $user_details;
 							TemplateController::set("user_details", $user_profile);				

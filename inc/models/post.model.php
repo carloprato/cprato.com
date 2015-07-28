@@ -59,7 +59,39 @@
 				1
 				));
 		}
+		
+		function edit($id) {
+
+			Auth::authorise(array("author", "editor"), true);
 			
+			$sql = 'UPDATE posts
+					SET content = ?'; 
+			$update = array($_POST['post_content']);
+			
+			if (!empty($_POST['post_title'])) {
+				
+				$sql .= ', title = ?';
+				$update[] = $_POST['post_title'];
+			}	
+			$update[] = $id;
+			$sql .= ' WHERE id = ?';	
+			$q = $this->db->prepare($sql);						
+			$req = $q->execute($update);
+					
+		}	
+		
+		function delete($id) {
+			
+			Auth::authorise(array("author"), true);
+			
+				$sql = 'DELETE FROM `posts` WHERE id = ?';
+				$q = $this->db->prepare($sql);						
+				$req = $q->execute(array(
+					$id
+					));				
+			
+		}
+		
 		function getComments($id) {
 			
 			$sql = 'SELECT 

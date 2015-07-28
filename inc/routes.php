@@ -2,12 +2,19 @@
 	
 	class Routes {
 		
+		static $lang;
 		static $controller;
 		static $action;
 		static $arg;
 		static $arg2;
 		
 		function __construct() {	
+
+			if (isset($_GET['lang'])) {
+				// Defines action not to incur in the undefined variable later on
+				
+				self::$lang = $_GET['lang'];
+			}	else self::$lang = 'en';
 
 			if (isset($_GET['arg'])) {
 				// Defines action not to incur in the undefined variable later on
