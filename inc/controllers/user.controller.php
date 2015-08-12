@@ -208,12 +208,3 @@
 		}
 	}
 	
-					$headers   = array();
-				$headers[] = "MIME-Version: 1.0";
-				$headers[] = "Content-type: text/plain; charset=iso-8859-1";
-				$headers[] = "From: Sender Name <selfhelp@bipolarmalta.org>";
-				$headers[] = "Reply-To: Recipient Name <djpredator17@gmail.com>";
-				$headers[] = "Subject: Welcome to Bipolar Malta!";
-				$headers[] = "X-Mailer: PHP/".phpversion();
-	
-				mail('carlo@cprato.com', 'Welcome to Bipolar Malta!', 'You can now join our forum and start discussing with our members!');

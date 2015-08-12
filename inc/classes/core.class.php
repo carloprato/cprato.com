@@ -52,7 +52,7 @@
 			** About
 			*/
 			
-			define("VERSION", "0.0.3");
+			define("VERSION", "0.1.005");
 			define("VERSION_DATE", "20150727");			
 			
 			/*
@@ -62,7 +62,6 @@
 			Auth::autologin();
 			$this->init();
 			$this->checkURI();
-
 
 		}
 	

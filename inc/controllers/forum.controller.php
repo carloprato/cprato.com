@@ -40,6 +40,8 @@
 				TemplateController::set("new_topic_errors", NULL);
 				TemplateController::set("errors", 0);
 			}
+			
+			header("Location: /en/forum");
 		}		
 			
 		function view_topic($id, $page = 1) {
