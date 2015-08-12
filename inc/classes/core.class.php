@@ -43,6 +43,12 @@
 			error_reporting(E_ALL);
 			
 			/*
+			** Update servers
+			*/
+			
+			define("UPDATE_SERVER", "http://www.cprato.com/updates/");
+			
+			/*
 			** About
 			*/
 			
