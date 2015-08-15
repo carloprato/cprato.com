@@ -52,8 +52,8 @@
 			** About
 			*/
 			
-			define("VERSION", "0.1.005");
-			define("VERSION_DATE", "20150727");			
+			define("VERSION", "0.1.005linux");
+			define("VERSION_DATE", "20150815");			
 			
 			/*
 			** Start
