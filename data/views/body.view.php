@@ -3,22 +3,24 @@
         <div class="row ">
             <div class='col_8'>
             </div>
-            <div class='col_6' style='color:#DFDFDF'>
+            <div class='col_6' >
                 {if:user}
-                    Hello, <a style='color:#8cf;' href='{{SITE_ROOT}}/{{lang}}/user/profile/'>{{name}}</a>! <a style='color:#8cf;' href='{{SITE_ROOT}}/{{lang}}/auth/logout'>Logout</a>
+                    Hello, <a href='{{SITE_ROOT}}/{{lang}}/user/profile/'>{{name}}</a>! <a href='{{SITE_ROOT}}/{{lang}}/auth/logout'>Logout</a>
                 {elseif}
-                    <a style='color:#8cf;' href="#" onClick="logInWithFacebook()">Log in with Facebook</a> - <a style='color:#8cf;' href='{{SITE_ROOT}}/{{lang}}/auth'>Login</a> - <a style='color:#8cf;' href='{{SITE_ROOT}}/{{lang}}/auth/register'>Register</a>
+                    <a href="#" onClick="logInWithFacebook()"><img src='/res/images/fb_logo.png' style='width:32px;
+                        -webkit-filter: drop-shadow(2px 2px 2px #222);
+                        filter:drop-shadow(2px 2px 2px #222); '></a> - <a href='{{SITE_ROOT}}/{{lang}}/auth'>Login</a> - <a href='{{SITE_ROOT}}/{{lang}}/auth/register'>Register</a>
                 {endif}
-                <a href='/en/{{p}}'><img alt='English version of the website' width='48' height='48' style='width:48px;height:48px;' src='{{SITE_ROOT}}/data/res/flags/en.png' /></a>
-                <a href='/it/{{p}}'><img alt='Versione italiana del sito web' width='48' height='48' style='width:48px;height:48px;' src='{{SITE_ROOT}}/data/res/flags/it.png' /></a>
-                <a href='/mt/{{p}}'><img alt='Verzjoni tal-website bil-Malti' width='48' height='48' style='width:48px;height:48px;' src='{{SITE_ROOT}}/data/res/flags/mt.png' /></a>
+                <!-- 
+                    <a href='/en/{{p}}'><img alt='English version of the website' width='48' height='48' style='width:48px;height:48px;' src='{{SITE_ROOT}}/data/res/flags/en.png' /></a>
+                    <a href='/mt/{{p}}'><img alt='Verzjoni tal-website bil-Malti' width='48' height='48' style='width:48px;height:48px;' src='{{SITE_ROOT}}/data/res/flags/mt.png' /></a>
+                -->
             </div>
         </div>
         <div class="row ">
             <div class='logo'>
                 <a href='/{{lang}}/home'>
                     <div class='title'>
-                        carlo prato
                     </div>
                 </a>
             </div>
@@ -38,11 +40,13 @@
                         Forum
                     </a>
                 </div>
-                <div class='col_3'  style='padding-left:10px;'>
-                    <a class='menu_item' href='{{SITE_ROOT}}/{{lang}}/about'>
-                        {{translate:About}}
+                {foreach:menu_items}
+                <div class='col_3' style='padding-left:5px;' >
+                    <a class='menu_item' href='{{SITE_ROOT}}/{{lang}}/{{loop_element:file}}'>
+                        {{loop_element:name}}
                     </a>
                 </div>
+                {endforeach}
             </div>
             <div class='fill'></div>
         </div>

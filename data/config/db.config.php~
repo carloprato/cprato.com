@@ -1,0 +1,6 @@
+<?php
+
+	define('DB_HOST', '62.149.150.236');
+	define('DB_USER', 'Sql882044');
+	define('DB_PASSWORD', 'ts04d2gkgv');
+	define('DB_DATABASE', 'Sql882044_1');
