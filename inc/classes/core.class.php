@@ -68,7 +68,7 @@
 		function init() {
 			
 			$post = new PostModel;			
-			TemplateController::set("recent_posts", $post->getLatestPosts(3));
+			TemplateController::set("recent_posts", $post->getLatestPosts(0,3));
 						
 			$forum = new TopicModel;
 			TemplateController::set("list_topics", $forum->getTopicList(3));

@@ -10,7 +10,6 @@
 		function index() {
 
 			$topic = new TopicModel;
-
 			$this->list_posts();
 			        
 		}
@@ -18,7 +17,10 @@
 		function list_posts() {
 			
 			$post = new PostModel;
-			$recent_posts = $post->getLatestPosts(5);
+			$num = 3;
+			$page = $_GET['arg']*$num;
+
+			$recent_posts = $post->getLatestPosts($page,$num);
 			TemplateController::set("recent_posts", $recent_posts);		
 
 		}

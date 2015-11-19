@@ -2,8 +2,8 @@
 	
 	Class PostModel extends BaseModel {
 		
-		function getLatestPosts($num) {	
-			$sql = 'SELECT * FROM posts WHERE status = 1 ORDER BY date_created DESC LIMIT ' . $num;
+		function getLatestPosts($page, $num) {	
+			$sql = 'SELECT * FROM posts WHERE status = 1 ORDER BY date_created DESC LIMIT ' . $page . ',' . $num;
 			$q = $this->db->prepare($sql);
 			$req = $q->execute(array($num));	
 			$recent_posts = array();	
