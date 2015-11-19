@@ -13,7 +13,7 @@
             <a href='/{{lang}}/home' class='footer_link'>
                 Home</a>
             <br/>
-            <a href='/forum' class='footer_link'>
+            <a href='/{{lang}}/forum' class='footer_link'>
                 Forum
             <br/>
             <a href='/{{lang}}/about' class='footer_link'>
@@ -37,8 +37,7 @@
     <div class='row footer'>
         <div class='col_12 footer_paragraph' style='text-align:center;'>
             <a href='https://www.facebook.com/bepositivemalta'>Facebook</a> - <a  href='https://twitter.com/BipolarMalta'>Twitter</a> - <a  href='https://mt.linkedin.com/in/bipolarmalta'>Linkedin</a>
-        </div>
-    
+        </div>    
     </div>
     <div class='fill' style='height:30px;'></div>
 </div>

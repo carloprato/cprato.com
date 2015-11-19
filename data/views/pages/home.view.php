@@ -19,6 +19,7 @@ Come and listen –  we can help each other, you are not alone.
 </div>
 <div class="fill">&nbsp;</div>
 </div>
+</div>
 <div class="content_container">
 <div class="row content">
 <div class="col_8 content_paragraph" style="text-align: justify; padding-left: 10px; float: left;">
