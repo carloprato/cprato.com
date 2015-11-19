@@ -77,7 +77,7 @@
 			TemplateController::set("p", PAGE);
 			TemplateController::set("lang", LANG);
 			TemplateController::set("SITE_ROOT", SITE_ROOT);
-			TemplateController::set("arg", $this->arg);
+			TemplateController::set("arg", $_GET['arg']);
 			if (isset($_GET['arg']) && $_GET['p'] == 'messages') {
 				$user = new UserModel;
 				TemplateController::set("recipient", $user->getById($_GET['arg'])->user);
