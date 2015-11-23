@@ -56,9 +56,8 @@
 		function edit($page_id) {
 			// Edits a created static page
 			Auth::authorise(array("editor"), true);
-			
-			
-			$page = file_get_contents("data/views/pages/" . $_GET['arg'] . ".view.php");
+					
+			$page = htmlentities(file_get_contents("data/views/pages/" . $_GET['arg'] . ".view.php"));
 			$page = str_replace("{layout:start}{layout:evidence}", "", $page);
 			$page = str_replace("{endlayout:evidence}{endlayout}", "", $page);
 			if (!empty($_POST['page_content'])) {
@@ -70,6 +69,7 @@
 				$content .= "{endlayout:evidence}{endlayout}";
 							
 				fwrite($file, $content);
+				header('Location: /en/editor/edit/'. $_GET["arg"]); // !!! Let's code something better when we have time
 				$page = $_POST['page_content'];
 			}
 

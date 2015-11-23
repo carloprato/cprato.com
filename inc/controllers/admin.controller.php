@@ -12,4 +12,10 @@
 			Auth::authorise(array("translator", "editor", "author", "moderator"), true);			
 			
 		}
+		
+		public function email() {
+			
+			
+		}
+
 	}

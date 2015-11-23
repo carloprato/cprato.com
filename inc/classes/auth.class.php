@@ -272,6 +272,7 @@
 						$_SESSION['user'] = $user['user'];
 						$_SESSION['name'] = $user['name'];	
 			      	}				
+
 			}
 
 			else {

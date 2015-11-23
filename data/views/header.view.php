@@ -65,7 +65,6 @@ tinyMCE.init({
         force_p_newlines : false,
         forced_root_block : '',
         auto_convert_smileys: true,
-        valid_elements : "a[href|target=_blank],strong/b,br,p,li,img[*],h1,h2,h3,h4,table[*],tr[*],td[*],th[*],style[*]",
         fontsize_formats: "8pt 9pt 10pt 11pt 12pt 26pt 36pt",
         content_css: "/data/res/css/tinymce.css"
 });

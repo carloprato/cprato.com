@@ -10,6 +10,7 @@
 		public $action;
 		public $arg;
 		public $arg2;
+
 		
 		function __construct() {
 			

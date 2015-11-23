@@ -19,8 +19,15 @@
 			$post = new PostModel;
 			$num = 3;
 			$page = $_GET['arg']*$num;
-
+			
 			$recent_posts = $post->getLatestPosts($page,$num);
+			
+		/*
+			$topic = new Topic;
+			$topic->pagination(1, 5, 'posts', 'id');
+			*/
+
+
 			TemplateController::set("recent_posts", $recent_posts);		
 
 		}
