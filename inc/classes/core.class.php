@@ -4,7 +4,6 @@
 
 		public $page;
 		public $lang;
-		public $routes;
 		
 		function __construct() {
 			
@@ -78,10 +77,12 @@
 			TemplateController::set("p", PAGE);
 			TemplateController::set("lang", LANG);
 			TemplateController::set("SITE_ROOT", SITE_ROOT);
-			TemplateController::set("arg", $this->arg);
-			if (isset($this->arg) && $_GET['p'] == 'messages') {
+			if (isset($_GET['arg'])) {
+				TemplateController::set("arg", $_GET['arg']); // !!! Please change this
+			}
+			if (isset(Routes::$arg) && $_GET['p'] == 'messages') {
 				$user = new UserModel;
-				TemplateController::set("recipient", $user->getById($this->arg)->user);
+				TemplateController::set("recipient", $user->getById(Routes::$arg)->user);
 			}
 			
 			if (isset($_SESSION['user'])) {

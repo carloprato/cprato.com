@@ -32,7 +32,7 @@
 				
 				$pages = intval(5 * $this->arg2)-5;
 
-				$req = $q->execute(array($_GET['arg'], $pages));
+				$req = $q->execute(array(Routes::$arg, $pages));
 
 				$i = 0;
 				foreach($q->fetchAll(PDO::FETCH_ASSOC) as $reply) {
@@ -107,7 +107,7 @@
 				LIMIT 1
 			';
 			$q = $this->db->prepare($sql);
-			$req = $q->execute(array($_GET['arg']));
+			$req = $q->execute(array(Routes::$arg));
 			foreach($q->fetchAll(PDO::FETCH_ASSOC) as $topic) {
 				 $topic_title = $topic['title'];	 
 	      	}	

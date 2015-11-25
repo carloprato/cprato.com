@@ -15,7 +15,8 @@
 		
 		public function email() {
 			
-			
+			Auth::authorise(array("editor", "author", "moderator"), true);
+			TemplateController::set("messages", $messages);						
 		}
 
 	}

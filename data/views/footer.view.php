@@ -16,7 +16,7 @@
             <a href='/{{lang}}/forum' class='footer_link'>
                 Forum
             <br/>
-            <a href='/{{lang}}/about' class='footer_link'>
+            <a href='/{{lang}}/contact' class='footer_link'>
                 Contact</a>
             <br/>
             <a href='/{{lang}}/admin' class='footer_link'>

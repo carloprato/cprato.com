@@ -18,7 +18,7 @@
 			
 			$post = new PostModel;
 			$num = 3;
-			$page = $_GET['arg']*$num;
+			$page = Routes::$arg*$num;
 			
 			$recent_posts = $post->getLatestPosts($page,$num);
 			

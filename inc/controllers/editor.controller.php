@@ -57,12 +57,12 @@
 			// Edits a created static page
 			Auth::authorise(array("editor"), true);
 					
-			$page = htmlentities(file_get_contents("data/views/pages/" . $_GET['arg'] . ".view.php"));
+			$page = htmlentities(file_get_contents("data/views/pages/" . Routes::$arg . ".view.php"));
 			$page = str_replace("{layout:start}{layout:evidence}", "", $page);
 			$page = str_replace("{endlayout:evidence}{endlayout}", "", $page);
 			if (!empty($_POST['page_content'])) {
 				
-				$file = fopen("data/views/pages/" . $_GET['arg'] . ".view.php", 'w');
+				$file = fopen("data/views/pages/" . Routes::$arg . ".view.php", 'w');
 				
 				$content  = "{layout:start}{layout:evidence}";
 				$content .= $_POST['page_content'];

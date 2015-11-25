@@ -1,9 +1,9 @@
 <body>
     <div class='header_container'>
-        <div class="row ">
+        <div class="row " >
             <div class='col_8'>
             </div>
-            <div class='col_6' >
+            <div class='col_4' >
                 {if:user}
                     Hello, <a href='{{SITE_ROOT}}/{{lang}}/user/profile/'>{{name}}</a>! <a href='{{SITE_ROOT}}/{{lang}}/auth/logout'>Logout</a>
                 {elseif}
@@ -11,6 +11,7 @@
                         -webkit-filter: drop-shadow(2px 2px 2px #222);
                         filter:drop-shadow(2px 2px 2px #222); '></a> - <a href='{{SITE_ROOT}}/{{lang}}/auth'>Login</a> - <a href='{{SITE_ROOT}}/{{lang}}/auth/register'>Register</a>
                 {endif}
+                
                 <!-- 
                     <a href='/en/{{p}}'><img alt='English version of the website' width='48' height='48' style='width:48px;height:48px;' src='{{SITE_ROOT}}/data/res/flags/en.png' /></a>
                     <a href='/mt/{{p}}'><img alt='Verzjoni tal-website bil-Malti' width='48' height='48' style='width:48px;height:48px;' src='{{SITE_ROOT}}/data/res/flags/mt.png' /></a>
@@ -46,7 +47,7 @@
                         {{loop_element:name}}
                     </a>
                 </div>
-                {endforeach}
+                {endforeach}             
             </div>
             <div class='fill'></div>
         </div>
