@@ -4,7 +4,7 @@
             <h2 class='Home' style='border-bottom:1px solid #22620e;'>Recent Discussions</h2>
                <ul>                        
 				{foreach:list_topics}
-                <li><a  class="footer_link" href="/{{lang}}/forum/view_topic/{{loop_element:id}}">{{loop_element:title}}</a> </li> 
+                <li><a  class="footer_link" href="/{{lang}}/forum/view_topic/{{loop_element:topic_id}}">{{loop_element:title}}</a> </li> 
                 {endforeach}
            </ul>
         </div>

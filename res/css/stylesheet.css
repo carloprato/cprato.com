@@ -93,14 +93,15 @@ xmp {
     padding: 0;
     font-size: 100%
 }
+
 @font-face {
   font-family: "Noto Serif";
   src: url(/res/fonts/NotoSerif-Regular.ttf) format("truetype");
 }
 body,
 html {
-    height: 100%
-    font-family: "Noto Serif";
+    height: 100%;
+    font-family: "Noto Serif", serif;
 }
 article,
 aside,
@@ -166,7 +167,7 @@ svg {
     overflow: hidden
 }
 body {
-    font-family:'Noto Serif';
+    font-family:"Noto Serif", serif;
 }
 code,
 pre {

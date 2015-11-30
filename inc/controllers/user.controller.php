@@ -32,12 +32,12 @@
 				$headers   = array();
 				$headers[] = "MIME-Version: 1.0";
 				$headers[] = "Content-type: text/plain; charset=iso-8859-1";
-				$headers[] = "From: Sender Name <selfhelp@bipolarmalta.org>";
-				$headers[] = "Reply-To: Recipient Name <" . $user_data->email .">";
+				$headers[] = "From: Self Help 2015 <selfhelp@bipolarmalta.org>";
+				$headers[] = "Reply-To: " . $user_data->name . " <" . $user_data->email .">";
 				$headers[] = "Subject: Welcome to Bipolar Malta!";
 				$headers[] = "X-Mailer: PHP/".phpversion();
 	
-				mail($user_data->email, 'Welcome to Bipolar Malta!', 'You can now join our forum and start discussing with our members!', implode("\r\n", $headers));
+				mail($user_data->email, 'Welcome to Bipolar Malta!', 'You can now join our forum and start discussing with our members! <a href="http://www.bipolarmalta.org">BipolarMalta.org</a>', implode("\r\n", $headers));
 
 			header("Location: /en/user/manage");
 		}

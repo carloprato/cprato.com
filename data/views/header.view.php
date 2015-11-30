@@ -11,7 +11,7 @@
     <link href="/res/css/stylesheet.css" rel="stylesheet">
     <link href="/data/res/css/stylesheet.css" rel="stylesheet">
 
-    <style type='text/css'>    
+    <style type='text/css'>  
         .col_12,
         .col_9,
         .col_8,
@@ -45,8 +45,8 @@
         ga('create', 'UA-60272920-1', 'auto');
         ga('send', 'pageview');
     </script>
-    <script type="text/javascript" src="/data/res/js/tinymce/tinymce.min.js" ></script >  
-<script  type="text/javascript">
+    <script async type="text/javascript" src="/data/res/js/tinymce/tinymce.min.js" ></script >  
+<script async type="text/javascript">
 tinyMCE.init({
         theme : "modern",
         mode : "specific_textareas",
@@ -69,7 +69,7 @@ tinyMCE.init({
         content_css: "/data/res/css/tinymce.css"
 });
 </script>
-    <script>
+    <script async>
       logInWithFacebook = function() {
         FB.login(function(response) {
           if (response.authResponse) {
