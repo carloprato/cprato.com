@@ -6,7 +6,7 @@
                     {foreach:results}
                         <p>
                             <a style='font-weight:bold' href='/en/{{loop_element:where}}/{{loop_element:id}}'>
-                                {{loop_element:title}}
+                                {{loop_element:title}} - {{loop_element:date_created}}
                             </a>
                         </p>
                     {endforeach}

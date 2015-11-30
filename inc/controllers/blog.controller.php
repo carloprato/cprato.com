@@ -85,7 +85,7 @@
 			function menu() {
 				
 				$post = new PostModel;
-				$blog_editor = 	$post->getLatestPosts(20);
+				$blog_editor = 	$post->getLatestPosts(0, 10);
 				TemplateController::set("blog_editor", $blog_editor);
 			}			
 			

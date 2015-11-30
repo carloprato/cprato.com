@@ -22,17 +22,43 @@
 			if (isset($_GET['p']) && isset($_GET['lang'])) {
 
 				if (file_exists(SITE_ROOT . "data/views/" . $page . ".view.php")) {
-
+										
 					return $this->template .= file_get_contents(SITE_ROOT . "data/views/" . $page . ".view.php");
 					
 				} else if (file_exists(SITE_ROOT . "inc/views/" . $page . ".view.php")) {
+
+					return $this->template .= file_get_contents(SITE_ROOT . "inc/views/" . $page . ".view.php");
+				}
+				
+				else {
+					
+			// !!! Needs to go in the model
+					$this->db = Db::getInstance();
+					$sql = '
+						SELECT *						
+						FROM pages 
+						WHERE name = ?
+						OR name = ?
+						LIMIT 1
+					';
+					$q = $this->db->prepare($sql);
+
+					$req = $q->execute(array($page, explode('/', $page)[0]));
+					foreach($q->fetchAll(PDO::FETCH_OBJ) as $page) {
+					
+
+						return $this->template .= $page->content;
+					}
+										
+				}
+				/*} else if (file_exists(SITE_ROOT . "inc/views/" . $page . ".view.php")) {
 
 					return $this->template .= file_get_contents(SITE_ROOT . "inc/views/" . $page . ".view.php");
 										
 				} else {
 					header("HTTP/1.0 404 Not Found");
 					return $this->template .= file_get_contents(SITE_ROOT . "inc/views/errors/404.view.php");					
-				}
+				}*/
 			}	
 		}
 		
@@ -223,7 +249,19 @@
 		}
 		
 		function menu_items() {
-			
+			$db = Db::getInstance();
+			$sql = 'SELECT * FROM pages WHERE name NOT LIKE "%home%"';
+			$q = $db->prepare($sql);
+			$req = $q->execute(array());	
+			$search_results = array();	
+			$i = 0;
+			foreach($q->fetchAll(PDO::FETCH_OBJ) as $item) {
+					
+				 	$menu_items[$i]['file'] = explode('/', ($item->name))[0];					
+					$menu_items[$i]['name'] = explode('/', ucwords($item->name))[0];
+			 		$i++;
+			 }
+/*									
 			$folder = scandir($_SERVER['DOCUMENT_ROOT'] . "/data/views/pages/");
 			$i = 2;
 			while (isset($folder[$i])) {
@@ -235,6 +273,7 @@
 				}		
 				$i++;				
 			}
+*/
 			TemplateController::set("menu_items", $menu_items);
 		}
 		
