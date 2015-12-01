@@ -53,7 +53,7 @@
 						$login_errors[]['error'] = "Login successful.";
 						TemplateController::set("login_errors", $login_errors);																	
 						return $user;
-					}
+					}	
 					return false;
 		      	}
 				  return false;
@@ -272,6 +272,7 @@
 						$_SESSION['user'] = $user['user'];
 						$_SESSION['name'] = $user['name'];	
 			      	}				
+
 			}
 
 			else {

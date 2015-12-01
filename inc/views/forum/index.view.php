@@ -1,7 +1,21 @@
 <div class='content_container'>
+
+        <div class='row ' style='padding-top:10px;'>
+                    <div class='evidence_paragraph'>
+                  			    <div class='col_9'>
+                                    <h2>Forum</h2>
+                                </div>
+			    <div class='col_4' style='text-align:right'>
+                    <form method='post' action='/{{lang}}/search/results/forum'>
+                    <input type='text' name='search_string' placeholder='Search forum posts...' style='width:200px'/>
+                    <input type='submit' value='Search'/>    
+                    </form> 
+                </div>
+         </div>   
     <div class="row content">
+
         <div class='col_12 content_paragraph'>
-            <h2>Forum</h2>
+
 			<table>
                     <tr>
                         <th>
@@ -44,6 +58,7 @@
                           </th>
                     </tr>
             </table> 
+        </div>
         </div>
     </div>
     <div class='fill'>

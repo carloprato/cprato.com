@@ -1,16 +1,26 @@
 <?php
 	
-	Class PostModel extends BaseModel {
+	Class SearchModel extends BaseModel {
 		
-		function getLatestPosts($page, $num) {	
-			$sql = 'SELECT * FROM posts WHERE status = 1 ORDER BY date_created DESC LIMIT ' . $page . ',' . $num;
+		function results($where) {	
+			
+			if ($where == 'blog') {
+				$table = 'posts';
+				$where = $where . "/view_post"; // !!! Quite ugly as well
+			} else if ($where == 'forum') {
+				$table = 'forum_topics';
+				$where = $where . "/view_topic";
+			}
+			$sql = 'SELECT * FROM ' . $table . ' WHERE content LIKE \'%'. $_POST["search_string"] . '%\' OR title LIKE \'%'. $_POST["search_string"] . '%\'';
 			$q = $this->db->prepare($sql);
-			$req = $q->execute(array($num));	
-			$recent_posts = array();	
-			foreach($q->fetchAll(PDO::FETCH_ASSOC) as $post) {
-				$recent_posts[] = $post;
+			$req = $q->execute(array());	
+			$search_results = array();	
+			foreach($q->fetchAll(PDO::FETCH_ASSOC) as $result) {
+				$search_results[] = $result;
+				$search_results[count($search_results)-1]['where'] = $where; // !!! Fix to understand if searching forum or blog
 		    }
-			return $recent_posts;
+			
+			return $search_results;
 		}
 		
 		function getPost($id) {

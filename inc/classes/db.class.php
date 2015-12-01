@@ -10,7 +10,14 @@
 
       if (!isset(self::$instance)) {
         $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-        self::$instance = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_DATABASE, DB_USER, DB_PASSWORD, $pdo_options);
+        try {
+          self::$instance = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_DATABASE, DB_USER, DB_PASSWORD, $pdo_options);
+          self::$instance->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, "SET NAMES 'utf8'");
+ 
+        }
+        catch(PDOException $e) {
+            echo $e->getMessage();
+        }
       }
       return self::$instance;
     }

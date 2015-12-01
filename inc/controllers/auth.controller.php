@@ -117,10 +117,14 @@
 					$user->add($user_details);
 					
 					$auth->login($user_details->user, $user_details->password);
+
 				} else {
+					echo $user_details->user; echo $user_details->password;
 					$auth->login($user_details->user, $user_details->password);	
+					
 				}
 							$user_profile[] = $user_details;
+
 							TemplateController::set("user_details", $user_profile);				
 			}	
 		}

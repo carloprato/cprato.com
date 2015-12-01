@@ -4,7 +4,7 @@
 
 		public $page;
 		public $lang;
-			
+		
 		function __construct() {
 			
 			session_start();
@@ -68,7 +68,7 @@
 		function init() {
 			
 			$post = new PostModel;			
-			TemplateController::set("recent_posts", $post->getLatestPosts(3));
+			TemplateController::set("recent_posts", $post->getLatestPosts(0,3));
 						
 			$forum = new TopicModel;
 			TemplateController::set("list_topics", $forum->getTopicList(3));
@@ -77,10 +77,12 @@
 			TemplateController::set("p", PAGE);
 			TemplateController::set("lang", LANG);
 			TemplateController::set("SITE_ROOT", SITE_ROOT);
-			TemplateController::set("arg", $_GET['arg']);
-			if (isset($_GET['arg']) && $_GET['p'] == 'messages') {
+			if (isset($_GET['arg'])) {
+				TemplateController::set("arg", $_GET['arg']); // !!! Please change this
+			}
+			if (isset(Routes::$arg) && $_GET['p'] == 'messages') {
 				$user = new UserModel;
-				TemplateController::set("recipient", $user->getById($_GET['arg'])->user);
+				TemplateController::set("recipient", $user->getById(Routes::$arg)->user);
 			}
 			
 			if (isset($_SESSION['user'])) {

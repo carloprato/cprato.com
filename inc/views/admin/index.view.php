@@ -18,6 +18,13 @@
                     <img src='/res/images/icons/mail.png' class='icon'/><br/>Newsletter<br/>           
                 </span>
                 {endauth}
+                {auth:moderator}
+                <a href='/{{lang}}/admin/email'>
+                <span class='admin_menu' style='float:left;text-align:center;'>
+                <img src='/res/images/icons/mail.png' class='icon'/><br/>Messages <br/>           
+                </span>
+                </a>
+                {endauth}
                 {auth:editor}
                 <a href='/{{lang}}/blog/menu'>            
                 <span class='admin_menu' style='float:left;        text-align:center;'>

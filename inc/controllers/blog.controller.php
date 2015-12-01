@@ -10,7 +10,6 @@
 		function index() {
 
 			$topic = new TopicModel;
-
 			$this->list_posts();
 			        
 		}
@@ -18,7 +17,17 @@
 		function list_posts() {
 			
 			$post = new PostModel;
-			$recent_posts = $post->getLatestPosts(5);
+			$num = 3;
+			$page = Routes::$arg*$num;
+			
+			$recent_posts = $post->getLatestPosts($page,$num);
+			
+		/*
+			$topic = new Topic;
+			$topic->pagination(1, 5, 'posts', 'id');
+			*/
+
+
 			TemplateController::set("recent_posts", $recent_posts);		
 
 		}
@@ -76,7 +85,7 @@
 			function menu() {
 				
 				$post = new PostModel;
-				$blog_editor = 	$post->getLatestPosts(20);
+				$blog_editor = 	$post->getLatestPosts(0, 10);
 				TemplateController::set("blog_editor", $blog_editor);
 			}			
 			

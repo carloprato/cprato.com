@@ -23,7 +23,7 @@ function PopupCenter(url, title, w, h) {
 			{foreach:post_content}
 
                 <h2>{{loop_element:post_title}} ({{loop_element:post_date}}) <span style='font-size:16px;'>by {{loop_element:user}}         <a  style='background-image:url("/res/images/fb_logo.png");background-repeat:no-repeat;background-color:#3B5998;border-radius:8px;padding:3px 8px;padding-left:30px;color:white;border:1px solid #0B3958;text-decoration:none;cursor:pointer;'
-            onclick="PopupCenter('https://www.facebook.com/dialog/share?app_id=1612484382341510&display=popup&href=http://bipolarmalta.org{{SITE_ROOT}}/{{lang}}/blog/view_post/{{loop_element:post_id}}&redirect_uri=http://bipolarmalta.org/', 'xtg', '555', '327')">Share on Facebook</a>
+            onclick="PopupCenter('https://www.facebook.com/dialog/share?app_id=1612484382341510&display=popup&href=http://bipolarmalta.org{{SITE_ROOT}}/{{lang}}/blog/view_post/{{loop_element:post_id}}&redirect_uri=http://bipolarmalta.org/close_window.html', 'xtg', '555', '327')">Share on Facebook</a>
 </span></h2>
                     {{loop_element:post_content}}
                 {endforeach}

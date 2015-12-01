@@ -31,13 +31,21 @@
 			
 				$headers   = array();
 				$headers[] = "MIME-Version: 1.0";
-				$headers[] = "Content-type: text/plain; charset=iso-8859-1";
-				$headers[] = "From: Sender Name <selfhelp@bipolarmalta.org>";
-				$headers[] = "Reply-To: Recipient Name <" . $user_data->email .">";
+				$headers[] = "Content-type: text/html; charset=UTF-8";
+				$headers[] = "From: Self Help 2015 <selfhelp@bipolarmalta.org>";
+				$headers[] = "Reply-To: " . $user_data->name . " <" . $user_data->email .">";
 				$headers[] = "Subject: Welcome to Bipolar Malta!";
 				$headers[] = "X-Mailer: PHP/".phpversion();
 	
-				mail($user_data->email, 'Welcome to Bipolar Malta!', 'You can now join our forum and start discussing with our members!', implode("\r\n", $headers));
+				mail($user_data->email, 'Welcome to Bipolar Malta!', '
+					<html><body style="background-color:#BAC545;">
+						<img style="margin:0 auto;" src="http://www.bipolarmalta.org/data/res/images/logo.png"><br/>
+						<p style="margin:0 auto;text-align:center;"><b>Hello ' . $user_data->name . '!</b><br/>
+						You can now join our forum and start discussing with our members!<br/>
+						<a href="http://www.bipolarmalta.org">Bipolar Malta</a><br/>
+						</p>
+					</body></html>
+				', implode("\r\n", $headers));
 
 			header("Location: /en/user/manage");
 		}

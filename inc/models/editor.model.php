@@ -1,6 +1,6 @@
 <?php
 	
-	Class PostModel extends BaseModel {
+	Class EditorModel extends BaseModel {
 		
 		function getLatestPosts($page, $num) {	
 			$sql = 'SELECT * FROM posts WHERE status = 1 ORDER BY date_created DESC LIMIT ' . $page . ',' . $num;
@@ -41,22 +41,17 @@
 			return $post_content;
 				  
 		}	
-		function add() {
+		function add($name, $content, $type) {
 			
 			// !!! Need to filter variables
-			$short_content = strip_tags(substr($_POST['post_content'], 0, 200));
-			$sql = 'INSERT INTO `posts`(`id`, `author`, `content`, `short_content`, `title`, `short_title`, `date_created`, `date_modified`, `status`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+
+			$sql = 'INSERT INTO `pages`(`id`, `name`, `content`, `type`) VALUES (?, ?, ?, ?)';
 			$q = $this->db->prepare($sql);						
 			$req = $q->execute(array(
 				NULL, 
-				Auth::getUserID(), 
-				$_POST['post_content'], 
-				$short_content,
-				$_POST['post_title'], 
-				BlogController::shorten($_POST['post_title']),
-				date("Y-m-d H:i:s"), 
-				date("Y-m-d H:i:s"), 
-				1
+				$name, 
+				$content,
+				'page'
 				));
 		}
 		
