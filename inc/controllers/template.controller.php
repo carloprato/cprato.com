@@ -7,22 +7,23 @@
 		public $arg;
 		public $arg2;
 		public static $values;
-		
+		public $lang;
 		function __construct() {
 			
 			$this->controller = Routes::$controller;
+			$this->page = Routes::$controller;
 			$this->action = Routes::$action;
 			$this->arg = Routes::$arg;
 			$this->arg2 = Routes::$arg2;
-			
+			$this->lang = Routes::$lang;
 		}
-		
+
 		function load($page, $type = 'view') {
-			
-			if (isset($_GET['p']) && isset($_GET['lang'])) {
+
+			if (isset($this->page) && isset($this->lang)) {
 
 				if (file_exists(SITE_ROOT . "data/views/" . $page . ".view.php")) {
-										
+
 					return $this->template .= file_get_contents(SITE_ROOT . "data/views/" . $page . ".view.php");
 					
 				} else if (file_exists(SITE_ROOT . "inc/views/" . $page . ".view.php")) {
@@ -31,7 +32,7 @@
 				}
 				
 				else {
-					
+
 			// !!! Needs to go in the model
 					$this->db = Db::getInstance();
 					$sql = '
@@ -45,7 +46,6 @@
 
 					$req = $q->execute(array($page, explode('/', $page)[0]));
 					foreach($q->fetchAll(PDO::FETCH_OBJ) as $page) {
-					
 
 						return $this->template .= $page->content;
 					}

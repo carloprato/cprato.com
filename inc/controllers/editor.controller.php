@@ -6,9 +6,13 @@
 		//
 		//
 		//
-	
+
+		/**
+		 * List all possible actions related to this module
+		 *
+		 */	
 		function index() {
-			// List all possible actions related to this module
+
 
 			$db = Db::getInstance();
 			$sql = 'SELECT * FROM pages';
@@ -43,7 +47,7 @@
 		function add() {
 			
 			Auth::authorise(array("editor"), true);
-			
+
 			// Adds a new static page
 			if (isset($_POST['page_name'])) {
 				
@@ -86,7 +90,7 @@
 				$q = $db->prepare($sql);
 				$req = $q->execute(array($_POST['page_content'], $page_id, $page_id . "/index")); // !!! Fix this too	
 
-				header('Location: /en/editor/edit/'. $_GET["arg"]); // !!! Let's code something better when we have time
+				header('Location: /en/editor/edit/'. $this->arg); // !!! Let's code something better when we have time
 			}
 			
 			$sql = 'SELECT * FROM pages WHERE name = ? OR name = ?';

@@ -3,7 +3,7 @@
 	class TopicModel extends BaseModel {
 		
 		function getTopic() {
-			
+		
 			// !!! Short term fix, please fix in the router instead
 			if ($this->arg2 == 0) {
 				$this->arg2 = 1;
@@ -79,7 +79,7 @@
 				GROUP BY forum_topics.id
 				ORDER BY last_reply DESC
 				LIMIT ' . $limit;
-			
+
 			$q = $this->db->prepare($sql);
 			$req = $q->execute(array($limit));	
 			$topics = array();	
