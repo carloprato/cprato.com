@@ -1,11 +1,11 @@
 <?php
 	
-	class SearchController {
+	class SearchController extends BaseController {
 		
 		public function results() {
 			
 			$search = new SearchModel;
-			$results = $search->results($_GET['arg']);
+			$results = $search->results($this->arg);
 			if (empty($results)) {
 				TemplateController::set("results", array());
 			} else {

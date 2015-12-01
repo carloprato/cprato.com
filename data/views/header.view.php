@@ -6,7 +6,7 @@
     <meta name="description" content="Be Positive Self Help, Malta. Find updates from our association and interact with the community!">
     <meta name="author" content="Carlo Prato - www.cprato.com">
     <meta name="keywords" content="bipolar disease, bipolar Malta, bipolar disorder, self help group Malta">
-    <title>Be Positive Self Help, Malta</title>
+    <title>{{page_title}} - Be Positive Self Help, Malta</title>
     <link rel="icon" href="/data/res/images/favicon.ico" type="image/x-icon" />
     <link href="/res/css/stylesheet.css" rel="stylesheet">
     <link href="/data/res/css/stylesheet.css" rel="stylesheet">
@@ -45,14 +45,14 @@
         ga('create', 'UA-60272920-1', 'auto');
         ga('send', 'pageview');
     </script>
-    <script async type="text/javascript" src="/data/res/js/tinymce/tinymce.min.js" ></script >  
-<script async type="text/javascript">
+    <script type="text/javascript" src="/data/res/js/tinymce/tinymce.min.js" ></script >  
+<script type="text/javascript">
 tinyMCE.init({
         theme : "modern",
         mode : "specific_textareas",
         editor_selector : "rich_editor",
-        plugins : 'link image code table smileys',
-        toolbar: "insertfile undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image smileys",
+        plugins : 'link image media code table smileys',
+        toolbar: "insertfile undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media smileys",
         menu : { // this is the complete default configuration
             edit   : {title : 'Edit'  , items : 'undo redo | cut copy paste pastetext | selectall'},
             insert : {title : 'Insert', items : 'link media | template hr'},

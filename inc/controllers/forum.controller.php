@@ -79,7 +79,7 @@
 					
 					TemplateController::set("errors", 0);					
 					TemplateController::set("topic_id", $this->arg);
-					header("Location: /" . $_GET['lang'] . "/forum/view_topic/" . $this->arg . "/#reply" . $last_id);
+					header("Location: /" . $this->lang . "/forum/view_topic/" . $this->arg . "/#reply" . $last_id);
 				} else {
 					TemplateController::set("new_reply_errors", $errors);
 					TemplateController::set("errors", 1);

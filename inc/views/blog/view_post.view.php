@@ -32,7 +32,7 @@ function PopupCenter(url, title, w, h) {
                     <h3>Insert comment</h3>
             {if:user}
                 {foreach:post_content}
-                <form method='post' action='{{SITE_ROOT}}/{{lang}}/blog/add_comment/{{loop_element:post_id}}'>
+                <form method='post' action='{{SITE_ROOT}}/{{lang}}/blog/add_comment/{{loop_element:post_id}}/{{loop_element:short_title}}'>
                     <textarea class='rich_editor' name='comment_content'></textarea><br/>
                     <input type='submit' style='width:200px;margin:0 auto;display:block;margin-bottom:50px;' name='submitComment' value='Submit Comment'>            
                 </form>

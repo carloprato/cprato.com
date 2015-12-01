@@ -19,6 +19,7 @@
 
 			$this->lang = Routes::$lang;
 			$this->controller = Routes::$controller;
+			$this->page = $this->controller;
 			$this->action = Routes::$action;
 			$this->arg = Routes::$arg;
 			$this->arg2 = Routes::$arg2;

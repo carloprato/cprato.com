@@ -11,7 +11,7 @@
 
 			$topic = new TopicModel;
 			$this->list_posts();
-			        
+
 		}
 
 		function list_posts() {
@@ -37,8 +37,12 @@
 			/// !!! only one URL should be processed instead of both short_title and post id.
 			$post = new PostModel;
 			$post_content = $post->getPost($id);
+			if ($this->arg2 != $post->getPost($id)[0]->short_title) {
+				
+				header("Location: /en/blog/view_post/" . $id . "/" . $post->getPost($id)[0]->short_title);
+			} 
 			$comments = $post->getComments($id);
-			
+
 			TemplateController::set("post_content", $post_content);
 	   		TemplateController::set("comments", $comments);
 		}
@@ -100,7 +104,7 @@
 					$post = new PostModel;
 					$post->addComment();
 					// ?!?				
-					header('Location: /' . $_GET['lang'] . "/blog/view_post/" . $post_id);
+					header('Location: /' . $this->lang . "/blog/view_post/" . $post_id);
 				}
 
 			}

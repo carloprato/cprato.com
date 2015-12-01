@@ -7,6 +7,7 @@
 		static $action;
 		static $arg;
 		static $arg2;
+		static $page;
 		
 		function __construct() {	
 
@@ -49,13 +50,12 @@
 				
 			} else if (!isset($_GET['action']) && !isset($_GET['p']) && !file_exists("data/views/pages/" . PAGE . ".view.php")) {
 
-				self::$action = 'index';
-				self::$controller = 'pages';				
+				header("Location: /en/home");			
 				
 			} else if (file_exists("data/views/pages/" . PAGE . ".view.php")) {
 				// If the view file exists the default controller pages will be called
-				
-				self::$controller = 'pages';	
+
+				self::$controller = 'home';	
 				self::$action   = PAGE;
 				
 			}
