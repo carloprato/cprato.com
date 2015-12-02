@@ -1,18 +1,13 @@
 <?php
 	
-	class Core extends BaseModel {
+	class Core extends BaseController {
 
 		public $page;
 		public $lang;
 		
 		function __construct() {
-			
-			session_start();
-			// !!! This belongs in routes.php
-			if (isset($_GET['lang'])) $this->lang = $_GET['lang'];
-			else $this->lang = 'en';
-			if (isset($_GET['p'])) $this->page = $_GET['p'];
-			else $this->page = 'home';
+
+ 			parent::__construct(); 						
 
 			/*
 			** Defines page constants
@@ -73,9 +68,11 @@
 			$forum = new TopicModel;
 			TemplateController::set("list_topics", $forum->getTopicList(3));
 			
-			TemplateController::set("page_title", $_GET['p']);
+			TemplateController::set("page_title", $this->page);
 			TemplateController::set("p", PAGE);
 			TemplateController::set("lang", LANG);
+			TemplateController::set("page_title", ucwords($this->page));
+						
 			TemplateController::set("SITE_ROOT", SITE_ROOT);
 			if (isset($_GET['arg'])) {
 				TemplateController::set("arg", $_GET['arg']); // !!! Please change this
@@ -102,7 +99,7 @@
 		function checkURI() { 
 			// Check if language and page to display are set, otherwise redirects to the homepage
 			
-			if (!isset($_GET['p']) || !isset($_GET['lang'])) {
+			if (!isset($this->page) || !isset($this->lang)) {
 				
 				header("Location: " . SITE_ROOT . "en/home");
 			}

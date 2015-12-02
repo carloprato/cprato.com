@@ -35,15 +35,15 @@
             {foreach:page_editor}
                 <tr>
                     <td>
-                        {{loop_element:page_id}}
+                        {{loop_element:name}}
                     </td>
                     <td>
-                        <a href='/en/editor/edit/{{loop_element:page_id}}'>
+                        <a href='/en/editor/edit/{{loop_element:name}}'>
                             Edit
                         </a>
                      </td>
                      <td>
-                         <a href='/en/editor/delete/{{loop_element:page_id}}'>
+                         <a href='/en/editor/delete/{{loop_element:name}}'>
                            <b>
                         <span style='color:red;'>
                             Delete [use with care]

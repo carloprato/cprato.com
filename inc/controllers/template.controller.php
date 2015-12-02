@@ -32,33 +32,11 @@
 				}
 				
 				else {
-
-			// !!! Needs to go in the model
-					$this->db = Db::getInstance();
-					$sql = '
-						SELECT *						
-						FROM pages 
-						WHERE name = ?
-						OR name = ?
-						LIMIT 1
-					';
-					$q = $this->db->prepare($sql);
-
-					$req = $q->execute(array($page, explode('/', $page)[0]));
-					foreach($q->fetchAll(PDO::FETCH_OBJ) as $page) {
-
-						return $this->template .= $page->content;
-					}
-										
+				
+					$model = new EditorModel;
+					$page = $model->getPage($this->page);
+					$this->template .= $page->content;										
 				}
-				/*} else if (file_exists(SITE_ROOT . "inc/views/" . $page . ".view.php")) {
-
-					return $this->template .= file_get_contents(SITE_ROOT . "inc/views/" . $page . ".view.php");
-										
-				} else {
-					header("HTTP/1.0 404 Not Found");
-					return $this->template .= file_get_contents(SITE_ROOT . "inc/views/errors/404.view.php");					
-				}*/
 			}	
 		}
 		
