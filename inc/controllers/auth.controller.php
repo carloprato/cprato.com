@@ -1,9 +1,9 @@
 <?php
 				
-				use Facebook\FacebookSession;
-				use Facebook\FacebookRedirectLoginHelper;
-				use Facebook\GraphUser;
-				use Facebook\FacebookRequestException;
+	use Facebook\FacebookSession;
+	use Facebook\FacebookRedirectLoginHelper;
+	use Facebook\GraphUser;
+	use Facebook\FacebookRequestException;
 				
 	class AuthController extends BaseController {
 						

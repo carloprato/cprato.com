@@ -36,8 +36,7 @@
 							</div>';
 
 				$editor = new EditorModel;
-				$editor->add($name, $content);
-				
+				$editor->add($name, $content);				
 				header("Location: /en/" . $_POST['page_name']);
 			}
 		}
@@ -47,16 +46,13 @@
 			Auth::authorise(array("editor"), true);			
 
 			$editor = new EditorModel;
-			$editor->delete($file);
-			
+			$editor->delete($file);			
 			header("Location: /en/editor");
 		}
 		
 		function edit($page_id) {
 			// Edits a created static page
 			Auth::authorise(array("editor"), true);
-
-			$db = Db::getInstance();
 
 			if (!empty($_POST['page_content'])) {
 				

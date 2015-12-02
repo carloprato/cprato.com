@@ -26,8 +26,6 @@
 			$topic = new Topic;
 			$topic->pagination(1, 5, 'posts', 'id');
 			*/
-
-
 			TemplateController::set("recent_posts", $recent_posts);		
 
 		}
