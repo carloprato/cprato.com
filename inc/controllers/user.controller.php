@@ -9,7 +9,6 @@
 			$user = new UserModel;
 			$user_list = $user->list_all();
 			TemplateController::set("user_list", $user_list);
-			
 		}
 		
 		function manage() {
@@ -19,7 +18,6 @@
 			$user_list = $user->getPending();
 
 			TemplateController::set("user_list", $user_list);				
-
 		}
 
 		function accept($id) {
@@ -38,15 +36,13 @@
 				$headers[] = "X-Mailer: PHP/".phpversion();
 	
 				mail($user_data->email, 'Welcome to Bipolar Malta!', '
-					<html><body style="background-color:#BAC545;">
-						<img style="margin:0 auto;" src="http://www.bipolarmalta.org/data/res/images/logo.png"><br/>
+					<html><body>
 						<p style="margin:0 auto;text-align:center;"><b>Hello ' . $user_data->name . '!</b><br/>
 						You can now join our forum and start discussing with our members!<br/>
 						<a href="http://www.bipolarmalta.org">Bipolar Malta</a><br/>
 						</p>
 					</body></html>
 				', implode("\r\n", $headers));
-
 			header("Location: /en/user/manage");
 		}
 
@@ -62,7 +58,6 @@
 			$sql = 'UPDATE `users` SET verified = 1 WHERE verified = ?';
 			$q = $this->db->prepare($sql);						
 			$req = $q->execute(array($code));
-
 		}
 				
 		function profile($id) {

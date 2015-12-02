@@ -17,7 +17,10 @@
 			
 			Auth::authorise(array("editor", "author", "moderator"), true);
 
-			$db = Db::getInstance();
+			$email = new EmailModel;
+			$emails = $email->getEmails();
+			TemplateController::set("emails", $emails);									
+/*			$db = Db::getInstance();
 			$sql = 'SELECT * FROM contact ORDER BY id DESC';
 			$q = $db->prepare($sql);
 			$req = $q->execute(array());	
@@ -35,6 +38,6 @@
 			 }
 					
 			TemplateController::set("messages", $messages);						
-		}
+*/		}
 
 	}

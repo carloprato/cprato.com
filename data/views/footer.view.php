@@ -37,7 +37,11 @@
     <div class='row footer'>
         <div class='col_12 footer_paragraph' style='text-align:center;'>
             <a href='https://www.facebook.com/bepositivemalta'>Facebook</a> - <a  href='https://twitter.com/BipolarMalta'>Twitter</a> - <a  href='https://mt.linkedin.com/in/bipolarmalta'>Linkedin</a>
-        </div>    
+        </div>
+    <div class='row footer'>            
+        <div class='col_12 footer_paragraph Home' style='text-align:right;padding-top:10px;'>
+            Website designed and developed by <a target='_blank' href='http://www.cprato.com'>Carlo Prato</a>
+        </div> 
     </div>
     <div class='fill' style='height:30px;'></div>
 </div>
