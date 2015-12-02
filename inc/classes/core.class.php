@@ -6,8 +6,8 @@
 		public $lang;
 		
 		function __construct() {
+
  			parent::__construct(); 						
-			session_start();
 
 			/*
 			** Defines page constants

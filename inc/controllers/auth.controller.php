@@ -9,7 +9,6 @@
 						
 		function register() {
 			
-
 			$registration_errors = Auth::register();	
 
 				TemplateController::set("error", $registration_errors);	
@@ -22,7 +21,6 @@
 				
 				TemplateController::set("registration_errors", $registration_errors);
 				return $registration_errors;	
-
 		}
 
 		public static function index() {
@@ -34,14 +32,18 @@
 			
 			$auth = new Auth;
 			$user = $auth->login($_POST['user'], $_POST['password']); // Returns user's details on success, false on failure
-			
+
 			if ($user != FALSE) {
+
 				$_SESSION['privileges'] = $user['privileges'];
 				$_SESSION['user_id'] = $user['id'];	
 				$_SESSION['user'] = $user['user'];				
 				$_SESSION['name'] = $user['name'];
-												
-			}				
+
+			} else {
+				
+				
+			}
 		}
 		
 		function logout() {
