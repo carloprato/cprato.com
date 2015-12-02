@@ -14,8 +14,8 @@
 			*/
 			
 			define("SITE_ROOT", "");
-			define("LANG", $this->lang);
-			define("PAGE", $this->page);
+			define("LANG", $_GET['lang']);
+			define("PAGE", $_GET['p']);
 						
 			/*
 			** Security
@@ -56,7 +56,7 @@
 			
 			Auth::autologin();
 			$this->init();
-			$this->checkURI();
+			//$this->checkURI();
 
 		}
 	
@@ -68,10 +68,10 @@
 			$forum = new TopicModel;
 			TemplateController::set("list_topics", $forum->getTopicList(3));
 			
-			TemplateController::set("page_title", $this->page);
+			TemplateController::set("page_title", PAGE);
 			TemplateController::set("p", PAGE);
 			TemplateController::set("lang", LANG);
-			TemplateController::set("page_title", ucwords($this->page));
+			TemplateController::set("page_title", ucwords(PAGE));
 						
 			TemplateController::set("SITE_ROOT", SITE_ROOT);
 			if (isset($_GET['arg'])) {
