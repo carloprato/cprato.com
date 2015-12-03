@@ -244,7 +244,7 @@ a:hover {
     background-size:800px;
     transition: background-image 1s ease;
     margin: 0 auto;
-    width:800px;
+    width:100%;
     padding-bottom: 20px;
     height:180px;
 }
@@ -822,3 +822,6 @@ img {
         margin-left: 0;
         margin-right: 10px
     }
+}   
+
+}

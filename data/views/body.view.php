@@ -25,30 +25,40 @@
                     </div>
                 </a>
             </div>
-            <div class='nav'>
-                <div class='col_3'>
-                    <a class='menu_item' href='{{SITE_ROOT}}/{{lang}}/home'>
-                        {{translate:Home}}
-                    </a>
-                </div>
-                <div class='col_3' style='padding-left:5px;' >
-                    <a class='menu_item' href='{{SITE_ROOT}}/{{lang}}/blog'>
-                        Blog
-                    </a>
-                </div>
-                <div class='col_3' style='padding-left:5px;' >
-                    <a class='menu_item' href='{{SITE_ROOT}}/{{lang}}/forum'>
-                        Forum
-                    </a>
-                </div>
-                {foreach:menu_items}
-                <div class='col_3' style='padding-left:5px;' >
-                    <a class='menu_item' href='{{SITE_ROOT}}/{{lang}}/{{loop_element:file}}'>
-                        {{loop_element:name}}
-                    </a>
-                </div>
-                {endforeach}             
-            </div>
+            <nav>
+                <ul >
+                    <li >
+                        <a class='mobile_menu'>Menu
+                            </a>
+                    
+
+                <ul class='dropdown'>
+                    <li>
+                        <a href='{{SITE_ROOT}}/{{lang}}/home'>
+                            {{translate:Home}}
+                        </a>
+                    </li>
+                    <li>
+                        <a href='{{SITE_ROOT}}/{{lang}}/blog'>
+                            Blog
+                        </a>
+                    </li>
+                    <li>
+                        <a href='{{SITE_ROOT}}/{{lang}}/forum'>
+                            Forum
+                        </a>
+                    </li>
+                    {foreach:menu_items}
+                    <li>
+                        <a href='{{SITE_ROOT}}/{{lang}}/{{loop_element:file}}'>
+                            {{loop_element:name}}
+                        </a>
+                    </li>
+                    {endforeach}
+                </li>    
+                </ul>            
+                </ul>
+            </nav>
             <div class='fill'></div>
         </div>
     </div>

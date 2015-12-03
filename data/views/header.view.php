@@ -29,6 +29,107 @@
             vertical-align: central;
         }
     </style>
+    
+    <style>
+
+        nav {
+        border-right: none;
+        width: 100%;
+        }
+        
+        nav ul {
+        margin: 0;
+        padding: 0;
+        }
+        
+        nav ul li {
+        list-style: none;
+        text-align: center;
+
+        }
+        
+        nav ul li:first-child {
+        border-left: none;
+        }
+        
+        nav ul li a {
+        display: block;
+        text-decoration: none;
+        padding: 5px 0;
+        font-size:20px;
+        font-family: 'Noto Serif';
+        color: #22620e;
+        height:24px;
+        z-index: 12;
+        text-align:center;
+        text-weigh:bold;        
+        }
+        
+        nav ul li a:hover {
+            text-shadow: 0 1.33px 5px #dfdfdf;
+            border-radius: 8px 8px 0 0;
+            box-shadow: inset 0 0 5px 0 #000;
+            text-decoration:none;
+            background-color: rgba(150, 150, 150 .9)
+        }
+        nav {
+        display: table;
+        table-layout: fixed;
+        }
+        
+        ul {
+        display: flex;
+        flex-direction: row;
+        }
+        
+        ul li {
+            flex-grow: 1;
+        }
+        
+        .mobile_menu {
+            
+            display: none;
+        }
+        @media (max-width: 639px) {
+
+        nav ul li a {
+            
+            font-size:16px;
+            height:20px;
+        }
+        nav ul li a:hover {
+
+            border-radius: 8px;
+
+        }
+                
+        ul {
+            display: block;
+        }
+        
+        nav {
+            font-size: .8em;
+        }
+        
+        nav ul li {
+            display: block;
+        }
+        
+        .dropdown {
+            
+            display:none;
+        }
+         ul li:hover ul.dropdown {
+             
+             display:block;
+         }
+         
+         .mobile_menu {
+             
+            display:block;            
+         }
+        }         
+    </style>    
     <script>
         (function(i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
