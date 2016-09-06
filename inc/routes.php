@@ -7,6 +7,7 @@
 		static $action;
 		static $arg;
 		static $arg2;
+		static $arg3;
 		static $page;
 		
 		function __construct() {	
@@ -27,8 +28,14 @@
 				// Defines action not to incur in the undefined variable later on
 				
 				self::$arg2 = $_GET['arg2'];
-			}	else self::$arg2 = NULL;	
-									
+			}	else self::$arg2 = NULL;
+
+			if (isset($_GET['arg3'])) {
+				// Defines action not to incur in the undefined variable later on
+				
+				self::$arg3 = $_GET['arg3'];
+			}	else self::$arg3 = NULL;	
+													
 			if (isset($_GET['action'])) {
 				// Defines action not to incur in the undefined variable later on
 				
@@ -55,6 +62,8 @@
 			} else if (file_exists("data/views/pages/" . PAGE . ".view.php")) {
 				// If the view file exists the default controller pages will be called
 
+				// !!! Fix until another homepage is ready
+				header("Location: /en/midi");
 				self::$controller = 'home';	
 				self::$action   = PAGE;
 				
@@ -66,7 +75,7 @@
 														
 				${self::$controller} = new $class;
 				
-				${self::$controller}->{self::$action}(self::$arg, self::$arg2);	
+				${self::$controller}->{self::$action}(self::$arg, self::$arg2, self::$arg3);	
 				}
 		}
 	}

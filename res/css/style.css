@@ -72,7 +72,6 @@ body {
 }
 .evidence {
     margin: 0 auto;
-    background: rgb(255, 255, 255) url(../images/evidence_bg_fade.png) repeat top;
     background-repeat: repeat-x;
     z-index: 2;
 }
@@ -142,7 +141,6 @@ body {
     box-shadow: 0 -2px 5px 0 #000;
 }
 .evidence_container {
-    background: rgb(255, 255, 255) url(../images/evidence_bg_fade.png) repeat top;
     background-repeat: repeat-x;
     z-index: 2;
     box-shadow: 0 -2px 5px 0 #000;

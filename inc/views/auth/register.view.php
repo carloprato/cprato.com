@@ -1,25 +1,3 @@
-<style>
-    table, td {
-        border: 0;
-        background-color:#DEE;
-
-    }
-    th {
-        background-color:#BCC;
-    }
-    table {
-        width:100%;
-        border-collapse: collapse;
-         border-radius:8px;
-    }
-    td, th {
-    padding:10px;
-    vertical-align: center;
-         border-radius:8px 8px 0px 0px;
-         border-bottom:1px solid #AAA;
-    }
-</style>
-
 <div class='content'>
     <div class="row content">
         <div class='col_8 content_paragraph'>

@@ -7,9 +7,9 @@
 			/* "This will be the e-mail's content:<br/><br/>" .
 			 	 "Hello, " . $user_details->user . ". You are receiving this e-mail because you need to confirm you are the owner of the account. Your code is " . md5($user_details->email);
 			*/
-			$sql = 'INSERT INTO `users`(`id`, `user`, `fb_user`, `password`, `name`, `email`, `verified`, `privileges`, `date`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+			$sql = 'INSERT INTO `users`(`user`, `fb_user`, `password`, `name`, `email`, `verified`, `privileges`, `date`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
 			$q = $this->db->prepare($sql);						
-			$req = $q->execute(array(NULL, $user_details->user, $user_details->fb_user, Auth::encryptPassword($user_details->password), $user_details->name, $user_details->email, 0, 1, date("Y-m-d H:i:s")));
+			$req = $q->execute(array($user_details->user, $user_details->fb_user, Auth::encryptPassword($user_details->password), $user_details->name, $user_details->email, 0, 1, date("Y-m-d H:i:s")));
 
 		}
 		

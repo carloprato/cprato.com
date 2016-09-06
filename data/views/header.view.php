@@ -28,6 +28,16 @@
             vertical-align: central;
         }
     </style>
+    <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.7&appId=437069579659215";
+            fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+            
     <script type="text/javascript">
         WebFontConfig = {
             google: {
@@ -60,7 +70,8 @@
         ga('create', 'UA-60272920-1', 'auto');
         ga('send', 'pageview');
     </script>
-    <script type="text/javascript" src="/data/res/js/tinymce/tinymce.min.js" ></script >  
+    <script type='text/javascript' src='http://www.midijs.net/lib/midi.js'></script>
+    <script type="text/javascript" src="/data/res/js/tinymce/tinymce.min.js" ></script > 
     <script  type="text/javascript">
     tinyMCE.init({
             theme : "modern",
@@ -82,32 +93,5 @@
             auto_convert_smileys: true
     
     });
-    </script>
-    <script>
-      logInWithFacebook = function() {
-        FB.login(function(response) {
-          if (response.authResponse) {
-            window.location.replace("{{SITE_ROOT}}/{{lang}}/auth/facebook");
-          } else {
-            
-          }
-        },  {scope: 'email'});
-        return false;
-      };
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId: '1612484382341510',
-          cookie: true,
-          version: 'v2.2'
-        });
-      };
-    
-      (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
     </script>
 </head>

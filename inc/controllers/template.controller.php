@@ -6,6 +6,7 @@
 		public $controller;
 		public $arg;
 		public $arg2;
+		public $arg3;
 		public static $values;
 		public $lang;
 		function __construct() {
@@ -15,6 +16,7 @@
 			$this->action = Routes::$action;
 			$this->arg = Routes::$arg;
 			$this->arg2 = Routes::$arg2;
+			$this->arg3 = Routes::$arg3;
 			$this->lang = Routes::$lang;
 		}
 
@@ -34,8 +36,8 @@
 				else {
 				
 					$model = new EditorModel;
-					$page = $model->getPage($this->page);
-					$this->template .= $page->content;										
+                    $page = $model->getPage($this->page);
+                    $this->template .= $page->content;										
 				}
 			}	
 		}
@@ -81,7 +83,7 @@
 					$loop_name = $matches[1][$i];
 
 					$foreach_array = TemplateController::$values[$loop_name];
-					
+
 					$foreach_complete = NULL;			
 					
 					foreach ($foreach_array as $single_array) {

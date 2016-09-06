@@ -4,26 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e1334ccbe7483bbffdc9885904e3dd84",
-    "content-hash": "a63b2f4e5930112dcdcd95fb7636109e",
+    "hash": "8e6c55c40a457b20811e33cadf806e29",
+    "content-hash": "f597b031a10075c1cc4a8751bcc937cc",
     "packages": [
         {
-            "name": "facebook/php-sdk-v4",
-            "version": "5.1.2",
+            "name": "facebook/graph-sdk",
+            "version": "5.3.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/facebook/facebook-php-sdk-v4.git",
-                "reference": "2c42fb3002953355f12d3c6e8003a9fd5af563d9"
+                "url": "https://github.com/facebook/php-graph-sdk.git",
+                "reference": "d1bbd31e606a40d07f9f68ab424bdbe7a6d7e002"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/facebook-php-sdk-v4/zipball/2c42fb3002953355f12d3c6e8003a9fd5af563d9",
-                "reference": "2c42fb3002953355f12d3c6e8003a9fd5af563d9",
+                "url": "https://api.github.com/repos/facebook/php-graph-sdk/zipball/d1bbd31e606a40d07f9f68ab424bdbe7a6d7e002",
+                "reference": "d1bbd31e606a40d07f9f68ab424bdbe7a6d7e002",
                 "shasum": ""
             },
             "require": {
-                "ext-mbstring": "*",
-                "php": ">=5.4.0"
+                "php": "^5.4|^7.0"
             },
             "require-dev": {
                 "guzzlehttp/guzzle": "~5.0",
@@ -42,7 +41,10 @@
             "autoload": {
                 "psr-4": {
                     "Facebook\\": "src/Facebook/"
-                }
+                },
+                "files": [
+                    "src/Facebook/polyfills.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -60,7 +62,7 @@
                 "facebook",
                 "sdk"
             ],
-            "time": "2015-11-19 21:07:36"
+            "time": "2016-08-06 21:30:48"
         }
     ],
     "packages-dev": [],

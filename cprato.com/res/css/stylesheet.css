@@ -1,0 +1,495 @@
+a,
+abbr,
+acronym,
+address,
+applet,
+article,
+aside,
+audio,
+b,
+big,
+blockquote,
+body,
+canvas,
+caption,
+center,
+cite,
+code,
+dd,
+del,
+details,
+dfn,
+dialog,
+div,
+dl,
+dt,
+em,
+embed,
+fieldset,
+figcaption,
+figure,
+font,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hgroup,
+hr,
+html,
+i,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+li,
+main,
+mark,
+menu,
+meter,
+nav,
+object,
+ol,
+output,
+p,
+pre,
+progress,
+q,
+rp,
+rt,
+ruby,
+s,
+samp,
+section,
+small,
+span,
+strike,
+strong,
+sub,
+summary,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+time,
+tr,
+tt,
+u,
+ul,
+var,
+video,
+xmp {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 100%
+}
+
+@font-face {
+  font-family: "Noto Serif";
+  src: url(/res/fonts/NotoSerif-Regular.ttf) format("truetype");
+}
+body,
+html {
+    height: 100%;
+    font-family: "Noto Serif", serif;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section {
+    display: block
+}
+b,
+strong {
+    font-weight: 700
+}
+img {
+    color: transparent;
+    font-size: 0;
+    vertical-align: middle
+}
+li {
+    display: list-item;
+    text-align:left;
+}
+
+caption,
+td,
+th {
+    font-weight: 400;
+    vertical-align: top;
+    text-align: left
+}
+q {
+    quotes: none
+}
+q:after,
+q:before {
+    content: "";
+    content: none
+}
+small,
+sub,
+sup {
+    font-size: 75%
+}
+sub,
+sup {
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline
+}
+sub {
+    bottom: -.25em
+}
+sup {
+    top: -.5em
+}
+svg {
+    overflow: hidden
+}
+body {
+    font-family:"Noto Serif", serif;
+}
+code,
+pre {
+    font-family: "DejaVu Sans Mono", Menlo, Consolas, monospace
+}
+hr {
+    border: 0 solid #ccc;
+    border-top-width: 1px;
+    clear: both;
+    height: 0
+}
+h1 {
+    font-size: 25px
+}
+h2 {
+    font-size: 23px
+}
+h3 {
+    font-size: 21px
+}
+h4 {
+    font-size: 19px
+}
+h5 {
+    font-size: 17px
+}
+h6 {
+    font-size: 15px
+}
+
+address,
+dl,
+fieldset,
+figure,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+ol,
+p,
+pre,
+table,
+ul {
+    margin-bottom: 20px;
+}
+
+.evidence_paragraph {
+        float: left;
+        padding-left:10px; 
+        text-align:justify;
+
+    }
+  
+.evidence {
+    margin: 0 auto;
+    background: url(../images/evidence_bg_fade.png) top repeat-x #fff;
+    z-index: 2
+}
+.content_paragraph,
+.evidence_paragraph,
+.footer_paragraph {
+
+    text-align: left;
+    padding-top: 20px;
+    z-index: 21;   
+}
+
+.content_paragraph,
+.content_container,
+.content {
+    min-height:300px;
+}
+
+.content {
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: center center;
+    z-index: 5
+}
+.footer {
+    text-align: left;
+    padding-top: 0;
+    z-index: 5
+}
+
+.page_title {
+    padding-top: 30px;
+    text-align: center
+}
+
+.fill {
+    clear: both
+}
+.padding_fix {
+    padding-left: 0
+}
+.admin_menu {
+    
+    background-color: rgba(136, 204, 102, 0.6);
+    border-radius:8px 16px;
+    margin:5px;
+    padding:5px;
+}
+    .icon {
+        width:64px;
+        height:64px;
+        margin-top:10px;
+        margin-bottom:10px;
+        margin-left:10px;
+        margin-right:10px;
+        text-align:center;
+
+    }
+    
+    .current {
+        
+        box-shadow: inset 0px 0px 10px #555555;
+
+    }
+.admin {
+        box-shadow:  0px 0px 5px #555555;
+    float:left;
+    border-radius:8px 16px;
+    background-color: rgba(136, 204, 102, 0.5);    
+    
+}
+    span {
+               text-align:center;
+    }
+
+body {
+    min-width: 960px;
+    margin: auto;
+}
+.row {
+    width: 960px;
+    margin: auto;
+}
+.col_1,
+.col_12,
+.col_2,
+.col_3,
+.col_4,
+.col_6,
+.col_8,
+.col_9 {
+    margin-left: 10px;
+    margin-right: 10px;
+    display: inline
+}
+.first {
+    margin-left: 0
+}
+.last {
+    margin-right: 0
+}
+.col_12 {
+    width: 940px
+}
+.col_9 {
+    width: 620px
+}
+.col_8 {
+    width: 700px
+}
+.col_6 {
+    width: 460px
+}
+.col_4 {
+    width: 290px
+}
+.col_3 {
+    width: 220px
+}
+.col_2 {
+    width: 140px
+}
+.col_1 {
+    width: 60px
+}
+.logo {
+    width: 300px
+}
+img {
+    width: auto;
+    height: auto;
+    max-width:500px;
+}
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+    body {
+        min-width: 767px
+    }
+    .padding_fix {
+        padding-left: 0
+    }
+    .row {
+        width: 767px
+    }
+    .col_12 {
+        width: 748px
+    }
+    .col_9 {
+        width: 492px
+    }
+    .col_8 {
+        width: 556px
+    }
+    .col_6 {
+        width: 364px
+    }
+    .col_1,
+    .col_2,
+    .col_3,
+    .col_4 {
+        width: 236px
+    }
+}
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    body {
+        min-width: 479px
+    }
+    .row {
+        width: 479px
+    }
+    .col_12 {
+        width: 460px
+    }
+    .col_9 {
+        width: 225px
+    }
+    .col_8 {
+        width: 460px
+    }
+    .col_6 {
+        width: 460px;
+        min-width: 460px;
+        float: left
+    }
+    .col_4 {
+        width: 460px;
+        margin: 0
+    }
+    .col_1,
+    .col_2,
+    .col_3 {
+        width: 460px;
+        margin-left: 0
+    }
+    .menu_item,
+    .title {
+        font-size: 16px;
+        float: none
+    }
+
+    .padding_fix {
+        padding-left: 0
+    }
+    .last {
+        margin-left: 0;
+        margin-right: 10px
+    }
+}
+@media only screen and (max-width: 479px) {
+    body {
+        min-width: 320px
+    }
+    .evidence_paragraph {
+        float: left;
+        padding-left:10px; 
+        text-align:justify;
+    }
+    .row {
+        width: 320px
+    }
+    .col_12,
+    .col_8,
+    .col_9 {
+        width: 300px
+    }
+    .col_6 {
+        width: 300px;
+        float: left
+    }
+    .col_1,
+    .col_2,
+    .col_3,
+    .col_4 {
+        width: 300px;
+        margin-left: 0
+    }
+    .menu_item {
+        font-size: 16px;
+        float: none
+    }
+    .padding_fix {
+        padding-left: 0
+    }
+    .Home {
+        line-height: 30px;
+    
+    }
+    .last {
+        margin-left: 0;
+        margin-right: 10px
+    }
+}
+
+::-webkit-input-placeholder {
+   color: #555555;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #555555;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #555555;
+}
+
+:-ms-input-placeholder {  
+   color: #555555;
+}

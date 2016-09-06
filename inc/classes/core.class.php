@@ -16,6 +16,7 @@
 			define("SITE_ROOT", "");
 			define("LANG", $_GET['lang']);
 			define("PAGE", $_GET['p']);
+			date_default_timezone_set('Europe/Berlin');
 						
 			/*
 			** Security

@@ -227,10 +227,10 @@
 					$error[]['error'] = "Please insert your name and surname.";
 				} 
 				
-				if ($data['invitation_code'] != 'selfhelp2015') {
+				if (1 === 0 && $data['invitation_code'] != 'selfhelp2015') {
 					
 					$error[]['error'] = "The invitation code is not valid.";
-				}
+				} 
 						
 			return $error;
 		}

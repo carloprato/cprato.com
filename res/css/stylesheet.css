@@ -226,7 +226,6 @@ ul {
   
 .evidence {
     margin: 0 auto;
-    background: url(../images/evidence_bg_fade.png) top repeat-x #fff;
     z-index: 2
 }
 .content_paragraph,
@@ -352,7 +351,6 @@ body {
     width: 60px
 }
 .logo {
-    width: 300px
 }
 img {
     width: auto;
