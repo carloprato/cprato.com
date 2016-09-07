@@ -95,11 +95,11 @@
 			$midi = new MidiModel;
 			if (isset($_POST['beatport_id'])) {
 			
-			$file = $midi->upload($id);
-			$json = $midi->getBeatport($id);
-			$midi->insert($json, $file);           			                     
-			
-			TemplateController::set("midi_list", $midis);
+				$file = $midi->upload($id);
+				$json = $midi->getBeatport($id);
+				$midi->insert($json, $file);           			                     
+				
+				TemplateController::set("midi_list", $midis);
 			
 			}
 		}
@@ -113,10 +113,24 @@
 		function search($keyword) {
 			        		
 			$midi = new MidiModel;
-			$midi_details = $midi->search($keyword);
-            TemplateController::set("midi_details", $midi_details);
-
+			if (isset($keyword)) {
+				$midi_details = $midi->search($keyword);
+				TemplateController::set("midi_list", $midi_details);
+				if (!empty($midi_details)) {
+					TemplateController::set("midi_results", 1);
+				} else {
+					TemplateController::set("midi_results", 0);					
+				}
+			} else if (isset($_POST['search_string'])) {
+				header("Location: /en/midi/search/" . $_POST['search_string']);
+			} else {	
+				TemplateController::set("midi_results", 0);	
+				TemplateController::set("midi_list", array());			
+				TemplateController::set("test", 'sex');			
+				
+			}
 		}
+
 		function delete($file) {
 			
 			Auth::authorise(array("editor"), true);			

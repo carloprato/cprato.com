@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, user-scalable=no" name="viewport">
-    <meta name="description" content="My personal website. Find information about me, contact me or read my blog!">
+    <meta name="description" content="Collection of free midi files made by Carlo Prato - predator17.">
     <meta name="author" content="Carlo Prato">
-    <meta name="keywords" content="Carlo Prato, Carlo Prato Malta, Carlo Prato Mosta, Webdesign Malta">
+    <meta name="keywords" content="Carlo Prato, Carlo Prato Malta, Carlo Prato Midi, Midi Music, Midi Remix, FL Studio Midi, Electronic Midi, Webdesign Malta">
     <title>Carlo Prato</title>
     <link rel="icon" href="/data/res/images/favicon.ico" type="image/x-icon" />
     <link href="{{SITE_ROOT}}/res/css/stylesheet.css" rel="stylesheet">
@@ -54,24 +54,18 @@
             s.parentNode.insertBefore(wf, s);
         })();
     </script>
-    <script>
-        (function(i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function() {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//data/res/js/analytics.js', 'ga');
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-        ga('create', 'UA-60272920-1', 'auto');
-        ga('send', 'pageview');
-    </script>
-    <script type='text/javascript' src='http://www.midijs.net/lib/midi.js'></script>
-    <script type="text/javascript" src="/data/res/js/tinymce/tinymce.min.js" ></script > 
+  ga('create', 'UA-60272920-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    <script type='text/javascript' src='http://www.midijs.net/lib/midi.js' async></script>
+    <script type="text/javascript" src="/data/res/js/tinymce/tinymce.min.js" async></script > 
     <script  type="text/javascript">
     tinyMCE.init({
             theme : "modern",
