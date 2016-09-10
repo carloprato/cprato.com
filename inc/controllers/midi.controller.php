@@ -16,7 +16,7 @@
 			//Auth::authorise(array("editor"), true);
 			$midi = new MidiModel;
 			$midis = $midi->getMidiList("LIMIT 10", "ORDER BY downloads DESC");               			
-			$midi_new = $midi->getNewMidi();                        
+			$midi_new = $midi->getMidiList("LIMIT 4", "ORDER BY id DESC");                        
 			TemplateController::set("midi_new", $midi_new);
 			TemplateController::set("midi_list", $midis);
 		}
@@ -42,7 +42,7 @@
 			$midi = new MidiModel;
 			$midi_details = $midi->getMidi($id);
 			if ($midi->isKeyValid($key) == FALSE) {
-				header("Location: /download.php?id=" . $midi_details[0]['id'] . "&key=" . $key);
+				header("Location: /en/midi/details/" . $midi_details[0]['id']);
 			}			
 			$midi_details[0]['key'] = $key;
             TemplateController::set("midi_details", $midi_details);
@@ -59,6 +59,7 @@
 			} else if (!file_exists($file_url)) {
 				header("Location: /en/midi/not_found");
 			} else {
+				$midi->downloadCount($midi_id);
 				header('Content-Type: audio/midi');
 				header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
 				header("Cache-Control: public");
@@ -94,12 +95,15 @@
 
 			$midi = new MidiModel;
 			if (isset($_POST['beatport_id'])) {
-			
-				$file = $midi->upload($id);
+				$fileName = $_POST['artist'] . " - " . $_POST['title'];
+				$artist = $_POST['artist'];
+				$title = $_POST['title'];
+				$edition = $_POST['edition'];
+				$file = $midi->upload($artist, $title, $edition);
 				$json = $midi->getBeatport($id);
 				$midi->insert($json, $file);           			                     
 				
-				TemplateController::set("midi_list", $midis);
+				//TemplateController::set("midi_list", $midis);
 			
 			}
 		}
