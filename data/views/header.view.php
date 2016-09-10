@@ -6,7 +6,7 @@
     <meta name="description" content="Collection of free midi files made by Carlo Prato - predator17.">
     <meta name="author" content="Carlo Prato">
     <meta name="keywords" content="Carlo Prato, Carlo Prato Malta, Carlo Prato Midi, Midi Music, Midi Remix, FL Studio Midi, Electronic Midi, Webdesign Malta">
-    <title>Carlo Prato</title>
+    <title>{{page_title}}</title>
     <link rel="icon" href="/data/res/images/favicon.ico" type="image/x-icon" />
     <link href="{{SITE_ROOT}}/res/css/stylesheet.css" rel="stylesheet">
     <link href="{{SITE_ROOT}}/data/res/css/stylesheet.css" rel="stylesheet">

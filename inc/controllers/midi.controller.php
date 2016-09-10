@@ -89,7 +89,7 @@
 			}
 		}
 
-		function insert($id) {
+		function insert() {
 			
 			Auth::authorise(array("editor"), true);
 
@@ -100,8 +100,9 @@
 				$title = $_POST['title'];
 				$edition = $_POST['edition'];
 				$file = $midi->upload($artist, $title, $edition);
-				$json = $midi->getBeatport($id);
-				$midi->insert($json, $file);           			                     
+				$json = $midi->getBeatport($_POST['beatport_id']);
+				$midi->insert($json, $file);
+				$midi->insertCover($midi->db->lastInsertId(), $_POST['albumCover']);    			                     
 				
 				//TemplateController::set("midi_list", $midis);
 			

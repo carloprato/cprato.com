@@ -63,17 +63,10 @@
 	
 		function init() {
 			
-			$post = new PostModel;			
-			TemplateController::set("recent_posts", $post->getLatestPosts(0,3));
-						
-			$forum = new TopicModel;
-			TemplateController::set("list_topics", $forum->getTopicList(3));
-			
-			TemplateController::set("page_title", PAGE);
+			TemplateController::set("page_title", 'Carlo\'s Midis');
 			TemplateController::set("p", PAGE);
 			TemplateController::set("lang", LANG);
-			TemplateController::set("page_title", ucwords(PAGE));
-						
+
 			TemplateController::set("SITE_ROOT", SITE_ROOT);
 			if (isset($_GET['arg'])) {
 				TemplateController::set("arg", $_GET['arg']); // !!! Please change this

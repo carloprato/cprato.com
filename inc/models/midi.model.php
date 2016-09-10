@@ -33,6 +33,7 @@
 			foreach($q->fetchAll(PDO::FETCH_ASSOC) as $midi) {
                 $midis[] = $midi;
 				$midis[$i]['slug'] = $this->slug($midis[$i]['artist'], $midis[$i]['title']);
+				$midis[$i]['date'] = date("d F Y", strtotime($midis[$i]['date']));
 				if (file_exists($_SERVER['DOCUMENT_ROOT'] . "/data/res/images/albums/" . $midis[$i]['id'] . ".jpg"))
 					 {
 							$midis[$i]['image'] =  $midis[$i]['id'];
@@ -91,7 +92,7 @@
 				0, 
 				0,
 				0,
-				'1970-12-01',
+				'1970-01-01',
 				0,
 				0,
 				0,
@@ -108,13 +109,21 @@
 			echo $json->results[0]->label->name . "<br>";
 			echo $json->results[0]->dynamicImages->main->url . "<br>";
 			*/
+			return $this->db->lastInsertId();
+		}
+
+		function insertCover($id, $albumCover) {
+
+			$file = file_get_contents($albumCover);
+			file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/data/res/images/albums/' . $id . '.jpg', $file);
+
 		}
 
 		function downloadCount($id) {
 
-			$sql = 'UPDATE midi SET downloads = ? WHERE id = ?';
-			$q = $this->db->prepare($sql);						
-			$req = $q->execute(array("downloads + 1", $id));			
+			$sql = 'UPDATE midi SET downloads = downloads + 1 WHERE ( id = :id )';
+			$prepStatement = $this->db->prepare( $sql );
+			$prepStatement->execute(array(':id' => $id));		
 
 		}
 
