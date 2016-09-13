@@ -62,8 +62,8 @@
 		}
 	
 		function init() {
-			
-			TemplateController::set("page_title", 'Carlo\'s Midis');
+			$title = 'Home | Carlo\'s Midis';
+			TemplateController::set("page_title",  $title);
 			TemplateController::set("p", PAGE);
 			TemplateController::set("lang", LANG);
 

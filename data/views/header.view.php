@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, user-scalable=no" name="viewport">
-    <meta name="description" content="Collection of free midi files made by Carlo Prato - predator17.">
+    <meta name="description" content="Download free midi files! Collection of electronic music midi made by Carlo Prato / predator17. Do you need a midi? Feel free to request one!">
     <meta name="author" content="Carlo Prato">
-    <meta name="keywords" content="Carlo Prato, Carlo Prato Malta, Carlo Prato Midi, Midi Music, Midi Remix, FL Studio Midi, Electronic Midi, Webdesign Malta">
+    <meta name="keywords" content="predator17, predator17 midi, Carlo Prato, Carlo Prato Malta, Carlo Prato Midi, Midi Music, Midi Remix, FL Studio Midi, Electronic Midi, Webdesign Malta">
     <title>{{page_title}}</title>
     <link rel="icon" href="/data/res/images/favicon.ico" type="image/x-icon" />
     <link href="{{SITE_ROOT}}/res/css/stylesheet.css" rel="stylesheet">

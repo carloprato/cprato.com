@@ -25,7 +25,10 @@
 
 			//Auth::authorise(array("editor"), true);
 			$midi = new MidiModel;
-			$midis = $midi->getMidiList("ORDER BY artist ASC");               			
+			$midis = $midi->getMidiList("ORDER BY artist ASC");   
+			$title = 'Midi List | Carlo\'s Midis';
+
+			TemplateController::set("page_title",  $title);            			
 			TemplateController::set("midi_list", $midis);			
 		}
 		
@@ -34,7 +37,11 @@
 			$midi = new MidiModel;
 			$midi_details = $midi->getMidi($midi_id);
 			$midi_details[0]['key'] = $midi->generateKey(time());
+			if (($midi_details[0]['edition'])) { $edition =  ' '.$midi_details[0]['edition']; } else $edition = NULL;
+			$title = $midi_details[0]['artist'] . ' - ' .$midi_details[0]['title'] . $edition .' Midi | Carlo\'s Midis';
             TemplateController::set("midi_details", $midi_details);
+            TemplateController::set("page_title", $title);
+
 		}
 
 		function download($id, $slug, $key) {
@@ -45,6 +52,10 @@
 				header("Location: /en/midi/details/" . $midi_details[0]['id']);
 			}			
 			$midi_details[0]['key'] = $key;
+						if (($midi_details[0]['edition'])) { $edition =  ' '.$midi_details[0]['edition']; } else $edition = NULL;
+			$title = 'Downloading ' . $midi_details[0]['artist'] . ' - ' .$midi_details[0]['title'] . $edition .' Midi | Carlo\'s Midis';
+            TemplateController::set("midi_details", $midi_details);
+            TemplateController::set("page_title", $title);
             TemplateController::set("midi_details", $midi_details);
 		}
 
@@ -130,10 +141,11 @@
 				header("Location: /en/midi/search/" . $_POST['search_string']);
 			} else {	
 				TemplateController::set("midi_results", 0);	
-				TemplateController::set("midi_list", array());			
-				TemplateController::set("test", 'sex');			
-				
+				TemplateController::set("midi_list", array());							
 			}
+
+			$title = $keyword . ' - Search results | Carlo\'s Midis';
+            TemplateController::set("page_title", $title);
 		}
 
 		function delete($file) {
